@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model notes {
+  note            String?  @db.VarChar
+  tags            String[] @db.VarChar
+  createdAt       DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  createdBy       String   @db.VarChar
+  id              String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  noteDescription String?  @db.VarChar
+  noteHeading     String?  @db.VarChar
+}
+
+model stickyNotes {
+  stickyNote String?  @db.VarChar
+  id         String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  createdAt  DateTime @default(now()) @db.Timestamptz(6)
+  createdBy  String   @db.VarChar
+  color      String   @default("blue") @db.VarChar
+}

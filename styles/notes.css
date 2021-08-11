@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ProseMirror > * + * {
+  margin-top: 0.75em;
+  font-family: Inter, monospace;
+  outline: none;
+}
+
+.ProseMirror p code {
+  @apply w-full px-1 py-px font-mono text-sm bg-gray-200 rounded;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding: 0 1rem;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 1.5;
+}
+
+.ProseMirror pre code {
+  padding: 0;
+  @apply py-8 font-mono;
+}
+
+/* .ProseMirror img {
+  max-width: 100%;
+  height: auto;≠
+} */
+
+.ProseMirror blockquote {
+  padding-left: 1rem;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-left: 4px solid rgba(13, 13, 13, 0.212);
+  font-style: italic;
+  @apply py-2 text-gray-700;
+}
+
+/* .ProseMirror blockquote::before {
+  content: url(/quote.svg);
+  text-decoration: none;
+  display: inline-block;
+} */
+
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid rgba(13, 13, 13, 0.288);
+  margin: 2rem 0;
+}
+
+.ProseMirror-focused {
+  outline: none;
+}
+
+.ProseMirror-focused pre,
+.ProseMirror pre {
+  @apply inline-block w-full px-4 py-3 overflow-x-auto text-sm text-gray-100 bg-gray-900 border border-gray-400 rounded-md;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-semibold;
+}
+.ProseMirror h2 {
+  @apply text-2xl font-semibold;
+}
+.ProseMirror h3 {
+  @apply text-xl font-medium;
+}
+
+.menu-bar button {
+  @apply px-2 py-1 rounded-sm hover:bg-gray-200;
+}
+
+.ProseMirror img {
+  max-width: 42rem !important;
+  @apply w-full mx-auto rounded-md shadow-lg my-7;
+}
+
+.ProseMirror mark {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  @apply px-1 text-black !bg-yellow-400 rounded;
+}
+
+.ProseMirror a {
+  cursor: pointer;
+  caret-color: black;
+  @apply text-blue-500 hover:underline hover:text-blue-700;
+}
+
+/* .ProseMirror a::selection {
+  background-color: lightblue;
+  color: black;
+} */
+.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #ced4da;
+  pointer-events: none;
+  height: 0;
+  /* font-size: 20px; */
+}
+
+.ProseMirror p.is-empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #ced4da;
+  pointer-events: none;
+  height: 0;
+  /* font-size: 20px; */
+}
+
+.ProseMirror ul {
+  list-style-type: disc;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.ProseMirror ul li,
+.ProseMirror ol li,
+.ProseMirror p,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 1.7;
+  @apply my-4;
+}
+
+.ProseMirror ul li,
+.ProseMirror ol li {
+  @apply -my-4;
+}
+
+.ProseMirror p,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  line-height: 1.7;
+}
+
+h1 strong,
+h2 strong {
+  font-weight: 600;
+}
+
+h3 strong {
+  font-weight: 500;
+}
+
+.code-block {
+  position: relative;
+}
+.code-block select {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  @apply px-1 py-1 text-xs text-gray-300 bg-gray-800 rounded focus-visible:outline-none focus:outline-none focus:ring-1 focus:ring-gray-400;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.ProseMirror pre .hljs-comment,
+.ProseMirror pre .hljs-quote {
+  color: #616161;
+}
+.ProseMirror pre .hljs-variable,
+.ProseMirror pre .hljs-template-variable,
+.ProseMirror pre .hljs-attribute,
+.ProseMirror pre .hljs-tag,
+.ProseMirror pre .hljs-name,
+.ProseMirror pre .hljs-regexp,
+.ProseMirror pre .hljs-link,
+.ProseMirror pre .hljs-name,
+.ProseMirror pre .hljs-selector-id,
+.ProseMirror pre .hljs-selector-class {
+  color: #f98181;
+}
+.ProseMirror pre .hljs-number,
+.ProseMirror pre .hljs-meta,
+.ProseMirror pre .hljs-built_in,
+.ProseMirror pre .hljs-builtin-name,
+.ProseMirror pre .hljs-literal,
+.ProseMirror pre .hljs-type,
+.ProseMirror pre .hljs-params {
+  color: #fbbc88;
+}
+.ProseMirror pre .hljs-string,
+.ProseMirror pre .hljs-symbol,
+.ProseMirror pre .hljs-bullet {
+  color: #b9f18d;
+}
+.ProseMirror pre .hljs-title,
+.ProseMirror pre .hljs-section {
+  color: #faf594;
+}
+.ProseMirror pre .hljs-keyword,
+.ProseMirror pre .hljs-selector-tag {
+  color: #70cff8;
+}
+.ProseMirror pre .hljs-emphasis {
+  font-style: italic;
+}
+.ProseMirror pre .hljs-strong {
+  font-weight: 700;
+}
+
+ul[data-type='taskList'] {
+  list-style: none;
+  padding: 0;
+  @apply my-3;
+}
+ul[data-type='taskList'] li {
+  display: flex;
+  align-items: center;
+  @apply -mt-2;
+}
+
+ul[data-type='taskList'] li:first-child {
+  @apply -mt-0;
+}
+ul[data-type='taskList'] li > label {
+  flex: 0 0 auto;
+  margin-right: 0.5rem;
+}
+ul[data-type='taskList'] input[type='checkbox'] {
+  cursor: pointer;
+}

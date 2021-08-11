@@ -1,0 +1,60 @@
+{
+  "name": "tailwind-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^1.5.0",
+    "@excalidraw/excalidraw": "^0.9.0",
+    "@headlessui/react": "^1.4.0",
+    "@prisma/client": "2.28.0",
+    "@radix-ui/react-tooltip": "^0.0.21",
+    "@tailwindcss/typography": "^0.4.1",
+    "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.33",
+    "@tiptap/extension-document": "^2.0.0-beta.13",
+    "@tiptap/extension-highlight": "2.0.0-beta.15",
+    "@tiptap/extension-image": "2.0.0-beta.15",
+    "@tiptap/extension-link": "2.0.0-beta.19",
+    "@tiptap/extension-paragraph": "^2.0.0-beta.16",
+    "@tiptap/extension-placeholder": "2.0.0-beta.26",
+    "@tiptap/extension-task-item": "^2.0.0-beta.17",
+    "@tiptap/extension-task-list": "^2.0.0-beta.17",
+    "@tiptap/extension-text": "^2.0.0-beta.13",
+    "@tiptap/react": "2.0.0-beta.55",
+    "@tiptap/starter-kit": "2.0.0-beta.89",
+    "axios": "^0.21.1",
+    "fuse.js": "^6.4.6",
+    "lodash.truncate": "^4.4.2",
+    "next": "^11.0.1",
+    "next-pwa": "^5.2.24",
+    "react": "17.0.2",
+    "react-contenteditable": "^3.3.5",
+    "react-dom": "17.0.2",
+    "react-dropzone": "^11.3.4",
+    "react-expanding-textarea": "^2.3.1",
+    "react-hot-toast": "^2.1.0",
+    "react-icons": "^4.2.0",
+    "react-loading-skeleton": "^2.2.0",
+    "swr": "^0.5.6"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.10",
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.9",
+    "autoprefixer": "^10.3.1",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.0.1",
+    "postcss": "^8.3.6",
+    "prisma": "2.28.0",
+    "tailwindcss": "^2.2.2",
+    "typescript": "^4.3.5"
+  },
+  "resolutions": {
+    "prosemirror-model": "1.13.1",
+    "prosemirror-view": "1.16.5"
+  }
+}

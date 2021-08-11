@@ -1,0 +1,10 @@
+text-gray-700
+text-bule-700
+text-purple-700
+text-green-700
+text-red-700
+border-gray-700
+border-bule-700
+border-purple-700
+border-green-700
+border-red-700
