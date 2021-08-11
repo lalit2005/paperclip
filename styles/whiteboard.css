@@ -22,7 +22,7 @@
 .excalidraw .ExportDialog .ExportDialog__name {
   display: none;
 }
-*/ .App {
+*\/ .App {
   font-family: sans-serif;
   text-align: center;
 }

@@ -5,8 +5,8 @@
 @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
 @import url(https://fonts.googleapis.com/css?family=Fira+Code:300,regular,500,600,700);
 
-@import url('./whiteboard.css');
-@import url('./notes.css');
+@import url(./whiteboard.css);
+@import url(./notes.css);
 
 html,
 body {
