@@ -18,7 +18,7 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
         <div>
           <h2 className='text-3xl font-extrabold'>Your Notes 📔</h2>
           <Link href='/app/notes'>
-            <div className='flex max-w-4xl px-10 mt-3 transition-all duration-300 border border-gray-300 rounded cursor-pointer py-7 hover:border-gray-400 hover:bg-gray-50/30'>
+            <div className='flex max-w-4xl px-10 mt-3 overflow-x-scroll overflow-y-hidden transition-all duration-300 border border-gray-300 rounded cursor-pointer py-7 hover:border-gray-400 hover:bg-gray-50/30'>
               {data?.notes.map((note) => (
                 <div key={note.id}>{<NoteCard note={note} />}</div>
               )) || (
@@ -36,7 +36,7 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
           <h2 className='text-3xl font-extrabold'>Your Sticky Notes 📝</h2>
           <Link href='/app/sticky-notes'>
             <a>
-              <div className='flex max-w-4xl px-10 mt-3 transition-all duration-300 border border-gray-300 rounded cursor-pointer py-7 hover:border-gray-400 hover:bg-gray-50/30'>
+              <div className='flex max-w-4xl px-10 mt-3 overflow-x-scroll overflow-y-hidden transition-all duration-300 border border-gray-300 rounded cursor-pointer py-7 hover:border-gray-400 hover:bg-gray-50/30'>
                 {data?.stickyNotes.map((note) => (
                   <StickyNoteCard stickyNote={note} key={note.id} />
                 )) || (
