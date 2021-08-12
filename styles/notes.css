@@ -237,3 +237,13 @@ ul[data-type='taskList'] li > label {
 ul[data-type='taskList'] input[type='checkbox'] {
   cursor: pointer;
 }
+
+.iframe-wrapper.ProseMirror-selectednode {
+  outline: 3px solid #68cef8;
+}
+.ProseMirror iframe {
+  width: 100%;
+  border-radius: 5px;
+  min-height: 500px;
+  height: 100%;
+}

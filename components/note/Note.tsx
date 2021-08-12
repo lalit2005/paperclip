@@ -23,6 +23,7 @@ import { HiOutlinePhotograph } from 'react-icons/hi'
 import { HiLink } from 'react-icons/hi'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import CodeBlockComponent from './CodeBlockComponent'
+import Iframe from './Iframe'
 
 // load all highlight.js languages
 import lowlight from 'lowlight'
@@ -180,6 +181,16 @@ const MenuBar: React.FC<{ editor: Editor }> = ({ editor }) => {
       </button>
       <button
         onClick={() => {
+          let embedUrl = window.prompt('URL')
+          embedUrl = embedUrl.toString().startsWith('http')
+            ? embedUrl
+            : 'http://' + embedUrl
+          editor.chain().focus().setIframe({ src: embedUrl }).run()
+        }}>
+        Iframe
+      </button>
+      <button
+        onClick={() => {
           editor.chain().focus().toggleHighlight().run()
         }}
         className={
@@ -200,6 +211,7 @@ export default function Note({ noteContent, noteId }) {
       Image,
       Highlight,
       Link,
+      Iframe,
       Placeholder.configure({
         placeholder: 'Write something amazing...',
       }),
