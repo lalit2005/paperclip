@@ -11,6 +11,7 @@
     "@auth0/nextjs-auth0": "^1.5.0",
     "@excalidraw/excalidraw": "^0.9.0",
     "@headlessui/react": "^1.4.0",
+    "@hookform/resolvers": "^2.7.1",
     "@prisma/client": "2.28.0",
     "@radix-ui/react-tooltip": "^0.0.21",
     "@tailwindcss/typography": "^0.4.1",
@@ -36,10 +37,12 @@
     "react-dom": "17.0.2",
     "react-dropzone": "^11.3.4",
     "react-expanding-textarea": "^2.3.1",
+    "react-hook-form": "^7.12.2",
     "react-hot-toast": "^2.1.0",
     "react-icons": "^4.2.0",
     "react-loading-skeleton": "^2.2.0",
-    "swr": "^0.5.6"
+    "swr": "^0.5.6",
+    "zod": "^3.7.1"
   },
   "devDependencies": {
     "@types/node": "^16.4.10",

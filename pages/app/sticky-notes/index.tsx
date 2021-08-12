@@ -5,7 +5,7 @@ import {
   UserProfile,
   withPageAuthRequired,
 } from '@auth0/nextjs-auth0/dist/frontend'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import useSWR from 'swr'
 import { stickyNotes } from '@prisma/client'
 import { HiOutlineCheck, HiOutlineSelector } from 'react-icons/hi'
@@ -64,7 +64,6 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
             </div>
           </div>
         </div>
-        <Toaster />
         <Transition appear show={isModalOpen} as={Fragment}>
           <Dialog
             as='div'

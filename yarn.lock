@@ -1054,6 +1054,11 @@
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.4.0.tgz#c6d424d8ab10ac925e4423d7f3cbab02c30d736a"
   integrity sha512-C+FmBVF6YGvqcEI5fa2dfVbEaXr2RGR6Kw1E5HXIISIZEfsrH/yuCgsjWw5nlRF9vbCxmQ/EKs64GAdKeb8gCw==
 
+"@hookform/resolvers@^2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.7.1.tgz#691f02a82b44317dc30df44765463f2eb73abf09"
+  integrity sha512-dX//pnHJK9CJSz0bURQ7B84vSy1OnqJmB+ziVY4Jvc5VyL2qe0l3ol8QicCkjKxFdlOLlAds+eF0H0u8HELk5A==
+
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.5.0.tgz#1407967d4c6eecd7388f83acf1eaf4d0c6e58ef9"
@@ -5283,6 +5288,11 @@ react-expanding-textarea@^2.3.1:
     react-with-forwarded-ref "^0.3.3"
     tslib "^2.0.3"
 
+react-hook-form@^7.12.2:
+  version "7.12.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.12.2.tgz#2660afbf03c4ef360a9314ebf46ce3d972296c77"
+  integrity sha512-cpxocjrgpMAJCMJQR51BQhMoEx80/EQqePNihMTgoTYTqCRbd2GExi+N4GJIr+cFqrmbwNj9wxk5oLWYQsUefg==
+
 react-hot-toast@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.1.0.tgz#f4fe3107a3ccd1d7e76ad3d3282967fbf2fccf2c"
@@ -6594,3 +6604,8 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zod@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.7.1.tgz#143a9f9bc8ebad27525f1b1069dad7328d0f9d53"
+  integrity sha512-9TRjeMKz3xFUOl/CYhBmp/hCrMhk5U6qRnfy9q+HwmQPbMYp3qnM+/cPst+wzHQjfSBjHDYZq7S7TQnlAjqjFg==
