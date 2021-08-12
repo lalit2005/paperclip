@@ -6,6 +6,7 @@ import {
   UserProfile,
 } from '@auth0/nextjs-auth0'
 import { defaultNoteContent } from '@/components/note/defaultNoteContent'
+import getTagsFromString from '@/lib/get-tags-from-string'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
@@ -19,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       note: defaultNoteContent,
       noteDescription: noteDescription,
       noteHeading: noteHeading,
-      tags: tags,
+      tags: getTagsFromString(tags),
     },
   })
   res.json(newNote)
