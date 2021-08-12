@@ -12,6 +12,7 @@ import { HiOutlineCheck, HiOutlineSelector } from 'react-icons/hi'
 import ExpandingTextarea from 'react-expanding-textarea'
 import axios from 'axios'
 import DashboardLayout from 'layouts/DashboardLayout'
+import Head from 'next/head'
 
 const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
   const { data: stickyNotesData, mutate } = useSWR<stickyNotes[]>(
@@ -30,6 +31,9 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
 
   return (
     <div>
+      <Head>
+        <title>{user.name || user.nickname}'s sticky notes</title>
+      </Head>
       <DashboardLayout>
         <div className='max-w-4xl mx-auto'>
           <div>

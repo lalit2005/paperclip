@@ -9,11 +9,15 @@ import Link from 'next/link'
 import Skeleton from 'react-loading-skeleton'
 import useSWR from 'swr'
 import fetcher from '@/lib/fetcher'
+import Head from 'next/head'
 
 const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
   const { data } = useSWR('/api/get-dashboard-data', fetcher)
   return (
     <DashboardLayout>
+      <Head>
+        <title>{user.name}'s Dashboard | Paperclip</title>
+      </Head>
       <div>
         <div>
           <h2 className='text-3xl font-extrabold'>Your Notes 📔</h2>

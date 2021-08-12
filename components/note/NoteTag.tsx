@@ -1,4 +1,4 @@
-import getRandomColor from '@/lib/getRandomColor'
+import getRandomColor from '@/lib/get-random-color'
 
 export default function NoteTag(props) {
   const color = getRandomColor()

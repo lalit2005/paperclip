@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import newNoteSchema from '@/lib/newNoteSchema'
+import newNoteSchema from '@/lib/new-note-schema'
 import { newNoteValues } from 'types/types'
 import axios from 'axios'
 import toast from 'react-hot-toast'
@@ -36,6 +36,7 @@ const SearchInput = (props) => {
       })
       .then((res) => {
         router.push('/app/notes/' + res.data.id)
+        closeModal()
       })
     toast.promise(createNewNote, {
       loading: 'Creating new note...',
@@ -149,7 +150,7 @@ const SearchInput = (props) => {
                         {...register('tags')}
                       />
                       <small className='text-gray-500'>
-                        Comma separated, use '-' for spaces
+                        Comma separated, use '-' instead of spaces
                       </small>
                       <p className='text-sm text-red-600'>
                         {errors.tags &&
@@ -160,8 +161,7 @@ const SearchInput = (props) => {
                     <div className='mt-4'>
                       <button
                         type='submit'
-                        className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
-                        onClick={closeModal}>
+                        className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'>
                         Start writing →
                       </button>
                     </div>

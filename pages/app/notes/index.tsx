@@ -1,8 +1,7 @@
-import Note from '@/components/note/Note'
 import NoteTag from '@/components/note/NoteTag'
 import SearchInput from '@/components/note/SearchInput'
 import fetcher from '@/lib/fetcher'
-import { withPageAuthRequired } from '@auth0/nextjs-auth0'
+import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { notes } from '@prisma/client'
 import DashboardLayout from 'layouts/DashboardLayout'
 import Link from 'next/link'
@@ -10,8 +9,9 @@ import { useState } from 'react'
 import useSWR from 'swr'
 import Fuse from 'fuse.js'
 import Skeleton from 'react-loading-skeleton'
+import Head from 'next/head'
 
-const index = () => {
+const index: React.FC<{ user: UserProfile }> = ({ user }) => {
   const { data: notes } = useSWR<notes[]>('/api/notes/get-all-notes', fetcher)
   const [inputValue, setInputValue] = useState('')
   const fuse = new Fuse(notes, {
@@ -22,6 +22,9 @@ const index = () => {
   const results = inputValue ? fuse.search(inputValue) : notes
   return (
     <div>
+      <Head>
+        <title>{user.name || user.nickname}'s Notes</title>
+      </Head>
       <DashboardLayout>
         <h1 className='mb-16 text-4xl font-extrabold text-center'>
           Your notes 📔
