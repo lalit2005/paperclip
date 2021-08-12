@@ -1,6 +1,6 @@
 import Note from '@/components/note/Note'
 import NoteTag from '@/components/note/NoteTag'
-import SearchInput from '@/components/note/searchInput'
+import SearchInput from '@/components/note/SearchInput'
 import fetcher from '@/lib/fetcher'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { notes } from '@prisma/client'
@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import useSWR from 'swr'
 import Fuse from 'fuse.js'
+import Skeleton from 'react-loading-skeleton'
 
 const index = () => {
   const { data: notes } = useSWR<notes[]>('/api/notes/get-all-notes', fetcher)
@@ -53,7 +54,14 @@ const index = () => {
               </div>
             </a>
           </Link>
-        ))}
+        )) || (
+          <Skeleton
+            height='150px'
+            width='100%'
+            count={3}
+            className='my-4 rounded shadow-sm'
+          />
+        )}
       </DashboardLayout>
     </div>
   )
