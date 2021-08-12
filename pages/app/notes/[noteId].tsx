@@ -24,7 +24,7 @@ const index = () => {
     <div className='min-h-screen px-10 bg-gray-50'>
       <Head>
         <title>
-          {note?.noteHeading} | {note?.noteDescription}
+          {note?.noteHeading || 'Note'} {'| ' + note?.noteDescription}
         </title>
       </Head>
       <DashboardNav />

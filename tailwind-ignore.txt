@@ -3,8 +3,15 @@ text-blue-700
 text-purple-700
 text-green-700
 text-red-700
+text-yellow-700
+text-indigo-700
+text-pink-700
+
 border-gray-700
 border-blue-700
 border-purple-700
 border-green-700
 border-red-700
+border-yellow-700
+border-indigo-700
+border-pink-700
