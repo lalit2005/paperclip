@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import DashboardNav from '@/components/dashboard/DashboardNav'
 import { useEffect } from 'react'
+import Head from 'next/head'
 
 const index = () => {
   const router = useRouter()
@@ -21,6 +22,11 @@ const index = () => {
   }, [])
   return (
     <div className='min-h-screen px-10 bg-gray-50'>
+      <Head>
+        <title>
+          {note?.noteHeading} | {note?.noteDescription}
+        </title>
+      </Head>
       <DashboardNav />
       <div className='max-w-5xl pt-16 mx-auto px-7'>
         <div className='flex items-start justify-start'>
