@@ -1,10 +1,7 @@
 import StickyNote from '@/components/stickyNote/StickyNote'
 import { Dialog, Transition, Listbox } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import {
-  UserProfile,
-  withPageAuthRequired,
-} from '@auth0/nextjs-auth0/dist/frontend'
+import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import toast from 'react-hot-toast'
 import useSWR from 'swr'
 import { stickyNotes } from '@prisma/client'
