@@ -17,7 +17,7 @@ model notes {
   noteDescription String?  @db.VarChar
   noteHeading     String?  @db.VarChar
   isPublic        Boolean  @default(false)
-  publicId        String?  @db.VarChar
+  publicId        String?  @db.VarChar @unique
   emoji           String?  @db.VarChar
 }
 
