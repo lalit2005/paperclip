@@ -60,16 +60,6 @@ const EditPopover = ({
     toast.success('Note settings updated')
   }
 
-  let [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-
-  function closeDeleteModal() {
-    setIsDeleteModalOpen(false)
-  }
-
-  function openDeleteModalModal() {
-    setIsDeleteModalOpen(true)
-  }
-
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -158,15 +148,6 @@ const EditPopover = ({
                       className='px-3 py-1 my-3 bg-gray-900 rounded shadow text-gray-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-gray-700'>
                       Save
                     </button>
-                    <button
-                      type='button'
-                      onClick={() => {
-                        // closeModal()
-                        openDeleteModalModal()
-                      }}
-                      className='px-3 py-1 my-3 ml-3 bg-red-600 rounded shadow text-red-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-red-400'>
-                      Delete note
-                    </button>
                   </div>
                 </form>
               </div>
@@ -174,75 +155,6 @@ const EditPopover = ({
           </div>
         </Dialog>
       </Transition>
-
-      <div>
-        <Transition appear show={isDeleteModalOpen} as={Fragment}>
-          <Dialog
-            as='div'
-            className='fixed inset-0 z-10 overflow-y-auto'
-            onClose={closeDeleteModal}>
-            <div className='min-h-screen px-4 text-center'>
-              <Transition.Child
-                as={Fragment}
-                enter='ease-out duration-300'
-                enterFrom='opacity-0'
-                enterTo='opacity-100'
-                leave='ease-in duration-200'
-                leaveFrom='opacity-100'
-                leaveTo='opacity-0'>
-                <Dialog.Overlay className='fixed inset-0 backdrop-filter backdrop-blur-lg' />
-              </Transition.Child>
-
-              {/* This element is to trick the browser into centering the modal contents. */}
-              <span
-                className='inline-block h-screen align-middle'
-                aria-hidden='true'>
-                &#8203;
-              </span>
-              <Transition.Child
-                as={Fragment}
-                enter='ease-out duration-300'
-                enterFrom='opacity-0 scale-95'
-                enterTo='opacity-100 scale-100'
-                leave='ease-in duration-200'
-                leaveFrom='opacity-100 scale-100'
-                leaveTo='opacity-0 scale-95'>
-                <div className='inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl'>
-                  <Dialog.Title
-                    as='h3'
-                    className='text-lg font-medium leading-6 text-gray-900'>
-                    Are you sure you want to delete {noteTitle}?
-                  </Dialog.Title>
-                  <button
-                    onClick={closeDeleteModal}
-                    className='px-3 py-1 my-3 bg-gray-900 rounded shadow text-gray-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-gray-700'>
-                    Cancel
-                  </button>
-                  <button
-                    type='button'
-                    onClick={() => {
-                      const deleteNoteRequest = axios
-                        .post('/api/notes/delete-note', {
-                          id: noteId,
-                        })
-                        .then(() => {
-                          router.push('/app/notes')
-                        })
-                      toast.promise(deleteNoteRequest, {
-                        loading: `Deleting ${noteTitle}...`,
-                        error: `Error deleting ${noteTitle}.`,
-                        success: 'Note deleted.',
-                      })
-                    }}
-                    className='px-3 py-1 my-3 ml-3 bg-red-900 rounded shadow text-red-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-red-700'>
-                    Delete {noteTitle}
-                  </button>
-                </div>
-              </Transition.Child>
-            </div>
-          </Dialog>
-        </Transition>
-      </div>
     </>
   )
 }
