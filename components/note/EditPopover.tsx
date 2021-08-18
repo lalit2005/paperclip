@@ -10,6 +10,8 @@ import { notes } from '@prisma/client'
 import tagsToString from '@/lib/convert-tags-to-string'
 import getTagsFromString from '@/lib/get-tags-from-string'
 import { useRouter } from 'next/router'
+import * as Popover from '@radix-ui/react-popover'
+import Picker from 'emoji-picker-react'
 
 const EditPopover = ({
   isOpen,
@@ -20,12 +22,16 @@ const EditPopover = ({
   mutate,
   noteId,
   noteData,
+  noteEmoji,
 }) => {
   const restOfNoteData: notes = noteData
+
   const router = useRouter()
+
   useEffect(() => {
     router.prefetch(`/app/notes/`)
   }, [])
+
   const {
     formState: { errors },
     handleSubmit,
@@ -39,12 +45,15 @@ const EditPopover = ({
     resolver: zodResolver(newNoteSchema),
   })
 
+  const [emoji, setEmoji] = useState<string>(noteEmoji)
+
   const updateNote = (values: newNoteValues) => {
     axios.post('/api/notes/update-note-metadata', {
       noteHeading: values.noteHeading,
       noteDescription: values.noteDescription,
       tags: values.tags,
       id: noteId,
+      emoji: emoji,
     })
     closeModal()
     mutate(
@@ -53,6 +62,7 @@ const EditPopover = ({
         noteHeading: values.noteHeading,
         noteDescription: values.noteDescription,
         tags: getTagsFromString(values.tags),
+        emoji: emoji,
       },
       false
     )
@@ -66,7 +76,7 @@ const EditPopover = ({
         <Dialog
           as='div'
           className='fixed inset-0 z-10 overflow-y-auto'
-          onClose={closeModal}>
+          onClose={console.log}>
           <div className='min-h-screen px-4 text-center'>
             <Transition.Child
               as={Fragment}
@@ -100,6 +110,32 @@ const EditPopover = ({
                   Note settings
                 </Dialog.Title>
                 <form onSubmit={handleSubmit(updateNote)}>
+                  <label className='block my-5'>
+                    <p className='mb-2 text-gray-700'>Emoji</p>
+                    <Popover.Root>
+                      <Popover.Trigger>
+                        <button
+                          type='button'
+                          className='block px-3 py-1 rounded shadow bg-gray-50 hover:bg-gray-100'>
+                          Emoji ( {emoji} )
+                        </button>
+                        <small>Click to change the emoji</small>
+                      </Popover.Trigger>
+                      <Popover.Anchor />
+                      <Popover.Content>
+                        <div>
+                          <Picker
+                            disableAutoFocus
+                            preload
+                            disableSearchBar
+                            onEmojiClick={(_, emojiObj) => {
+                              setEmoji(emojiObj.emoji)
+                            }}
+                          />
+                        </div>
+                      </Popover.Content>
+                    </Popover.Root>
+                  </label>
                   <label className='block my-5'>
                     <span className='mb-2 text-gray-700'>Note title</span>
                     <input
@@ -147,6 +183,12 @@ const EditPopover = ({
                       type='submit'
                       className='px-3 py-1 my-3 bg-gray-900 rounded shadow text-gray-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-gray-700'>
                       Save
+                    </button>
+                    <button
+                      type='button'
+                      onClick={closeModal}
+                      className='px-3 py-1 my-3 ml-2 text-gray-900 rounded shadow bg-gray-50 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-gray-700'>
+                      Cancel
                     </button>
                   </div>
                 </form>

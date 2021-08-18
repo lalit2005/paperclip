@@ -17,6 +17,11 @@ const Page = ({
         <title>
           {noteHeading || 'Note'} {'| ' + noteDescription}
         </title>
+        <link
+          rel='shortcut icon'
+          href={`data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${emoji}</text></svg>`}
+          type='image/x-icon'
+        />
       </Head>
       <div className='max-w-5xl pt-16 mx-auto px-7'>
         <div className='items-start justify-start sm:flex group'>

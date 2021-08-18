@@ -9,7 +9,7 @@ import getTagsFromString from '@/lib/get-tags-from-string'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body } = req
-  const { noteHeading, noteDescription, tags, id } = body
+  const { noteHeading, noteDescription, tags, id, emoji } = body
   const newNote = await prisma.notes.update({
     where: {
       id,
@@ -18,6 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       noteHeading: noteHeading,
       noteDescription: noteDescription,
       tags: getTagsFromString(tags),
+      emoji: emoji,
     },
   })
   res.json(newNote)
