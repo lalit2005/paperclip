@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Note from '@/components/note/PublicNote'
 import NoteTag from '@/components/note/NoteTag'
 import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 const Page = ({
   content,
@@ -10,6 +11,7 @@ const Page = ({
   description: noteDescription,
   emoji,
   tags,
+  publicId,
 }) => {
   return (
     <div className='min-h-screen px-10 bg-gray-50'>
@@ -23,7 +25,29 @@ const Page = ({
           type='image/x-icon'
         />
       </Head>
-      <div className='max-w-5xl pt-16 mx-auto px-7'>
+      <NextSeo
+        title={noteHeading || 'Paperclip note'}
+        description={noteDescription}
+        openGraph={{
+          url: 'https://usepaperclip.vercel.app/p/' + publicId,
+          title: noteHeading || 'Paperclip',
+          description:
+            noteDescription ||
+            'Paperclip is more than just a note taking app. It is the only productivity tool you will ever need.',
+          // TODO: Change OG Image URL
+          images: [
+            {
+              url: 'https://staticshield.vercel.app/ogimage.png',
+            },
+          ],
+          site_name: noteHeading || 'Paperclip',
+        }}
+        twitter={{
+          handle: '@lalitcodes',
+          cardType: 'summary_large_image',
+        }}
+      />
+      <div className='max-w-5xl mx-auto pt-28 px-7'>
         <div className='items-start justify-start sm:flex group'>
           <span className='inline-block mr-5 text-4xl font-bold'>{emoji}</span>
           <div className='inline-block'>
@@ -68,6 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         description: pageData.noteDescription,
         emoji: pageData.emoji,
         tags: pageData.tags,
+        publicId: pageData.publicId,
       },
       revalidate: 10 * 60,
     }
