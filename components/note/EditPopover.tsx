@@ -116,8 +116,21 @@ const EditPopover = ({
                       <Popover.Trigger>
                         <button
                           type='button'
-                          className='block px-3 py-1 rounded shadow bg-gray-50 hover:bg-gray-100'>
-                          Emoji ( {emoji} )
+                          className='block px-3 py-1 rounded shadow bg-gray-50 hover:bg-gray-100'
+                          onClick={() => {
+                            const wait = new Promise((resolve, _) => {
+                              setTimeout(() => {
+                                resolve('')
+                              }, 2000)
+                            })
+                            toast.promise(wait, {
+                              loading: 'Loading emojis ...',
+                              error:
+                                'Emojis could not be loaded. Try refreshing the page',
+                              success: 'Emojis loaded',
+                            })
+                          }}>
+                          Emoji - {emoji}
                         </button>
                         <small>Click to change the emoji</small>
                       </Popover.Trigger>
