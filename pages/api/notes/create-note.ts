@@ -7,6 +7,7 @@ import {
 } from '@auth0/nextjs-auth0'
 import { defaultNoteContent } from '@/components/note/defaultNoteContent'
 import getTagsFromString from '@/lib/get-tags-from-string'
+import { nanoid } from 'nanoid'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
@@ -21,6 +22,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       noteDescription: noteDescription,
       noteHeading: noteHeading,
       tags: getTagsFromString(tags),
+      publicId: nanoid(),
+      emoji: '⚡️',
     },
   })
   res.json(newNote)

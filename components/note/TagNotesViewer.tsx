@@ -1,0 +1,104 @@
+import { Dialog, Transition } from '@headlessui/react'
+import { notes } from '@prisma/client'
+import { Fragment, useState } from 'react'
+import NoteTag from './NoteTag'
+import Link from 'next/link'
+
+const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
+  tag,
+  notesData,
+}) => {
+  let [isOpen, setIsOpen] = useState(false)
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  return (
+    <div>
+      <div
+        className='p-5 my-4 border border-gray-500 rounded shadow-md cursor-pointer hover:bg-gray-50'
+        onClick={openModal}>
+        <h3 className='text-lg text-gray-900 capitalize'>{tag}</h3>
+      </div>
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog
+          as='div'
+          className='fixed inset-0 z-10 overflow-y-auto'
+          onClose={closeModal}>
+          <div className='min-h-screen px-4 text-center'>
+            <Transition.Child
+              as={Fragment}
+              enter='ease-out duration-300'
+              enterFrom='opacity-0'
+              enterTo='opacity-100'
+              leave='ease-in duration-200'
+              leaveFrom='opacity-100'
+              leaveTo='opacity-0'>
+              <Dialog.Overlay className='fixed inset-0 backdrop-filter backdrop-blur-lg' />
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className='inline-block h-screen align-middle'
+              aria-hidden='true'>
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter='ease-out duration-300'
+              enterFrom='opacity-0 scale-95'
+              enterTo='opacity-100 scale-100'
+              leave='ease-in duration-200'
+              leaveFrom='opacity-100 scale-100'
+              leaveTo='opacity-0 scale-95'>
+              <div className='inline-block w-full max-w-5xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl'>
+                <Dialog.Title
+                  as='h3'
+                  className='text-lg font-medium leading-6 text-gray-900 capitalize'>
+                  Notes containg `<span className='underline'>{tag}</span>` tag
+                </Dialog.Title>
+                <div className='mt-3'>
+                  {notesData?.map((note) => (
+                    <Link key={note.id} href={`/app/notes/${note.id}`}>
+                      <a className='block'>
+                        <div className='p-3 my-4 border border-gray-500 rounded shadow-md hover:bg-gray-50'>
+                          <h3 className='text-lg text-gray-900'>
+                            {note.noteHeading}
+                          </h3>
+                          <p className='mb-3 text-gray-500 font-sm'>
+                            {note.noteDescription}
+                          </p>
+                          <div className='my-2'>
+                            {note?.tags?.map((tag) => (
+                              <NoteTag key={tag} tag={tag} />
+                            ))}
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  ))}
+                </div>
+
+                <div className='mt-4'>
+                  <button
+                    type='button'
+                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+                    onClick={closeModal}>
+                    Close
+                  </button>
+                </div>
+              </div>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
+    </div>
+  )
+}
+
+export default TagNotesViewer

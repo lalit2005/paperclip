@@ -148,6 +148,9 @@ const EditPopover = ({
                       {/* @ts-ignore */}
                       {errors.tags && errors.tags.message}
                     </p>
+                    <small className='text-gray-500'>
+                      Comma separated list of tags
+                    </small>
                   </label>
                   <div>
                     <button

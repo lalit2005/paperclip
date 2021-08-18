@@ -18,6 +18,7 @@ model notes {
   noteHeading     String?  @db.VarChar
   isPublic        Boolean  @default(false)
   publicId        String?  @db.VarChar
+  emoji           String?  @db.VarChar
 }
 
 model stickyNotes {

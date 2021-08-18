@@ -63,6 +63,7 @@ const SearchInput = (props) => {
         type='search'
         name='search-input'
         id='search-input'
+        autoComplete='off'
         placeholder='Search your tags, notes and their content too. Press / to focus'
         className='inline-block w-full px-2 py-1 mb-5 text-gray-600 border border-gray-400 rounded shadow focus:outline-none focus:ring focus:ring-gray-300 focus:ring-offset-1'
         {...props}
@@ -150,7 +151,7 @@ const SearchInput = (props) => {
                         {...register('tags')}
                       />
                       <small className='text-gray-500'>
-                        Comma separated, use '-' instead of spaces
+                        Comma separated list of tags
                       </small>
                       <p className='text-sm text-red-600'>
                         {errors.tags &&
@@ -162,7 +163,7 @@ const SearchInput = (props) => {
                       <button
                         type='submit'
                         className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'>
-                        Start writing →
+                        Start writing {'->'}
                       </button>
                     </div>
                   </form>
