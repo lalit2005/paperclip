@@ -63,7 +63,7 @@ const SearchInput = (props) => {
         type='search'
         name='search-input'
         id='search-input'
-        placeholder='Search your tags, notes and their content too'
+        placeholder='Search your tags, notes and their content too. Press / to focus'
         className='inline-block w-full px-2 py-1 mb-5 text-gray-600 border border-gray-400 rounded shadow focus:outline-none focus:ring focus:ring-gray-300 focus:ring-offset-1'
         {...props}
       />
