@@ -5,19 +5,19 @@ import {
   withApiAuthRequired,
   UserProfile,
 } from '@auth0/nextjs-auth0'
+import getTagsFromString from '@/lib/get-tags-from-string'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const {
-    user: { sub },
-  }: { user: UserProfile } = getSession(req, res)
   const { body } = req
-  const { noteContent, id } = body
+  const { noteHeading, noteDescription, tags, id } = body
   const newNote = await prisma.notes.update({
     where: {
       id,
     },
     data: {
-      note: noteContent,
+      noteHeading: noteHeading,
+      noteDescription: noteDescription,
+      tags: getTagsFromString(tags),
     },
   })
   res.json(newNote)

@@ -11,8 +11,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     user: { sub },
   }: { user: UserProfile } = getSession(req, res)
   const { body } = req
-  const { stickyNote, id } = body
-  const deletedNote = await prisma.stickyNotes.delete({
+  const { id } = body
+  const deletedNote = await prisma.notes.delete({
     where: {
       id: id,
     },

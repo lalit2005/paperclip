@@ -1,11 +1,11 @@
 export interface StickyNote {
-  note: String
+  note: string
   color: 'red' | 'blue' | 'green' | 'purple' | 'gray'
   id: Number
 }
 
 export interface newNoteValues {
-  noteHeading: String
-  noteDescription: String
-  tags: String
+  noteHeading: string
+  noteDescription: string
+  tags: string
 }

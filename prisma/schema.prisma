@@ -16,6 +16,8 @@ model notes {
   id              String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   noteDescription String?  @db.VarChar
   noteHeading     String?  @db.VarChar
+  isPublic        Boolean  @default(false)
+  publicId        String?  @db.VarChar
 }
 
 model stickyNotes {
