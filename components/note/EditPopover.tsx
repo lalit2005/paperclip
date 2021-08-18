@@ -141,6 +141,7 @@ const EditPopover = ({
                             disableAutoFocus
                             preload
                             disableSearchBar
+                            skinTone='1f3fb'
                             onEmojiClick={(_, emojiObj) => {
                               setEmoji(emojiObj.emoji)
                             }}
