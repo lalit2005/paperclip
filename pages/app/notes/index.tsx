@@ -82,12 +82,12 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
         </div>
 
         {!isSortedBasedOnTagsChecked ? (
-          <div>
+          <div className='flex flex-wrap justify-evenly'>
             {results?.map((note) => (
               <Link
                 key={note.id || note.item.id}
                 href={`/app/notes/${note.id || note.item.id}`}>
-                <a className='block'>
+                <a className='inline-block w-full max-w-xl'>
                   <div className='p-5 my-4 border border-gray-500 rounded shadow-md hover:bg-gray-50'>
                     <h3 className='text-lg text-gray-900'>
                       {note.noteHeading || note.item.noteHeading}
@@ -111,12 +111,12 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
                 height='150px'
                 width='100%'
                 count={3}
-                className='my-4 rounded shadow-sm'
+                className='inline-block w-full max-w-xl my-4 rounded shadow-sm'
               />
             )}
           </div>
         ) : (
-          <div>
+          <div className='flex flex-wrap justify-evenly'>
             {/* @ts-ignore */}
             {notes ? (
               searchedNotes?.map((tag) => (
@@ -130,7 +130,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
                 height='70px'
                 width='100%'
                 count={5}
-                className='my-4 rounded shadow-sm'
+                className='inline-block w-full max-w-xl my-4 rounded shadow-sm'
               />
             )}
           </div>

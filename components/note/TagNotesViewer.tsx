@@ -3,6 +3,7 @@ import { notes } from '@prisma/client'
 import { Fragment, useState } from 'react'
 import NoteTag from './NoteTag'
 import Link from 'next/link'
+import { HiOutlineXCircle } from 'react-icons/hi'
 
 const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
   tag,
@@ -19,7 +20,7 @@ const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
   }
 
   return (
-    <div>
+    <div className='inline-block w-full max-w-xl'>
       <div
         className='p-5 my-4 border border-gray-500 rounded shadow-md cursor-pointer hover:bg-gray-50'
         onClick={openModal}>
@@ -56,11 +57,17 @@ const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
               leave='ease-in duration-200'
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'>
-              <div className='inline-block w-full max-w-5xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl'>
+              <div className='absolute top-0 left-0 w-screen h-screen p-6 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl'>
                 <Dialog.Title
                   as='h3'
-                  className='text-lg font-medium leading-6 text-gray-900 capitalize'>
-                  Notes containg `<span className='underline'>{tag}</span>` tag
+                  className='flex items-center justify-between w-full mb-10 text-lg font-medium leading-6 text-gray-900 capitalize'>
+                  <p className='inline-block'>
+                    Notes containg `<span className='underline'>{tag}</span>`
+                    tag
+                  </p>
+                  <button onClick={closeModal} className='inline-block'>
+                    <HiOutlineXCircle className='text-gray-600 w-7 h-7' />
+                  </button>
                 </Dialog.Title>
                 <div className='mt-3'>
                   {notesData?.map((note) => (
@@ -70,9 +77,6 @@ const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
                           <h3 className='text-lg text-gray-900'>
                             {note.noteHeading}
                           </h3>
-                          <p className='mb-3 text-gray-500 font-sm'>
-                            {note.noteDescription}
-                          </p>
                           <div className='my-2'>
                             {note?.tags?.map((tag) => (
                               <NoteTag key={tag} tag={tag} />
@@ -87,9 +91,9 @@ const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
                 <div className='mt-4'>
                   <button
                     type='button'
-                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded my-14 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
                     onClick={closeModal}>
-                    Close
+                    {'<-'} Go Back
                   </button>
                 </div>
               </div>
