@@ -9,6 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     router.prefetch('/app')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (user) {

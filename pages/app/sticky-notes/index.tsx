@@ -29,7 +29,7 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
   return (
     <div>
       <Head>
-        <title>{user.name || user.nickname}'s sticky notes</title>
+        <title>{user.name || user.nickname}&apos;s sticky notes</title>
       </Head>
       <DashboardLayout>
         <div className='max-w-4xl mx-auto'>

@@ -21,7 +21,7 @@ const Account: React.FC<{ user: UserProfile }> = ({ user }) => {
           </div>
         )}
         <h1 className='text-4xl font-extrabold capitalize'>
-          {name}'s Paperclip Account
+          {name}&apos;s Paperclip Account
         </h1>
         <hr className='text-gray-200' />
         <div className='mt-5'>
@@ -37,6 +37,7 @@ const Account: React.FC<{ user: UserProfile }> = ({ user }) => {
           </p>
           <h3 className='mt-10 mb-2 text-2xl font-bold'>Profile Picture</h3>
           <p className='mb-5 text-gray-700 text-md'>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={picture}
               alt='Profile Picture'
