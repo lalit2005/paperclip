@@ -8,6 +8,7 @@ import {
   HiOutlineUserCircle,
 } from 'react-icons/hi'
 import Link from 'next/link'
+import * as Avatar from '@radix-ui/react-avatar'
 
 const ProfileDropdown = () => {
   const {
@@ -29,7 +30,16 @@ const ProfileDropdown = () => {
               open={isOpen}>
               <Tooltip.Trigger className='w-8 h-8'>
                 <div>
-                  <img src={picture} alt={name} className='rounded-full' />
+                  <Avatar.Root>
+                    <Avatar.Image
+                      src={picture}
+                      className='rounded-full'
+                      alt={name}
+                    />
+                    <Avatar.Fallback className='p-2 uppercase bg-blue-600 rounded-full text-gray-50'>
+                      {name.substr(0, 2)}
+                    </Avatar.Fallback>
+                  </Avatar.Root>
                 </div>
               </Tooltip.Trigger>
               <Transition
