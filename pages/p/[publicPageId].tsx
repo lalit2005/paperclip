@@ -63,7 +63,7 @@ const Page = ({
           </div>
         </div>
         <div className='mt-12 bg-white note-container'>
-          <Note noteId='hello' isModalOpen={false} noteContent={content} />
+          <Note noteContent={content} />
         </div>
       </div>
     </div>
