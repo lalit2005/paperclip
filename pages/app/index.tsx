@@ -9,11 +9,12 @@ import fetcher from '@/lib/fetcher'
 import Head from 'next/head'
 
 const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data } = useSWR('/api/get-dashboard-data', fetcher)
   return (
     <DashboardLayout>
       <Head>
-        <title>{user.name}'s Dashboard | Paperclip</title>
+        <title>{user.name}&apos;s Dashboard | Paperclip</title>
       </Head>
       <div>
         <div>

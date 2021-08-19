@@ -8,10 +8,11 @@ import {
 import { defaultNoteContent } from '@/components/note/defaultNoteContent'
 import getTagsFromString from '@/lib/get-tags-from-string'
 import { customAlphabet } from 'nanoid'
+import generateDefaultContent from '@/lib/generate-default-content'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
-    user: { sub },
+    user: { sub, name, email },
   }: { user: UserProfile } = getSession(req, res)
   const { body } = req
   const alphabet =
@@ -21,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const newNote = await prisma.notes.create({
     data: {
       createdBy: sub,
-      note: defaultNoteContent,
+      note: generateDefaultContent(name, email),
       noteDescription: noteDescription,
       noteHeading: noteHeading,
       tags: getTagsFromString(tags),

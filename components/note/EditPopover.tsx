@@ -11,7 +11,9 @@ import tagsToString from '@/lib/convert-tags-to-string'
 import getTagsFromString from '@/lib/get-tags-from-string'
 import { useRouter } from 'next/router'
 import * as Popover from '@radix-ui/react-popover'
-import Picker from 'emoji-picker-react'
+// import { Picker } from 'emoji-mart'
+// import 'emoji-mart/css/emoji-mart.css'
+import Picker from './EmojiPicker'
 
 const EditPopover = ({
   isOpen,
@@ -30,6 +32,7 @@ const EditPopover = ({
 
   useEffect(() => {
     router.prefetch(`/app/notes/`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const {
@@ -116,37 +119,14 @@ const EditPopover = ({
                       <Popover.Trigger>
                         <button
                           type='button'
-                          className='block px-3 py-1 rounded shadow bg-gray-50 hover:bg-gray-100'
-                          onClick={() => {
-                            const wait = new Promise((resolve, _) => {
-                              setTimeout(() => {
-                                resolve('')
-                              }, 2000)
-                            })
-                            toast.promise(wait, {
-                              loading: 'Loading emojis ...',
-                              error:
-                                'Emojis could not be loaded. Try refreshing the page',
-                              success: 'Emojis loaded',
-                            })
-                          }}>
+                          className='block px-3 py-1 rounded shadow bg-gray-50 hover:bg-gray-100'>
                           Emoji - {emoji}
                         </button>
                         <small>Click to change the emoji</small>
                       </Popover.Trigger>
                       <Popover.Anchor />
                       <Popover.Content>
-                        <div>
-                          <Picker
-                            disableAutoFocus
-                            preload
-                            disableSearchBar
-                            skinTone='1f3fb'
-                            onEmojiClick={(_, emojiObj) => {
-                              setEmoji(emojiObj.emoji)
-                            }}
-                          />
-                        </div>
+                        <Picker emoji={emoji} setEmoji={setEmoji} />
                       </Popover.Content>
                     </Popover.Root>
                   </label>

@@ -1,11 +1,11 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     open-pull-requests-limit: 0
     assignees:
-      - "Lalit2005"
+      - 'Lalit2005'
     reviewers:
-      - "Lalit2005"
+      - 'Lalit2005'

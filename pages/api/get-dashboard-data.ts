@@ -13,6 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const notesFetcher = prisma.notes.findMany({
     where: {
       createdBy: sub,
+      inTrash: false,
     },
     select: {
       noteHeading: true,

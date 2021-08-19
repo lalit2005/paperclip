@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Note from '@/components/note/Note'
 import NoteTag from '@/components/note/NoteTag'
 import fetcher from '@/lib/fetcher'
@@ -15,6 +16,11 @@ import { Fragment, useState } from 'react'
 import { Fab, Action } from 'react-tiny-fab'
 import 'react-tiny-fab/dist/styles.css'
 import Link from 'next/link'
+import MenuBarTooltip from '@/components/note/MenuBarTooltip'
+import * as Checkbox from '@radix-ui/react-checkbox'
+import { HiCheck } from 'react-icons/hi'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const index = () => {
   const router = useRouter()
@@ -29,6 +35,7 @@ const index = () => {
   }, [])
 
   let [isOpen, setIsOpen] = useState(false)
+  const [isNotePublic, setIsNotePublic] = useState(note?.isPublic)
 
   function closeModal() {
     setIsOpen(false)
@@ -80,9 +87,13 @@ const index = () => {
       </div>
       <div className='max-w-5xl pt-16 mx-auto px-7'>
         <div className='items-start justify-start sm:flex group'>
-          <span className='inline-block mr-5 text-4xl font-bold'>
-            {note?.emoji}
-          </span>
+          <MenuBarTooltip text={`Change emoji for ${note?.noteHeading}`}>
+            <span
+              className='relative inline-block p-2 mr-5 text-4xl font-bold rounded cursor-pointer bottom-2 hover:bg-gray-300'
+              onClick={openModal}>
+              {note?.emoji}
+            </span>
+          </MenuBarTooltip>
           <div className='inline-block'>
             <h1 className='text-4xl font-bold'>
               {note?.noteHeading}{' '}
@@ -160,18 +171,99 @@ const index = () => {
                 <Dialog.Title
                   as='h3'
                   className='text-lg font-medium leading-6 text-gray-900'>
-                  {note?.noteHeading}'s Settings
+                  {note?.noteHeading}&apos;s Settings
                 </Dialog.Title>
                 <div className='mt-2'>
-                  <p className='text-sm text-gray-500'></p>
+                  <div className='flex items-center'>
+                    <Checkbox.Root
+                      id='check'
+                      checked={isNotePublic}
+                      onCheckedChange={(isChecked) => {
+                        // @ts-ignore
+                        setIsNotePublic(isChecked)
+                      }}
+                      className='inline-flex items-center justify-center w-5 h-5 mr-2 text-gray-600 border border-gray-400 rounded shadow focus:ring focus:ring-gray-600 group checked:bg-gray-500 checked:text-gray-50'>
+                      <Checkbox.Indicator>
+                        <HiCheck />
+                      </Checkbox.Indicator>
+                    </Checkbox.Root>
+                    <label htmlFor='check'>
+                      Make {note?.noteHeading} public?
+                    </label>
+                  </div>
+                  <div className='ml-5 text-base text-gray-600'>
+                    {note?.isPublic ? (
+                      <div>
+                        Your note is currently public. View your note as website
+                        at{' '}
+                        <a
+                          className='text-blue-500 hover:underline'
+                          rel='noopener noreferrer'
+                          target='_blank'
+                          href={`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/p/${note?.publicId}`}>{`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/p/${note?.publicId}`}</a>
+                      </div>
+                    ) : (
+                      <div>
+                        You can convert your note to a public note/website by
+                        selecting the checkbox above and hit that Save button
+                        below.🤯
+                      </div>
+                    )}
+                  </div>
                 </div>
-
                 <div className='mt-4'>
                   <button
                     type='button'
-                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
-                    onClick={closeMenuModal}>
+                    className='inline-flex justify-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+                    onClick={() => {
+                      mutate({ ...note, isPublic: isNotePublic }, false)
+                      const updateIsNotePublic = axios.post(
+                        '/api/notes/public',
+                        {
+                          id: note?.id,
+                          isNotePublic: isNotePublic,
+                        }
+                      )
+                      toast.promise(
+                        updateIsNotePublic,
+                        {
+                          error: 'Could not update note',
+                          success: 'Note updated successfully',
+                          loading: 'Updating note...',
+                        },
+                        {
+                          duration: 5000,
+                        }
+                      )
+                    }}>
                     Save settings
+                  </button>
+                  <button
+                    type='button'
+                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500'
+                    onClick={() => {
+                      mutate({ ...note, inTrash: true }, false)
+                      const updateIsNotePublic = axios.post(
+                        '/api/notes/trash',
+                        {
+                          id: note?.id,
+                          inTrash: true,
+                        }
+                      )
+                      toast.promise(updateIsNotePublic, {
+                        error: `Could not move ${note?.noteHeading} note`,
+                        success:
+                          'Note moved to trash successfully. View trash by clicking menu (profile picture)',
+                        loading: `Moving ${note?.noteHeading} to trash...`,
+                      })
+                      closeMenuModal()
+                      router.push('/app/notes')
+                    }}>
+                    Move
+                    <span className='mx-1 font-extrabold'>
+                      {note?.noteHeading}
+                    </span>
+                    to trash
                   </button>
                 </div>
               </div>

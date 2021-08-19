@@ -4,13 +4,16 @@ import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body } = req
-  const { id } = body
-  const deletedNote = await prisma.notes.delete({
+  const { id, inTrash } = body
+  const trashNotes = await prisma.notes.update({
     where: {
       id: id,
     },
+    data: {
+      inTrash: inTrash,
+    },
   })
-  res.json(deletedNote)
+  res.json(trashNotes)
 }
 
 export default withApiAuthRequired(handler)

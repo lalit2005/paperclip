@@ -1,25 +1,23 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/utils/prisma'
 import {
-  getSession,
   withApiAuthRequired,
+  getSession,
   UserProfile,
 } from '@auth0/nextjs-auth0'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { body } = req
   const {
     user: { sub },
   }: { user: UserProfile } = getSession(req, res)
-  const notes = await prisma.notes.findMany({
+  const trashNotes = await prisma.notes.deleteMany({
     where: {
       createdBy: sub,
-      inTrash: false,
-    },
-    orderBy: {
-      createdAt: 'desc',
+      inTrash: true,
     },
   })
-  res.json(notes)
+  res.json(trashNotes)
 }
 
 export default withApiAuthRequired(handler)

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import NoteTag from '@/components/note/NoteTag'
 import SearchInput from '@/components/note/SearchInput'
 import fetcher from '@/lib/fetcher'
@@ -46,7 +47,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
   return (
     <div>
       <Head>
-        <title>{user.name || user.nickname}'s Notes</title>
+        <title>{user.name || user.nickname}&apos;s Notes</title>
       </Head>
       <DashboardLayout>
         <h1 className='mb-16 text-4xl font-extrabold text-center'>
@@ -123,6 +124,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
                 <TagNotesViewer
                   tag={tag}
                   notesData={getNotesDataByTags(notes, tag)}
+                  key={tag}
                 />
               ))
             ) : (

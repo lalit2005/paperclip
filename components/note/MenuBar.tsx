@@ -14,6 +14,8 @@ import {
 // load all highlight.js languages
 import saveNote from '@/lib/save-note'
 import MenuBarTooltip from './MenuBarTooltip'
+import generateEmbedUrl from '@/lib/generateEmbedUrl'
+import { customAlphabet } from 'nanoid'
 
 const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
   editor,
@@ -238,7 +240,25 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
               embedUrl = embedUrl.toString().startsWith('http')
                 ? embedUrl
                 : 'http://' + embedUrl
-              editor.chain().focus().setIframe({ src: embedUrl }).run()
+              editor
+                .chain()
+                .focus()
+                .setIframe({ src: generateEmbedUrl(embedUrl) })
+                .run()
+            }}>
+            <HiOutlineDesktopComputer />
+          </button>
+        </MenuBarTooltip>
+        <MenuBarTooltip text='Add a whiteboard in notes 🤯'>
+          <button
+            onClick={() => {
+              const alphabet =
+                '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+              const nanoid = (len) => customAlphabet(alphabet, len)
+              const whiteboardUrl = `https://excalidraw.com/#room=${nanoid(
+                20
+              )()},${nanoid(22)()}`
+              editor.chain().focus().setIframe({ src: whiteboardUrl }).run()
             }}>
             <HiOutlineDesktopComputer />
           </button>

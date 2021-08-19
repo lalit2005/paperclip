@@ -17,8 +17,6 @@ import TableHeader from '@tiptap/extension-table-header'
 
 const Note: React.FC<{
   noteContent: string
-  noteId: string
-  isModalOpen: boolean
 }> = ({ noteContent }) => {
   const CustomTableCell = TableCell.extend({
     addAttributes() {

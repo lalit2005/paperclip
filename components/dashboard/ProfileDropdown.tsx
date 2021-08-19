@@ -5,6 +5,7 @@ import { Menu, Transition } from '@headlessui/react'
 import {
   HiOutlineLogout,
   HiOutlineSupport,
+  HiOutlineTrash,
   HiOutlineUserCircle,
 } from 'react-icons/hi'
 import Link from 'next/link'
@@ -91,6 +92,24 @@ const ProfileDropdown = () => {
                           aria-hidden='true'
                         />
                         Manage Account
+                      </a>
+                    </Link>
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active ? 'bg-gray-200 text-gray-900' : 'text-gray-900'
+                    } group flex rounded-md items-center w-full text-sm`}>
+                    <Link href='/app/trash'>
+                      <a className='px-2 py-2'>
+                        <HiOutlineTrash
+                          className='inline-block w-5 h-5 mr-2 text-gray-700'
+                          aria-hidden='true'
+                        />
+                        Trash
                       </a>
                     </Link>
                   </button>

@@ -23,12 +23,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   res.json(newNote)
 }
 
-export const config: PageConfig = {
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
-  },
-}
+// export const config: PageConfig = {
+//   api: {
+//     bodyParser: {
+//       sizeLimit: '10mb',
+//     },
+//   },
+// }
 
 export default withApiAuthRequired(handler)
