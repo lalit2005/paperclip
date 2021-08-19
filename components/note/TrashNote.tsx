@@ -38,14 +38,13 @@ const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
           onClick={() => {
             let newData = allData.filter((item) => item.id !== note?.id)
             console.log(JSON.stringify(newData, null, 2))
-            const removeFromTrash = axios
-              .post('/api/notes/trash', {
-                id: note?.id,
-                inTrash: false,
-              })
-              .then(() => {
-                router.reload()
-              })
+            const removeFromTrash = axios.post('/api/notes/trash', {
+              id: note?.id,
+              inTrash: false,
+            })
+            // .then(() => {
+            //   router.reload()
+            // })
             toast.promise(removeFromTrash, {
               error: `Could not restore ${note?.noteHeading}`,
               success: 'Note restored from trash successfully.',
@@ -57,13 +56,12 @@ const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
         <button
           className='px-3 py-1 text-red-700 bg-red-200 border border-red-500 rounded shadow focus:ring focus:ring-offset-1 focus:ring-red-700'
           onClick={() => {
-            const deleteNote = axios
-              .post('/api/notes/delete-note', {
-                id: note?.id,
-              })
-              .then(() => {
-                router.reload()
-              })
+            const deleteNote = axios.post('/api/notes/delete-note', {
+              id: note?.id,
+            })
+            // .then(() => {
+            //   router.reload()
+            // })
             toast.promise(deleteNote, {
               error: 'Error deleting note',
               success: 'Note deleted successfully',

@@ -6,11 +6,11 @@ import TrashNote from '@/components/note/TrashNote'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/dist/frontend'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import useReload from '@/lib/useReload'
+// import useReload from '@/lib/useReload'
 
 const Trash = () => {
   const { data, mutate } = useSWR<TrashResponse>('/api/trash', fetcher)
-  const reload = useReload()
+  // const reload = useReload()
   console.log(data?.notes)
   return (
     <div>
@@ -23,11 +23,10 @@ const Trash = () => {
           <button
             className='px-3 py-1 my-2 rounded shadow bg-blue-50 focus:ring focus:ring-offset-1 focus:ring-blue-700'
             onClick={() => {
-              const clearTrash = axios
-                .post('/api/notes/clear-trash')
-                .then(() => {
-                  reload()
-                })
+              const clearTrash = axios.post('/api/notes/clear-trash')
+              // .then(() => {
+              //   reload()
+              // })
               toast.promise(clearTrash, {
                 loading: 'Clearing trash...',
                 success: 'Trash cleared',
