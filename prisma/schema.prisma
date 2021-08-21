@@ -29,3 +29,15 @@ model stickyNotes {
   createdBy  String   @db.VarChar
   color      String   @default("blue") @db.VarChar
 }
+
+model whiteboards {
+  id               String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  elements         String?  @db.VarChar
+  appState         String?  @db.VarChar
+  createdBy        String   @db.VarChar
+  createdAt        DateTime @default(now()) @db.Timestamptz(6)
+  boardName        String?  @db.VarChar
+  boardDescription String?  @db.VarChar
+  inTrash          Boolean  @default(false)
+  updatedAt        DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+}

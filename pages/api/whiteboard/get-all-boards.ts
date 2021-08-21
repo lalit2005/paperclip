@@ -1,35 +1,25 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/utils/prisma'
 import {
+  getSession,
   withApiAuthRequired,
   UserProfile,
-  getSession,
 } from '@auth0/nextjs-auth0'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { body } = req
   const {
     user: { sub },
   }: { user: UserProfile } = getSession(req, res)
-  const trashNotesRequest = prisma.notes.findMany({
+  const boards = await prisma.whiteboards.findMany({
     where: {
       createdBy: sub,
-      inTrash: true,
+      inTrash: false,
+    },
+    orderBy: {
+      updatedAt: 'desc',
     },
   })
-  const trashBoardsRequest = prisma.whiteboards.findMany({
-    where: {
-      createdBy: sub,
-    },
-  })
-  const [trashNotes, trashBoards] = await prisma.$transaction([
-    trashNotesRequest,
-    trashBoardsRequest,
-  ])
-  res.json({
-    notes: trashNotes,
-    boards: trashBoards,
-  })
+  res.json(boards)
 }
 
 export default withApiAuthRequired(handler)

@@ -1,24 +1,84 @@
 import React, { useEffect, useState, useRef, Fragment } from 'react'
 import Excalidraw from './Excalidraw'
-import InitialData from './initialData'
 import { Dialog, Transition } from '@headlessui/react'
+import { ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types'
+import { AppState } from '@excalidraw/excalidraw/types/types'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import Script from 'next/script'
 
-export default function App() {
+const Whiteboard: React.FC<{
+  initialData: { elements?: ExcalidrawElement[]; appState?: AppState }
+  id: string
+  mutate: any
+}> = ({ initialData, id }) => {
   const excalidrawRef = useRef(null)
-
+  console.log(initialData, id)
   const [viewModeEnabled, setViewModeEnabled] = useState(false)
   const [zenModeEnabled, setZenModeEnabled] = useState(false)
   const [gridModeEnabled, setGridModeEnabled] = useState(false)
-
+  const [appState, setAppState] = useState<AppState>(initialData.appState)
+  const [elementsState, setElementsState] = useState<ExcalidrawElement[]>(
+    initialData.elements
+  )
   let [isOpen, setIsOpen] = useState(false)
+  const [addedButton, setAddedButton] = useState(false)
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = new URLSearchParams(window.location.hash.slice(1))
+      const libraryUrl = hash.get('addLibrary')
+      if (libraryUrl) {
+        excalidrawRef.current!.importLibrary(libraryUrl, hash.get('token'))
+      }
+    }
+    window.addEventListener('hashchange', onHashChange, false)
+
+    return () => {
+      window.removeEventListener('hashchange', onHashChange)
+    }
+  }, [])
+
+  useEffect(() => {
+    const btn: HTMLButtonElement = document.querySelector(
+      '#whiteboard-save-btn'
+    )
+    btn &&
+      btn?.addEventListener('click', () => {
+        const updateReq = axios.post('/api/whiteboard/update-board', {
+          elements: elementsState,
+          appState: appState,
+          id,
+        })
+        toast.promise(updateReq, {
+          error: 'There was an error saving your changes.',
+          success: 'Your changes have been saved.',
+          loading: 'Saving your changes...',
+        })
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.key === 'z') {
+      if (e.metaKey && e.key === 'h') {
         setIsOpen(true)
       }
+      if (e.metaKey && e.key === 'B') {
+        const updateReq = axios.post('/api/whiteboard/update-board', {
+          elements: elementsState,
+          appState,
+          id,
+        })
+        toast.promise(updateReq, {
+          error: 'There was an error saving your changes.',
+          success: 'Your changes have been saved.',
+          loading: 'Saving your changes...',
+        })
+        alert('Saving your changes...')
+      }
     })
-    return
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -99,51 +159,65 @@ export default function App() {
       </Transition>
 
       <div className='w-screen h-screen'>
+        {/* <button
+          onClick={() => {
+            
+          }}>
+          <h1 className='font-bold text-7xl'>Export</h1>
+        </button> */}
         <Excalidraw
           innerRef={excalidrawRef}
-          initialData={InitialData}
-          // onChange={(elements, state) =>
-          //   console.log("Elements :", elements, "State : ", state)
-          // }
+          initialData={{
+            elements: elementsState,
+            appState,
+          }}
+          autofocus={true}
+          onChange={(
+            newElements: readonly ExcalidrawElement[],
+            newAppState: AppState
+          ) => {
+            // @ts-ignore
+            setElementsState(newElements)
+            setAppState(newAppState)
+            if (!addedButton) {
+              console.log(
+                'Elements :',
+                newElements,
+                '\n',
+                'State : ',
+                newAppState
+              )
+              const box = document.querySelector('.Stack .Stack_horizontal')
+              const btn = document.createElement('button')
+              btn.innerHTML = 'Save'
+              btn.id += ' whiteboard-save-btn'
+              btn.className +=
+                ' !py-2 ml-2 !px-3 !bg-gray-900 !text-gray-50 border-white'
+              box.appendChild(btn)
+              btn.onclick = () => {
+                const updateReq = axios.post('/api/whiteboard/update-board', {
+                  elements: newElements,
+                  appState: newAppState,
+                  id,
+                })
+                toast.promise(updateReq, {
+                  error: 'There was an error saving your changes.',
+                  success: 'Your changes have been saved.',
+                  loading: 'Saving your changes...',
+                })
+              }
+              setAddedButton(true)
+            }
+            window.navigator.clipboard.writeText(JSON.stringify(newElements))
+          }}
+          handleKeyboardGlobally={false}
           viewModeEnabled={viewModeEnabled}
           zenModeEnabled={zenModeEnabled}
           gridModeEnabled={gridModeEnabled}
+          export={false}
         />
       </div>
     </div>
   )
 }
-
-/* <div className="absolute z-50 text-4xl font-semibold button-wrapper top-40 left-40">
-        <button
-          className="reset-scene"
-          onClick={() => {
-            excalidrawRef.current.resetScene();
-          }}>
-          Reset Scene
-        </button>
-        <label>
-          <input
-            type="checkbox"
-            checked={viewModeEnabled}
-            onChange={() => setViewModeEnabled(!viewModeEnabled)}
-          />
-          View mode
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={zenModeEnabled}
-            onChange={() => setZenModeEnabled(!zenModeEnabled)}
-          />
-          Zen mode
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={gridModeEnabled}
-            onChange={() => setGridModeEnabled(!gridModeEnabled)}
-          />
-          Grid mode
-        </label>
-      </div> */
+export default Whiteboard
