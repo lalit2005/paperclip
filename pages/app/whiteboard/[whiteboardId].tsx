@@ -1,47 +1,36 @@
-import initialData from '@/components/whiteboard/initialBoardData';
-import Whiteboard from '@/components/whiteboard/Whiteboard';
+import DashboardNav from '@/components/dashboard/DashboardNav';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { whiteboards } from '@prisma/client';
+import DashboardLayout from 'layouts/DashboardLayout';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import { useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
+import { useState } from 'react';
 import useSWR from 'swr';
 
-function WhiteboardPage() {
+const Page = () => {
   const router = useRouter();
-  const whiteboardId = router.query.whiteboardId?.toString();
-  const { data, mutate } = useSWR<whiteboards>(
-    whiteboardId
-      ? `/api/whiteboard/get-board-data/?boardId=${whiteboardId}`
-      : null
+  const { whiteboardId } = router.query;
+  const { data } = useSWR<whiteboards>(
+    `/api/whiteboard/get-board/?boardId=${whiteboardId}`
   );
+
+  const [boardLoaded, setBoardLoaded] = useState(false);
 
   return (
-    <div>
-      {data && (
-        <Whiteboard
-          id={whiteboardId}
-          initialData={{
-            elements: JSON.parse(
-              data?.elements ||
-                // @ts-ignore
-                window.localStorage.getItem(whiteboardId.elements)
-            ),
-            appState: JSON.parse(
-              data?.appState ||
-                // @ts-ignore
-                window.localStorage.getItem(whiteboardId.appState)
-            ),
-          }}
-        />
-      )}
-      {!data && <div>Loading...</div>}
-      <div>
-        <Toaster />
-      </div>
-    </div>
+    <DashboardLayout className='!w-screen !-mt-10'>
+      <iframe
+        src={data?.boardUrl}
+        id='excalidraw-iframe'
+        frameBorder='0'
+        allowFullScreen
+        allowTransparency
+        className='w-screen h-[90vh]'
+        onLoad={() => setBoardLoaded(true)}
+        allow='clipboard-read; clipboard-write; allow-popups; allow-downloads; allow-modals;'
+      />
+      {boardLoaded === false && <div className=''>Loading...</div>}
+    </DashboardLayout>
   );
-}
+};
 
-export default WhiteboardPage;
+export default withPageAuthRequired(Page);

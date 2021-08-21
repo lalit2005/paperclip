@@ -10,16 +10,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     user: { sub },
   }: { user: UserProfile } = getSession(req, res);
-  const whiteboards = await prisma.whiteboards.findMany({
+  const board = await prisma.whiteboards.findFirst({
     where: {
+      id: req.query.boardId.toString(),
       createdBy: sub,
-      inTrash: false,
-    },
-    orderBy: {
-      createdAt: 'desc',
     },
   });
-  res.json(whiteboards);
+  res.json(board);
 };
 
 export default withApiAuthRequired(handler);

@@ -1,22 +1,23 @@
-import { notes, whiteboards } from '@prisma/client'
+import { notes, whiteboards } from '@prisma/client';
 
 export interface StickyNote {
-  note: string
-  color: 'red' | 'blue' | 'green' | 'purple' | 'gray'
-  id: Number
+  note: string;
+  color: 'red' | 'blue' | 'green' | 'purple' | 'gray';
+  id: Number;
 }
 
 export interface newNoteValues {
-  noteHeading: string
-  noteDescription: string
-  tags: string
+  noteHeading: string;
+  noteDescription: string;
+  tags: string;
 }
 export interface newBoardValues {
-  boardName: string
-  boardDescription: string
+  boardName: string;
+  boardDescription: string;
+  tags: string;
 }
 
 export interface TrashResponse {
-  notes: notes[]
-  boards: whiteboards[]
+  notes: notes[];
+  boards: whiteboards[];
 }

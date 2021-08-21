@@ -32,12 +32,11 @@ model stickyNotes {
 
 model whiteboards {
   id               String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  elements         String?  @db.VarChar
-  appState         String?  @db.VarChar
+  boardUrl         String   @db.VarChar
   createdBy        String   @db.VarChar
+  tags             String[] @db.VarChar
   createdAt        DateTime @default(now()) @db.Timestamptz(6)
+  inTrash          Boolean  @default(false)
   boardName        String?  @db.VarChar
   boardDescription String?  @db.VarChar
-  inTrash          Boolean  @default(false)
-  updatedAt        DateTime @default(now()) @updatedAt @db.Timestamptz(6)
 }

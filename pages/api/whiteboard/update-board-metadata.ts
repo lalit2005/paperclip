@@ -1,20 +1,26 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/utils/prisma'
-import { withApiAuthRequired } from '@auth0/nextjs-auth0'
+import { NextApiRequest, NextApiResponse, PageConfig } from 'next';
+import prisma from '@/utils/prisma';
+import {
+  getSession,
+  withApiAuthRequired,
+  UserProfile,
+} from '@auth0/nextjs-auth0';
+import getTagsFromString from '@/lib/get-tags-from-string';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { body } = req
-  const { boardName, boardDescription, id } = body
+  const { body } = req;
+  const { noteHeading, noteDescription, tags, id, emoji } = body;
   const newNote = await prisma.whiteboards.update({
     where: {
       id,
     },
     data: {
-      boardName,
-      boardDescription,
+      boardName: noteHeading,
+      boardDescription: noteDescription,
+      tags: getTagsFromString(tags),
     },
-  })
-  res.json(newNote)
-}
+  });
+  res.json(newNote);
+};
 
-export default withApiAuthRequired(handler)
+export default withApiAuthRequired(handler);
