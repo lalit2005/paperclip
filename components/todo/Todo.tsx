@@ -56,15 +56,38 @@ const Todo: React.FC<{
               onClick={openModal}
             />
           </div>
-          <div className='inline-flex items-center justify-center ml-1 mr-2 rounded group'>
+          <div
+            className='inline-flex items-center justify-center ml-1 mr-2 rounded group'
+            onClick={async () => {
+              mutate(
+                {
+                  ...restOfData,
+                  todos: restOfData?.todos.filter((t) => t.id !== todo?.id),
+                },
+                false
+              );
+              toast.success(`'${todo?.todo}' deleted`);
+              const deleteTodo = await axios.post('/api/todo/delete-todo', {
+                id: todo?.id,
+              });
+            }}>
             <HiOutlineTrash className='w-5 h-5 text-gray-400 transition-all transform group-hover:scale-150 group-hover:text-red-400' />
           </div>
           <div className='inline-flex items-center justify-center'>
             <Checkbox.Root
               id='check'
               onCheckedChange={async (isChecked) => {
-                toast.success(`Yayy!! you completed '${todo?.todo}'`);
                 if (isChecked) {
+                  mutate(
+                    {
+                      ...restOfData,
+                      todos: [
+                        ...restOfData.todos.filter((t) => t.id !== todo?.id),
+                      ],
+                    },
+                    false
+                  );
+                  toast.success(`Yayy!! you completed '${todo?.todo}'`);
                   const updateTodo = await axios.post(
                     '/api/todo/update-todo-state',
                     {
@@ -72,12 +95,6 @@ const Todo: React.FC<{
                       isDone: true,
                     }
                   );
-                  mutate({
-                    ...restOfData,
-                    todos: [
-                      ...restOfData.todos.filter((t) => t.id !== todo?.id),
-                    ],
-                  });
                 }
               }}
               className='inline-flex items-center justify-center w-5 h-5 mr-2 text-gray-600 border border-gray-400 rounded shadow focus:ring focus:ring-gray-600 group checked:bg-gray-500 checked:text-gray-50'>
