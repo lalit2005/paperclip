@@ -32,7 +32,12 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
           {todolist?.todos?.map(
             (todo) =>
               todo?.isDone === false && (
-                <Todo mutate={mutate} todo={todo} key={todo?.id} />
+                <Todo
+                  mutate={mutate}
+                  todo={todo}
+                  key={todo?.id}
+                  restOfData={todolist}
+                />
               )
           )}
           <NewTodo

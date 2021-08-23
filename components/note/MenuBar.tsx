@@ -1,21 +1,21 @@
-import { Editor } from '@tiptap/react'
-import { BiItalic, BiHighlight, BiBold } from 'react-icons/bi'
-import { FaRemoveFormat, FaMinus, FaListUl, FaListOl } from 'react-icons/fa'
-import { FiCode, FiLink2 } from 'react-icons/fi'
-import { MdStrikethroughS } from 'react-icons/md'
-import { AiOutlineTable } from 'react-icons/ai'
-import { CgQuoteO } from 'react-icons/cg'
+import { Editor } from '@tiptap/react';
+import { BiItalic, BiHighlight, BiBold } from 'react-icons/bi';
+import { FaRemoveFormat, FaMinus, FaListUl, FaListOl } from 'react-icons/fa';
+import { FiCode, FiLink2 } from 'react-icons/fi';
+import { MdStrikethroughS } from 'react-icons/md';
+import { AiOutlineTable } from 'react-icons/ai';
+import { CgQuoteO } from 'react-icons/cg';
 import {
   HiOutlineCode,
   HiOutlineDesktopComputer,
   HiOutlinePhotograph,
-} from 'react-icons/hi'
+} from 'react-icons/hi';
 
 // load all highlight.js languages
-import saveNote from '@/lib/save-note'
-import MenuBarTooltip from './MenuBarTooltip'
-import generateEmbedUrl from '@/lib/generateEmbedUrl'
-import { customAlphabet } from 'nanoid'
+import saveNote from '@/lib/save-note';
+import MenuBarTooltip from './Tooltip';
+import generateEmbedUrl from '@/lib/generateEmbedUrl';
+import { customAlphabet } from 'nanoid';
 
 const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
   editor,
@@ -23,7 +23,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
   ...props
 }) => {
   if (!editor) {
-    return <>Loading...</>
+    return <>Loading...</>;
   }
 
   return (
@@ -188,9 +188,9 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <MenuBarTooltip text='Add Image'>
           <button
             onClick={() => {
-              const url = window.prompt('URL')
+              const url = window.prompt('URL');
               if (url) {
-                editor.chain().focus().setImage({ src: url }).run()
+                editor.chain().focus().setImage({ src: url }).run();
               }
             }}
             className={
@@ -208,7 +208,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
                 .chain()
                 .focus()
                 .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
-                .run()
+                .run();
             }}
             className={
               editor.isActive('image')
@@ -221,9 +221,9 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <MenuBarTooltip text='Convert selected text to link'>
           <button
             onClick={() => {
-              let url = window.prompt('URL')
-              url = url.toString().startsWith('http') ? url : 'http://' + url
-              editor.chain().focus().setLink({ href: url }).run()
+              let url = window.prompt('URL');
+              url = url.toString().startsWith('http') ? url : 'http://' + url;
+              editor.chain().focus().setLink({ href: url }).run();
             }}
             className={
               editor.isActive('link')
@@ -236,15 +236,15 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <MenuBarTooltip text='Embed any website'>
           <button
             onClick={() => {
-              let embedUrl = window.prompt('URL')
+              let embedUrl = window.prompt('URL');
               embedUrl = embedUrl.toString().startsWith('http')
                 ? embedUrl
-                : 'http://' + embedUrl
+                : 'http://' + embedUrl;
               editor
                 .chain()
                 .focus()
                 .setIframe({ src: generateEmbedUrl(embedUrl) })
-                .run()
+                .run();
             }}>
             <HiOutlineDesktopComputer />
           </button>
@@ -253,12 +253,12 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
           <button
             onClick={() => {
               const alphabet =
-                '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-              const nanoid = (len) => customAlphabet(alphabet, len)
+                '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+              const nanoid = (len) => customAlphabet(alphabet, len);
               const whiteboardUrl = `https://excalidraw.com/#room=${nanoid(
                 20
-              )()},${nanoid(22)()}`
-              editor.chain().focus().setIframe({ src: whiteboardUrl }).run()
+              )()},${nanoid(22)()}`;
+              editor.chain().focus().setIframe({ src: whiteboardUrl }).run();
             }}>
             <HiOutlineDesktopComputer />
           </button>
@@ -266,7 +266,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <MenuBarTooltip text='Highlight selected text'>
           <button
             onClick={() => {
-              editor.chain().focus().toggleHighlight().run()
+              editor.chain().focus().toggleHighlight().run();
             }}
             className={
               editor.isActive('blockquote')
@@ -279,7 +279,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <MenuBarTooltip text='Save note. You can also press Cmd/Ctrl + S to save.'>
           <div
             onClick={() => {
-              saveNote(noteId, editor)
+              saveNote(noteId, editor);
             }}
             className='px-2 py-1 text-white bg-gray-600 rounded shadow hover:text-gray-100 hover:!bg-gray-500'>
             Save
@@ -287,7 +287,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         </MenuBarTooltip>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MenuBar
+export default MenuBar;

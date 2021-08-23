@@ -1,22 +1,22 @@
-import { useUser } from '@auth0/nextjs-auth0'
-import * as Tooltip from '@radix-ui/react-tooltip'
-import { useState, Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { useUser } from '@auth0/nextjs-auth0';
+import * as Tooltip from '@radix-ui/react-tooltip';
+import { useState, Fragment } from 'react';
+import { Menu, Transition } from '@headlessui/react';
 import {
   HiOutlineLogout,
   HiOutlineSupport,
   HiOutlineUserCircle,
-} from 'react-icons/hi'
-import Link from 'next/link'
+} from 'react-icons/hi';
+import Link from 'next/link';
 
-const MenuBarTooltip: React.FC<{ text: string }> = ({ text, ...props }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+const CustomTooltip: React.FC<{ text: string }> = ({ text, ...props }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div>
       <Tooltip.Root
         delayDuration={0.5}
         onOpenChange={(isOpen) => {
-          setIsOpen(isOpen)
+          setIsOpen(isOpen);
         }}
         open={isOpen}>
         <Tooltip.Trigger>
@@ -41,7 +41,7 @@ const MenuBarTooltip: React.FC<{ text: string }> = ({ text, ...props }) => {
         </Transition>
       </Tooltip.Root>
     </div>
-  )
-}
+  );
+};
 
-export default MenuBarTooltip
+export default CustomTooltip;

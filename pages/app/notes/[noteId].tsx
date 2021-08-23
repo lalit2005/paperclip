@@ -1,62 +1,62 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import Note from '@/components/note/Note'
-import NoteTag from '@/components/note/NoteTag'
-import fetcher from '@/lib/fetcher'
-import { withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { notes } from '@prisma/client'
-import useSWR from 'swr'
-import { useRouter } from 'next/router'
-import DashboardNav from '@/components/dashboard/DashboardNav'
-import { useEffect } from 'react'
-import Head from 'next/head'
-import EditPopover from '@/components/note/EditPopover'
-import { HiOutlineCog, HiOutlineMenuAlt1 } from 'react-icons/hi'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { Fab, Action } from 'react-tiny-fab'
-import 'react-tiny-fab/dist/styles.css'
-import Link from 'next/link'
-import MenuBarTooltip from '@/components/note/MenuBarTooltip'
-import * as Checkbox from '@radix-ui/react-checkbox'
-import { HiCheck } from 'react-icons/hi'
-import axios from 'axios'
-import toast from 'react-hot-toast'
+import Note from '@/components/note/Note';
+import NoteTag from '@/components/note/NoteTag';
+import fetcher from '@/lib/fetcher';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { notes } from '@prisma/client';
+import useSWR from 'swr';
+import { useRouter } from 'next/router';
+import DashboardNav from '@/components/dashboard/DashboardNav';
+import { useEffect } from 'react';
+import Head from 'next/head';
+import EditPopover from '@/components/note/EditPopover';
+import { HiOutlineCog, HiOutlineMenuAlt1 } from 'react-icons/hi';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { Fab, Action } from 'react-tiny-fab';
+import 'react-tiny-fab/dist/styles.css';
+import Link from 'next/link';
+import MenuBarTooltip from '@/components/note/Tooltip';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { HiCheck } from 'react-icons/hi';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const index = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { data: note, mutate } = useSWR<notes>(
     `/api/notes/get-note/?noteId=${router.query.noteId}`,
     fetcher
-  )
+  );
   useEffect(() => {
     window.onbeforeunload = function () {
-      return ''
-    }
-  }, [])
+      return '';
+    };
+  }, []);
 
-  let [isOpen, setIsOpen] = useState(false)
-  const [isNotePublic, setIsNotePublic] = useState(note?.isPublic)
+  let [isOpen, setIsOpen] = useState(false);
+  const [isNotePublic, setIsNotePublic] = useState(note?.isPublic);
 
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsMenuModalOpen(false)
-    setIsOpen(true)
+    setIsMenuModalOpen(false);
+    setIsOpen(true);
   }
 
-  const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false)
+  const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
 
   function closeMenuModal() {
-    setIsMenuModalOpen(false)
+    setIsMenuModalOpen(false);
   }
 
   function openMenuModal() {
-    setIsOpen(false)
-    setIsMenuModalOpen(true)
+    setIsOpen(false);
+    setIsMenuModalOpen(true);
   }
-  const isAnyModalOpen = isOpen || isMenuModalOpen
+  const isAnyModalOpen = isOpen || isMenuModalOpen;
   return (
     <div className='min-h-screen px-10 bg-gray-50'>
       <Head>
@@ -180,7 +180,7 @@ const index = () => {
                       checked={isNotePublic}
                       onCheckedChange={(isChecked) => {
                         // @ts-ignore
-                        setIsNotePublic(isChecked)
+                        setIsNotePublic(isChecked);
                       }}
                       className='inline-flex items-center justify-center w-5 h-5 mr-2 text-gray-600 border border-gray-400 rounded shadow focus:ring focus:ring-gray-600 group checked:bg-gray-500 checked:text-gray-50'>
                       <Checkbox.Indicator>
@@ -216,14 +216,14 @@ const index = () => {
                     type='button'
                     className='inline-flex justify-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
                     onClick={() => {
-                      mutate({ ...note, isPublic: isNotePublic }, false)
+                      mutate({ ...note, isPublic: isNotePublic }, false);
                       const updateIsNotePublic = axios.post(
                         '/api/notes/public',
                         {
                           id: note?.id,
                           isNotePublic: isNotePublic,
                         }
-                      )
+                      );
                       toast.promise(
                         updateIsNotePublic,
                         {
@@ -234,7 +234,7 @@ const index = () => {
                         {
                           duration: 5000,
                         }
-                      )
+                      );
                     }}>
                     Save settings
                   </button>
@@ -242,22 +242,22 @@ const index = () => {
                     type='button'
                     className='inline-flex justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500'
                     onClick={() => {
-                      mutate({ ...note, inTrash: true }, false)
+                      mutate({ ...note, inTrash: true }, false);
                       const updateIsNotePublic = axios.post(
                         '/api/notes/trash',
                         {
                           id: note?.id,
                           inTrash: true,
                         }
-                      )
+                      );
                       toast.promise(updateIsNotePublic, {
                         error: `Could not move ${note?.noteHeading} note`,
                         success:
                           'Note moved to trash successfully. View trash by clicking menu (profile picture)',
                         loading: `Moving ${note?.noteHeading} to trash...`,
-                      })
-                      closeMenuModal()
-                      router.push('/app/notes')
+                      });
+                      closeMenuModal();
+                      router.push('/app/notes');
                     }}>
                     Move
                     <span className='mx-1 font-extrabold'>
@@ -272,7 +272,7 @@ const index = () => {
         </Dialog>
       </Transition>
     </div>
-  )
-}
+  );
+};
 
-export default withPageAuthRequired(index)
+export default withPageAuthRequired(index);
