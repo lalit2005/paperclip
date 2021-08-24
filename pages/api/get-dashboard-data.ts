@@ -1,54 +1,76 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/utils/prisma'
+import { NextApiRequest, NextApiResponse } from 'next';
+import prisma from '@/utils/prisma';
 import {
   getSession,
   withApiAuthRequired,
   UserProfile,
-} from '@auth0/nextjs-auth0'
+} from '@auth0/nextjs-auth0';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     user: { sub },
-  }: { user: UserProfile } = getSession(req, res)
+  }: { user: UserProfile } = getSession(req, res);
   const notesFetcher = prisma.notes.findMany({
     where: {
       createdBy: sub,
       inTrash: false,
     },
-    select: {
-      noteHeading: true,
-      noteDescription: true,
-      tags: true,
-      id: true,
-    },
     orderBy: {
       updatedAt: 'desc',
     },
+    select: {
+      noteHeading: true,
+      emoji: true,
+      id: true,
+    },
     take: 4,
-  })
+  });
   const stickyNotesFetcher = prisma.stickyNotes.findMany({
     where: {
       createdBy: sub,
-    },
-    select: {
-      id: true,
-      color: true,
-      stickyNote: true,
     },
     orderBy: {
       createdAt: 'desc',
     },
     take: 4,
-  })
-  const [notes, stickyNotes] = await prisma.$transaction([
+  });
+  const boardsFetcher = prisma.whiteboards.findMany({
+    where: {
+      createdBy: sub,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    take: 4,
+  });
+
+  const todolistsFetcher = prisma.todos.findMany({
+    where: {
+      todolist: {
+        createdBy: sub,
+        inTrash: false,
+      },
+      isDone: false,
+    },
+    orderBy: {
+      priority: 'desc',
+    },
+    take: 4,
+  });
+
+  const [notes, stickyNotes, boards, todolists] = await prisma.$transaction([
     notesFetcher,
     stickyNotesFetcher,
-  ])
-  console.log(notes, stickyNotes)
+    boardsFetcher,
+    todolistsFetcher,
+  ]);
+
   res.json({
     notes,
     stickyNotes,
-  })
-}
+    boards,
+    impTodos: todolists,
+  });
+};
 
-export default withApiAuthRequired(handler)
+export default withApiAuthRequired(handler);

@@ -1,4 +1,10 @@
-import { notes, whiteboards } from '@prisma/client';
+import {
+  notes,
+  stickyNotes,
+  todolists,
+  todos,
+  whiteboards,
+} from '@prisma/client';
 
 export interface StickyNote {
   note: string;
@@ -20,4 +26,15 @@ export interface newBoardValues {
 export interface TrashResponse {
   notes: notes[];
   boards: whiteboards[];
+}
+
+export interface DashboardData {
+  notes: {
+    id: string;
+    noteHeading: string;
+    emoji: string;
+  }[];
+  stickyNotes: stickyNotes[];
+  boards: whiteboards[];
+  impTodos: todos[];
 }
