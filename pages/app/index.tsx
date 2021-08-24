@@ -36,16 +36,18 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
             <div className='w-full max-w-md px-4 py-2 mx-auto'>
               <h3 className='my-3 text-lg font-medium'>Your Notes</h3>
               {data?.notes?.map((note) => (
-                <div
-                  key={note?.id}
-                  className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
-                  <p>
-                    {note?.emoji}{' '}
-                    {truncate(note?.noteHeading, {
-                      length: 50,
-                    })}
-                  </p>
-                </div>
+                <Link key={note?.id} href={'/app/notes/' + note?.id}>
+                  <a className='block'>
+                    <div className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
+                      <p>
+                        {note?.emoji}{' '}
+                        {truncate(note?.noteHeading, {
+                          length: 50,
+                        })}
+                      </p>
+                    </div>
+                  </a>
+                </Link>
               )) || (
                 <Skeleton
                   count={4}
@@ -64,11 +66,15 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
             <div className='w-full max-w-sm px-4 py-2 mx-auto'>
               <h3 className='my-3 text-lg font-medium'>Your Sticky Notes</h3>
               {data?.stickyNotes?.map((stickyNote) => (
-                <div key={stickyNote?.id}>
-                  <p className='my-3' style={{ color: stickyNote?.color }}>
-                    {truncate(stickyNote?.stickyNote, { length: 100 })}
-                  </p>
-                </div>
+                <Link key={stickyNote?.id} href={'/app/sticky-notes'}>
+                  <a className='block'>
+                    <div>
+                      <p className='my-3' style={{ color: stickyNote?.color }}>
+                        {truncate(stickyNote?.stickyNote, { length: 100 })}
+                      </p>
+                    </div>
+                  </a>
+                </Link>
               )) || <Skeleton count={4} className='w-full px-2 py-1 my-1' />}
               {data?.stickyNotes?.length == 0 && (
                 <div className='w-full px-2 py-1 my-3'>
@@ -85,13 +91,15 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
             <div className='w-full max-w-md px-4 py-2 mx-auto'>
               <h3 className='my-3 text-lg font-medium'>Your Whiteboards</h3>
               {data?.boards?.map((board) => (
-                <div
-                  key={board?.id}
-                  className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
-                  <p className='capitalize'>
-                    {truncate(board?.boardName, { length: 50 })}
-                  </p>
-                </div>
+                <Link key={board?.id} href={'/app/whiteboard/' + board?.id}>
+                  <a className='block'>
+                    <div className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
+                      <p className='capitalize'>
+                        {truncate(board?.boardName, { length: 50 })}
+                      </p>
+                    </div>
+                  </a>
+                </Link>
               )) || (
                 <Skeleton
                   count={4}
@@ -111,13 +119,15 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
             <div className='w-full max-w-sm px-4 py-2 mx-auto'>
               <h3 className='my-3 text-lg font-medium'>Your todos</h3>
               {data?.impTodos?.map((todo) => (
-                <div
-                  key={todo?.id}
-                  className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
-                  <p className='capitalize'>
-                    {truncate(todo?.todo, { length: 50 })}
-                  </p>
-                </div>
+                <Link key={todo?.id} href={'/app/todo/' + todo?.todolistId}>
+                  <a className='block'>
+                    <div className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
+                      <p className='capitalize'>
+                        {truncate(todo?.todo, { length: 50 })}
+                      </p>
+                    </div>
+                  </a>
+                </Link>
               )) || <Skeleton count={4} className='w-full px-2 py-1 my-1' />}
               {data?.stickyNotes?.length == 0 && (
                 <div className='w-full px-2 py-1 my-3'>
