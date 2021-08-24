@@ -1,9 +1,9 @@
 import { Editor } from '@tiptap/react';
-import { BiItalic, BiHighlight, BiBold } from 'react-icons/bi';
+import { BiItalic, BiHighlight, BiBold, BiPaint } from 'react-icons/bi';
 import { FaRemoveFormat, FaMinus, FaListUl, FaListOl } from 'react-icons/fa';
 import { FiCode, FiLink2 } from 'react-icons/fi';
 import { MdStrikethroughS } from 'react-icons/md';
-import { AiOutlineTable } from 'react-icons/ai';
+import { AiOutlineHighlight, AiOutlineTable } from 'react-icons/ai';
 import { CgQuoteO } from 'react-icons/cg';
 import {
   HiOutlineCode,
@@ -260,7 +260,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
               )()},${nanoid(22)()}`;
               editor.chain().focus().setIframe({ src: whiteboardUrl }).run();
             }}>
-            <HiOutlineDesktopComputer />
+            <BiPaint />
           </button>
         </MenuBarTooltip>
         <MenuBarTooltip text='Highlight selected text'>
@@ -273,7 +273,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
                 ? 'is-active'
                 : '' + '  hover:bg-gray-200'
             }>
-            <BiHighlight />
+            <AiOutlineHighlight />
           </button>
         </MenuBarTooltip>
         <MenuBarTooltip text='Save note. You can also press Cmd/Ctrl + S to save.'>
