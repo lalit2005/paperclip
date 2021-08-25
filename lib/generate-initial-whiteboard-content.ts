@@ -380,9 +380,9 @@ const generateInitialWhiteboardContent = (name: string) => {
         baseline: 18,
       },
     ],
-  }
+  };
 
-  return initialData
-}
+  return initialData;
+};
 
-export default generateInitialWhiteboardContent
+export default generateInitialWhiteboardContent;

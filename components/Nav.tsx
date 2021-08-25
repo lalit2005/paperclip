@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Nav = (props) => {
   return (
@@ -22,7 +22,7 @@ const Nav = (props) => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

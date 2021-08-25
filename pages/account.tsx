@@ -1,11 +1,11 @@
-import DashboardLayout from 'layouts/DashboardLayout'
-import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { HiOutlineInformationCircle, HiOutlineXCircle } from 'react-icons/hi'
-import { useState } from 'react'
+import DashboardLayout from 'layouts/DashboardLayout';
+import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { HiOutlineInformationCircle, HiOutlineXCircle } from 'react-icons/hi';
+import { useState } from 'react';
 
 const Account: React.FC<{ user: UserProfile }> = ({ user }) => {
-  const { name, email, email_verified, picture } = user
-  const [isOpen, setIsOpen] = useState(true)
+  const { name, email, email_verified, picture } = user;
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <div>
       <DashboardLayout>
@@ -47,7 +47,7 @@ const Account: React.FC<{ user: UserProfile }> = ({ user }) => {
         </div>
       </DashboardLayout>
     </div>
-  )
-}
+  );
+};
 
-export default withPageAuthRequired(Account)
+export default withPageAuthRequired(Account);

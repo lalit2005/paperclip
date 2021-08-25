@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 const useReload = () => {
-  const router = useRouter()
-  return router.reload
-}
+  const router = useRouter();
+  return router.reload;
+};
 
-export default useReload
+export default useReload;

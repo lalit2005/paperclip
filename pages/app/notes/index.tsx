@@ -1,48 +1,48 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import NoteTag from '@/components/note/NoteTag'
-import SearchInput from '@/components/note/SearchInput'
-import fetcher from '@/lib/fetcher'
-import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { notes as notesType } from '@prisma/client'
-import DashboardLayout from 'layouts/DashboardLayout'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import useSWR from 'swr'
-import Fuse from 'fuse.js'
-import Skeleton from 'react-loading-skeleton'
-import Head from 'next/head'
-import * as Checkbox from '@radix-ui/react-checkbox'
-import { HiCheck } from 'react-icons/hi'
-import getUniqueTags from '@/lib/get-unique-tags'
-import TagNotesViewer from '@/components/note/TagNotesViewer'
-import getNotesDataByTags from '@/lib/get-notes-data-by-tags'
-import searchTags from '@/lib/search-tags'
+import NoteTag from '@/components/note/NoteTag';
+import SearchInput from '@/components/note/SearchInput';
+import fetcher from '@/lib/fetcher';
+import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { notes as notesType } from '@prisma/client';
+import DashboardLayout from 'layouts/DashboardLayout';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+import Fuse from 'fuse.js';
+import Skeleton from 'react-loading-skeleton';
+import Head from 'next/head';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { HiCheck } from 'react-icons/hi';
+import getUniqueTags from '@/lib/get-unique-tags';
+import TagNotesViewer from '@/components/note/TagNotesViewer';
+import getNotesDataByTags from '@/lib/get-notes-data-by-tags';
+import searchTags from '@/lib/search-tags';
 
 const index: React.FC<{ user: UserProfile }> = ({ user }) => {
   const { data: notes } = useSWR<notesType[]>(
     '/api/notes/get-all-notes',
     fetcher
-  )
+  );
 
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
   const [isSortedBasedOnTagsChecked, setIsSortedBasedOnTagsChecked] =
-    useState<boolean>(false)
+    useState<boolean>(false);
 
   useEffect(() => {
     setIsSortedBasedOnTagsChecked(
       JSON.parse(localStorage.getItem('isSorted')) || false
-    )
-  }, [])
+    );
+  }, []);
 
   const fuse = new Fuse(notes, {
     keys: ['noteHeading', 'noteDescription', 'note', 'tags'],
     includeMatches: true,
     useExtendedSearch: true,
-  })
+  });
 
-  const results = inputValue ? fuse.search(inputValue) : notes
+  const results = inputValue ? fuse.search(inputValue) : notes;
 
-  const searchedNotes = searchTags(getUniqueTags(notes), inputValue)
+  const searchedNotes = searchTags(getUniqueTags(notes), inputValue);
 
   return (
     <div>
@@ -56,8 +56,8 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
         <SearchInput
           value={inputValue}
           onChange={(e) => {
-            setInputValue(e.target.value)
-            console.log(results)
+            setInputValue(e.target.value);
+            console.log(results);
           }}
         />
         <div
@@ -68,11 +68,11 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
             checked={isSortedBasedOnTagsChecked}
             onCheckedChange={(isChecked) => {
               // @ts-ignore
-              setIsSortedBasedOnTagsChecked(isChecked)
+              setIsSortedBasedOnTagsChecked(isChecked);
               localStorage.setItem(
                 'isSorted',
                 (!isSortedBasedOnTagsChecked).toString()
-              )
+              );
             }}
             className='inline-flex items-center justify-center w-5 h-5 mr-2 text-gray-600 border border-gray-400 rounded shadow focus:ring focus:ring-gray-600 group checked:bg-gray-500 checked:text-gray-50'>
             <Checkbox.Indicator>
@@ -139,7 +139,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
         )}
       </DashboardLayout>
     </div>
-  )
-}
+  );
+};
 
-export default withPageAuthRequired(index)
+export default withPageAuthRequired(index);

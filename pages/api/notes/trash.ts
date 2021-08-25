@@ -1,10 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/utils/prisma'
-import { withApiAuthRequired } from '@auth0/nextjs-auth0'
+import { NextApiRequest, NextApiResponse } from 'next';
+import prisma from '@/utils/prisma';
+import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { body } = req
-  const { id, inTrash } = body
+  const { body } = req;
+  const { id, inTrash } = body;
   const trashNotes = await prisma.notes.update({
     where: {
       id: id,
@@ -12,8 +12,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     data: {
       inTrash: inTrash,
     },
-  })
-  res.json(trashNotes)
-}
+  });
+  res.json(trashNotes);
+};
 
-export default withApiAuthRequired(handler)
+export default withApiAuthRequired(handler);

@@ -1,22 +1,22 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { notes } from '@prisma/client'
-import { Fragment, useState } from 'react'
-import NoteTag from './NoteTag'
-import Link from 'next/link'
-import { HiOutlineXCircle } from 'react-icons/hi'
+import { Dialog, Transition } from '@headlessui/react';
+import { notes } from '@prisma/client';
+import { Fragment, useState } from 'react';
+import NoteTag from './NoteTag';
+import Link from 'next/link';
+import { HiOutlineXCircle } from 'react-icons/hi';
 
 const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
   tag,
   notesData,
 }) => {
-  let [isOpen, setIsOpen] = useState(false)
+  let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   return (
@@ -102,7 +102,7 @@ const TagNotesViewer: React.FC<{ tag: string; notesData: notes[] }> = ({
         </Dialog>
       </Transition>
     </div>
-  )
-}
+  );
+};
 
-export default TagNotesViewer
+export default TagNotesViewer;

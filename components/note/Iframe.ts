@@ -1,10 +1,10 @@
-import { Node } from '@tiptap/core'
+import { Node } from '@tiptap/core';
 
 export interface IframeOptions {
-  allowFullscreen: boolean
+  allowFullscreen: boolean;
   HTMLAttributes: {
-    [key: string]: any
-  }
+    [key: string]: any;
+  };
 }
 
 declare module '@tiptap/core' {
@@ -13,8 +13,8 @@ declare module '@tiptap/core' {
       /**
        * Add an iframe
        */
-      setIframe: (options: { src: string }) => ReturnType
-    }
+      setIframe: (options: { src: string }) => ReturnType;
+    };
   }
 }
 
@@ -45,10 +45,10 @@ export default Node.create({
         parseHTML: () => {
           return {
             allowfullscreen: this.options.allowFullscreen,
-          }
+          };
         },
       },
-    }
+    };
   },
 
   parseHTML() {
@@ -56,11 +56,11 @@ export default Node.create({
       {
         tag: 'iframe',
       },
-    ]
+    ];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['div', this.options.HTMLAttributes, ['iframe', HTMLAttributes]]
+    return ['div', this.options.HTMLAttributes, ['iframe', HTMLAttributes]];
   },
 
   addCommands() {
@@ -68,15 +68,15 @@ export default Node.create({
       setIframe:
         (options: { src: string }) =>
         ({ tr, dispatch }) => {
-          const { selection } = tr
-          const node = this.type.create(options)
+          const { selection } = tr;
+          const node = this.type.create(options);
 
           if (dispatch) {
-            tr.replaceRangeWith(selection.from, selection.to, node)
+            tr.replaceRangeWith(selection.from, selection.to, node);
           }
 
-          return true
+          return true;
         },
-    }
+    };
   },
-})
+});

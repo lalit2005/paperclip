@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+		"lint": "next lint",
+    "format": "npx prettier --write \"**/*.{js,ts,jsx,tsx,json,css,md,html}\""
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.5.0",

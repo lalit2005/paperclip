@@ -1,12 +1,12 @@
-import { customAlphabet } from 'nanoid'
+import { customAlphabet } from 'nanoid';
 
 const generateDefaultContent = (name: string, email: string) => {
   const alphabet =
-    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-  const nanoid = (len) => customAlphabet(alphabet, len)
+    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const nanoid = (len) => customAlphabet(alphabet, len);
   const whiteboardUrl = `https://excalidraw.com/#room=${nanoid(20)()},${nanoid(
     22
-  )()}`
+  )()}`;
 
   return `<p>Hey there <strong>${name}</strong></p>
 <p>
@@ -158,7 +158,7 @@ const generateDefaultContent = (name: string, email: string) => {
   <strong>You can make your note public into a website!!!</strong> Click on the
   more options here ➜
 </p>
-`
-}
+`;
+};
 
-export default generateDefaultContent
+export default generateDefaultContent;

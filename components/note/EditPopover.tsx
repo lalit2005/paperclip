@@ -1,19 +1,19 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { newNoteValues } from 'types/types'
-import { zodResolver } from '@hookform/resolvers/zod'
-import newNoteSchema from '@/lib/new-note-schema'
-import axios from 'axios'
-import toast from 'react-hot-toast'
-import { notes } from '@prisma/client'
-import tagsToString from '@/lib/convert-tags-to-string'
-import getTagsFromString from '@/lib/get-tags-from-string'
-import { useRouter } from 'next/router'
-import * as Popover from '@radix-ui/react-popover'
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { newNoteValues } from 'types/types';
+import { zodResolver } from '@hookform/resolvers/zod';
+import newNoteSchema from '@/lib/new-note-schema';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { notes } from '@prisma/client';
+import tagsToString from '@/lib/convert-tags-to-string';
+import getTagsFromString from '@/lib/get-tags-from-string';
+import { useRouter } from 'next/router';
+import * as Popover from '@radix-ui/react-popover';
 // import { Picker } from 'emoji-mart'
 // import 'emoji-mart/css/emoji-mart.css'
-import Picker from './EmojiPicker'
+import Picker from './EmojiPicker';
 
 const EditPopover = ({
   isOpen,
@@ -26,14 +26,14 @@ const EditPopover = ({
   noteData,
   noteEmoji,
 }) => {
-  const restOfNoteData: notes = noteData
+  const restOfNoteData: notes = noteData;
 
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    router.prefetch(`/app/notes/`)
+    router.prefetch(`/app/notes/`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const {
     formState: { errors },
@@ -46,9 +46,9 @@ const EditPopover = ({
       tags: tagsToString(noteTags),
     },
     resolver: zodResolver(newNoteSchema),
-  })
+  });
 
-  const [emoji, setEmoji] = useState<string>(noteEmoji)
+  const [emoji, setEmoji] = useState<string>(noteEmoji);
 
   const updateNote = (values: newNoteValues) => {
     axios.post('/api/notes/update-note-metadata', {
@@ -57,8 +57,8 @@ const EditPopover = ({
       tags: values.tags,
       id: noteId,
       emoji: emoji,
-    })
-    closeModal()
+    });
+    closeModal();
     mutate(
       {
         ...restOfNoteData,
@@ -68,10 +68,10 @@ const EditPopover = ({
         emoji: emoji,
       },
       false
-    )
+    );
 
-    toast.success('Note settings updated')
-  }
+    toast.success('Note settings updated');
+  };
 
   return (
     <>
@@ -192,7 +192,7 @@ const EditPopover = ({
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default EditPopover
+export default EditPopover;

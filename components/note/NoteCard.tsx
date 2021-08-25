@@ -1,4 +1,4 @@
-import truncate from 'lodash.truncate'
+import truncate from 'lodash.truncate';
 
 const NoteCard = ({ note }) => {
   return (
@@ -14,7 +14,7 @@ const NoteCard = ({ note }) => {
         })}
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default NoteCard
+export default NoteCard;

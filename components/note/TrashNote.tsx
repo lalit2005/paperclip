@@ -1,24 +1,24 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { notes } from '@prisma/client'
-import PublicNote from './PublicNote'
-import axios from 'axios'
-import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { notes } from '@prisma/client';
+import PublicNote from './PublicNote';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
   note,
   mutate,
   allData,
 }) => {
-  let [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
+  let [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   return (
@@ -36,12 +36,12 @@ const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
         <button
           className='px-3 py-1 mr-2 text-blue-700 bg-blue-200 border border-blue-500 rounded shadow focus:ring focus:ring-offset-1 focus:ring-blue-700'
           onClick={() => {
-            let newData = allData.filter((item) => item.id !== note?.id)
-            console.log(JSON.stringify(newData, null, 2))
+            let newData = allData.filter((item) => item.id !== note?.id);
+            console.log(JSON.stringify(newData, null, 2));
             const removeFromTrash = axios.post('/api/notes/trash', {
               id: note?.id,
               inTrash: false,
-            })
+            });
             // .then(() => {
             //   router.reload()
             // })
@@ -49,7 +49,7 @@ const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
               error: `Could not restore ${note?.noteHeading}`,
               success: 'Note restored from trash successfully.',
               loading: `Restoring ${note?.noteHeading}...`,
-            })
+            });
           }}>
           Restore Note
         </button>
@@ -58,7 +58,7 @@ const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
           onClick={() => {
             const deleteNote = axios.post('/api/notes/delete-note', {
               id: note?.id,
-            })
+            });
             // .then(() => {
             //   router.reload()
             // })
@@ -66,7 +66,7 @@ const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
               error: 'Error deleting note',
               success: 'Note deleted successfully',
               loading: 'Deleting note...',
-            })
+            });
           }}>
           Delete Note
         </button>
@@ -130,7 +130,7 @@ const TrashNote: React.FC<{ note: notes; mutate: any; allData: notes[] }> = ({
         </Dialog>
       </Transition>
     </div>
-  )
-}
+  );
+};
 
-export default TrashNote
+export default TrashNote;

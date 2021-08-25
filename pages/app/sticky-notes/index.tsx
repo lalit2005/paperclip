@@ -1,30 +1,30 @@
-import StickyNote from '@/components/stickyNote/StickyNote'
-import { Dialog, Transition, Listbox } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0'
-import toast from 'react-hot-toast'
-import useSWR from 'swr'
-import { stickyNotes } from '@prisma/client'
-import { HiOutlineCheck, HiOutlineSelector } from 'react-icons/hi'
-import ExpandingTextarea from 'react-expanding-textarea'
-import axios from 'axios'
-import DashboardLayout from 'layouts/DashboardLayout'
-import Head from 'next/head'
+import StickyNote from '@/components/stickyNote/StickyNote';
+import { Dialog, Transition, Listbox } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import toast from 'react-hot-toast';
+import useSWR from 'swr';
+import { stickyNotes } from '@prisma/client';
+import { HiOutlineCheck, HiOutlineSelector } from 'react-icons/hi';
+import ExpandingTextarea from 'react-expanding-textarea';
+import axios from 'axios';
+import DashboardLayout from 'layouts/DashboardLayout';
+import Head from 'next/head';
 
 const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
   const { data: stickyNotesData, mutate } = useSWR<stickyNotes[]>(
     '/api/sticky-notes/get-all-sticky-notes'
-  )
+  );
   const colors = [
     { color: 'blue' },
     { color: 'green' },
     { color: 'purple' },
     { color: 'red' },
     { color: 'gray' },
-  ]
-  const [selected, setSelected] = useState(colors[0])
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [newStickyNote, setNewStickyNote] = useState('')
+  ];
+  const [selected, setSelected] = useState(colors[0]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [newStickyNote, setNewStickyNote] = useState('');
 
   return (
     <div>
@@ -39,8 +39,8 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
               <div className='w-full text-center'>
                 <button
                   onClick={() => {
-                    console.log(selected)
-                    setIsModalOpen(true)
+                    console.log(selected);
+                    setIsModalOpen(true);
                   }}
                   className='px-4 py-1 text-sm text-center bg-gray-900 rounded shadow text-gray-50 hover:bg-gray-700 opacity-60'>
                   + New sticky note
@@ -60,7 +60,7 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
                     mutate={mutate}
                     createdAt={note.createdAt}
                   />
-                )
+                );
               })}
             </div>
           </div>
@@ -70,7 +70,7 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
             as='div'
             className='fixed inset-0 z-10 overflow-y-auto'
             onClose={() => {
-              setIsModalOpen(false)
+              setIsModalOpen(false);
             }}>
             <div className='min-h-screen px-4 text-center'>
               <Transition.Child
@@ -106,7 +106,7 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
                     <p className='font-medium text-md'>Sticky note</p>
                     <ExpandingTextarea
                       onChange={(e) => {
-                        setNewStickyNote(e.currentTarget.value)
+                        setNewStickyNote(e.currentTarget.value);
                       }}
                       autoFocus
                       className='w-full p-2 mt-2 text-base text-gray-700 border border-gray-400 rounded outline-none resize-none'
@@ -182,15 +182,15 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
                             stickyNote: newStickyNote,
                           })
                           .then(() => {
-                            setIsModalOpen(false)
-                            mutate()
+                            setIsModalOpen(false);
+                            mutate();
                           })
-                          .catch(() => setIsModalOpen(false))
+                          .catch(() => setIsModalOpen(false));
                         toast.promise(newNote, {
                           loading: 'Creating new sticky note...',
                           success: 'New sticky note created!',
                           error: 'Could not create new sticky note.',
-                        })
+                        });
                       }}>
                       Create
                     </button>
@@ -202,6 +202,6 @@ const StickyNotesPage: React.FC<{ user: UserProfile }> = ({ user }) => {
         </Transition>
       </DashboardLayout>
     </div>
-  )
-}
-export default withPageAuthRequired(StickyNotesPage)
+  );
+};
+export default withPageAuthRequired(StickyNotesPage);
