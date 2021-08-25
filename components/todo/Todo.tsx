@@ -83,6 +83,10 @@ const Todo: React.FC<{
                       ...restOfData,
                       todos: [
                         ...restOfData.todos.filter((t) => t.id !== todo?.id),
+                        {
+                          ...todo,
+                          isDone: true,
+                        },
                       ],
                     },
                     false
