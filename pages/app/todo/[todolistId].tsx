@@ -11,6 +11,8 @@ import Todo from '@/components/todo/Todo';
 import NewTodo from '@/components/todo/NewTodo';
 import DoneTodos from '@/components/todo/DoneTodos';
 import clsx from 'clsx';
+import * as Popover from '@radix-ui/react-popover';
+import { FiInfo } from 'react-icons/fi';
 
 const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
   const router = useRouter();
@@ -86,9 +88,31 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
                 </div>
               ))}
             </div>
-            <h2 className='z-30 text-lg font-extrabold md:text-3xl md:mt-16'>
+            <h2 className='z-30 inline-block text-lg font-extrabold md:text-3xl md:mt-16'>
               Points earned: {points}
             </h2>
+            <div className='inline-block'>
+              <Popover.Root>
+                <Popover.Trigger className='relative block ml-3 top-1'>
+                  <FiInfo className='w-6 h-6 p-1 text-gray-500 rounded hover:bg-gray-100' />
+                </Popover.Trigger>
+                <Popover.Anchor />
+                <Popover.Content>
+                  <div className='bg-gray-900 rounded shadow-lg text-gray-50'>
+                    <ul className='px-5 py-2 list-disc'>
+                      <li>5 points for completing a very important task</li>
+                      <li>3 points for completing an important task</li>
+                      <li>
+                        1 point for completing a &quot;not so important&quot;
+                        task
+                      </li>
+                    </ul>
+                    <Popover.Close />
+                    <Popover.Arrow />
+                  </div>
+                </Popover.Content>
+              </Popover.Root>
+            </div>
           </div>
         </div>
       </DashboardLayout>
