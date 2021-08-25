@@ -1,7 +1,7 @@
-import ProfileDropdown from './ProfileDropdown'
-import Logo from '@/public/logos/logo-transparent.png'
-import Image from 'next/image'
-import Link from 'next/link'
+import ProfileDropdown from './ProfileDropdown';
+import Logo from '@/public/logos/logo-transparent.png';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const DashboardNav = (props) => {
   return (
@@ -19,7 +19,7 @@ const DashboardNav = (props) => {
         <ProfileDropdown />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DashboardNav
+export default DashboardNav;

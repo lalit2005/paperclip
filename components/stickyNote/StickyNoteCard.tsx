@@ -1,4 +1,4 @@
-import truncate from 'lodash.truncate'
+import truncate from 'lodash.truncate';
 
 const StickyNoteCard = ({ stickyNote }) => {
   return (
@@ -8,7 +8,7 @@ const StickyNoteCard = ({ stickyNote }) => {
         {truncate(stickyNote.stickyNote, { length: 50 })}
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default StickyNoteCard
+export default StickyNoteCard;

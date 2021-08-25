@@ -1,5 +1,5 @@
-import React from 'react'
-import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
+import React from 'react';
+import { NodeViewWrapper, NodeViewContent } from '@tiptap/react';
 
 const CodeBlock = ({
   node: {
@@ -25,6 +25,6 @@ const CodeBlock = ({
       <NodeViewContent as='code' />
     </pre>
   </NodeViewWrapper>
-)
+);
 
-export default CodeBlock
+export default CodeBlock;

@@ -1,6 +1,6 @@
 const tagsToString = (tags: string[]) => {
-  const tagsString = tags.join(',')
-  return tagsString
-}
+  const tagsString = tags.join(',');
+  return tagsString;
+};
 
-export default tagsToString
+export default tagsToString;

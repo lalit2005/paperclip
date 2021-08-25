@@ -1,22 +1,22 @@
-import { useUser } from '@auth0/nextjs-auth0'
-import * as Tooltip from '@radix-ui/react-tooltip'
-import { useState, Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { useUser } from '@auth0/nextjs-auth0';
+import * as Tooltip from '@radix-ui/react-tooltip';
+import { useState, Fragment } from 'react';
+import { Menu, Transition } from '@headlessui/react';
 import {
   HiOutlineLogout,
   HiOutlineSupport,
   HiOutlineTrash,
   HiOutlineUserCircle,
-} from 'react-icons/hi'
-import Link from 'next/link'
-import * as Avatar from '@radix-ui/react-avatar'
+} from 'react-icons/hi';
+import Link from 'next/link';
+import * as Avatar from '@radix-ui/react-avatar';
 
 const ProfileDropdown = () => {
   const {
     user: { email, picture, name },
-  } = useUser()
+  } = useUser();
 
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <div>
@@ -26,7 +26,7 @@ const ProfileDropdown = () => {
             <Tooltip.Root
               delayDuration={0.5}
               onOpenChange={(isOpen) => {
-                setIsOpen(isOpen)
+                setIsOpen(isOpen);
               }}
               open={isOpen}>
               <Tooltip.Trigger className='w-8 h-8'>
@@ -151,10 +151,10 @@ const ProfileDropdown = () => {
         </Transition>
       </Menu>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileDropdown
+export default ProfileDropdown;
 
 function DuplicateInactiveIcon(props) {
   return (
@@ -176,7 +176,7 @@ function DuplicateInactiveIcon(props) {
         strokeWidth='2'
       />
     </svg>
-  )
+  );
 }
 
 function ArchiveInactiveIcon(props) {
@@ -206,7 +206,7 @@ function ArchiveInactiveIcon(props) {
       />
       <path d='M8 12H12' stroke='#A78BFA' strokeWidth='2' />
     </svg>
-  )
+  );
 }
 
 function MoveInactiveIcon(props) {
@@ -220,7 +220,7 @@ function MoveInactiveIcon(props) {
       <path d='M16 4L8 12' stroke='#A78BFA' strokeWidth='2' />
       <path d='M8 6H4V16H14V12' stroke='#A78BFA' strokeWidth='2' />
     </svg>
-  )
+  );
 }
 
 function DeleteInactiveIcon(props) {
@@ -242,7 +242,7 @@ function DeleteInactiveIcon(props) {
       <path d='M3 6H17' stroke='#A78BFA' strokeWidth='2' />
       <path d='M8 6V4H12V6' stroke='#A78BFA' strokeWidth='2' />
     </svg>
-  )
+  );
 }
 
 function EditInactiveIcon(props) {
@@ -259,5 +259,5 @@ function EditInactiveIcon(props) {
         strokeWidth='2'
       />
     </svg>
-  )
+  );
 }

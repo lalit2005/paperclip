@@ -28,6 +28,6 @@ module.exports = {
         destination: '/api/auth/logout',
         permanent: false,
       },
-    ]
+    ];
   },
-}
+};

@@ -1,9 +1,9 @@
-import prisma from '@/utils/prisma'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import Note from '@/components/note/PublicNote'
-import NoteTag from '@/components/note/NoteTag'
-import Head from 'next/head'
-import { NextSeo } from 'next-seo'
+import prisma from '@/utils/prisma';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Note from '@/components/note/PublicNote';
+import NoteTag from '@/components/note/NoteTag';
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 const Page = ({
   content,
@@ -67,22 +67,22 @@ const Page = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const pageId = params.publicPageId
+    const pageId = params.publicPageId;
     const pageData = await prisma.notes.findUnique({
       where: {
         publicId: pageId.toString(),
       },
-    })
+    });
 
     if (pageData.isPublic !== true) {
       return {
         notFound: true,
-      }
+      };
     }
 
     return {
@@ -95,20 +95,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         publicId: pageData.publicId,
       },
       revalidate: 10 * 60,
-    }
+    };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return {
       notFound: true,
-    }
+    };
   }
-}
+};
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
     fallback: 'blocking',
-  }
-}
+  };
+};
 
-export default Page
+export default Page;

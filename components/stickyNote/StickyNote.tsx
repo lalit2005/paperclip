@@ -4,12 +4,12 @@ import {
   HiPencil,
   HiOutlineArrowsExpand,
   HiOutlineTrash,
-} from 'react-icons/hi'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import ExpandingTextarea from 'react-expanding-textarea'
-import toast, { Toaster } from 'react-hot-toast'
-import axios from 'axios'
+} from 'react-icons/hi';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import ExpandingTextarea from 'react-expanding-textarea';
+import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
 
 export default function stickyNotes(props) {
   function convertToTailwindBgColor(
@@ -21,8 +21,8 @@ export default function stickyNotes(props) {
       gray: 'bg-gray-200',
       purple: 'bg-purple-100',
       red: 'bg-red-100',
-    }
-    return colorsObj[color]
+    };
+    return colorsObj[color];
   }
   function convertToTailwindBorderColor(
     color: 'blue' | 'green' | 'gray' | 'purple' | 'red'
@@ -33,42 +33,42 @@ export default function stickyNotes(props) {
       gray: 'border-gray-300',
       purple: 'border-purple-300',
       red: 'border-red-300',
-    }
-    return colorsObj[color]
+    };
+    return colorsObj[color];
   }
 
-  const { note, color, id } = props
-  const tailwindBgColor = convertToTailwindBgColor(color)
-  const tailwindBorderColor = convertToTailwindBorderColor(color)
+  const { note, color, id } = props;
+  const tailwindBgColor = convertToTailwindBgColor(color);
+  const tailwindBorderColor = convertToTailwindBorderColor(color);
 
-  const words: string[] = note.split(' ')
+  const words: string[] = note.split(' ');
   const newWords = words.map((word: string): string => {
     if (word.length > 20) {
-      word = word.substr(0, 20) + '…\n'
+      word = word.substr(0, 20) + '…\n';
     }
-    return word
-  })
+    return word;
+  });
 
-  let substringedNote: string = ''
+  let substringedNote: string = '';
   newWords.forEach((word: string) => {
-    substringedNote += word + ' '
-  })
+    substringedNote += word + ' ';
+  });
 
-  const [isEditModalOpen, setEditModalIsOpen] = useState(false)
-  const [isViewModalOpen, setViewModalIsOpen] = useState(false)
-  const [disabled, setDisabled] = useState(true)
-  const [textareaValue, setTextareaValue] = useState<string>(note)
+  const [isEditModalOpen, setEditModalIsOpen] = useState(false);
+  const [isViewModalOpen, setViewModalIsOpen] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const [textareaValue, setTextareaValue] = useState<string>(note);
 
   const copyToClipBoard = () => {
     window.navigator.clipboard
       .writeText(note)
       .then(() => {
-        toast.success('Copied to clipboard!!')
+        toast.success('Copied to clipboard!!');
       })
       .catch((e) => {
-        toast.error('Could not copy to clipboard')
-      })
-  }
+        toast.error('Could not copy to clipboard');
+      });
+  };
 
   return (
     <div className='inline-block mx-auto -mt-44'>
@@ -79,7 +79,7 @@ export default function stickyNotes(props) {
       <div className='relative left-0 flex items-center px-4 py-3 bg-transparent rounded-md -top-60 bc backdrop-filter hover:backdrop-blur-sm justify-items-center h-60 hover:border-transparent'>
         <button
           onClick={() => {
-            setEditModalIsOpen(true)
+            setEditModalIsOpen(true);
           }}
           tabIndex={id}
           className='.btn z-50 mx-auto flex justify-between items-center border border-gray-600 hover:bg-gray-100 bg-white text-gray-800 text-opacity-70 opacity-0 focus:ring-1 focus:ring-offset-gray-500 focus:ring-gray-800 focus:outline-none px-2 rounded py-1'>
@@ -99,17 +99,17 @@ export default function stickyNotes(props) {
                 id: props.stickyNoteId,
               })
               .then(() => {
-                props.mutate()
-                setViewModalIsOpen(false)
+                props.mutate();
+                setViewModalIsOpen(false);
               })
               .catch(() => {
-                setViewModalIsOpen(false)
-              })
+                setViewModalIsOpen(false);
+              });
             toast.promise(deleteNote, {
               loading: 'Deleting note...',
               error: 'Your sticky note could not be deleted. Please try again',
               success: 'Sticky note deleted successfully',
-            })
+            });
           }}
           className='.btn z-50 mx-auto flex justify-between items-center border border-gray-600 hover:bg-gray-100 bg-white text-gray-800 text-opacity-70 opacity-0 focus:ring-1 focus:ring-offset-gray-500 focus:ring-gray-800 focus:outline-none px-2 rounded py-1'>
           <HiOutlineTrash className='inline-block w-6 h-6' />
@@ -117,7 +117,7 @@ export default function stickyNotes(props) {
         <button
           tabIndex={id + 3}
           onClick={() => {
-            setViewModalIsOpen(true)
+            setViewModalIsOpen(true);
           }}
           className='.btn z-50 mx-auto flex justify-between items-center border border-gray-600 hover:bg-gray-100 bg-white text-gray-800 text-opacity-70 opacity-0 focus:ring-1 focus:ring-offset-gray-500 focus:ring-gray-800 focus:outline-none px-2 rounded py-1'>
           <HiOutlineArrowsExpand className='inline-block w-6 h-6' />
@@ -129,7 +129,7 @@ export default function stickyNotes(props) {
             as='div'
             className='fixed inset-0 z-10 overflow-y-auto'
             onClose={() => {
-              setEditModalIsOpen(false)
+              setEditModalIsOpen(false);
             }}>
             <div className='min-h-screen px-4 text-center'>
               <Transition.Child
@@ -164,8 +164,8 @@ export default function stickyNotes(props) {
                   <div>
                     <ExpandingTextarea
                       onChange={(e) => {
-                        setTextareaValue(e.currentTarget.value)
-                        setDisabled(false)
+                        setTextareaValue(e.currentTarget.value);
+                        setDisabled(false);
                       }}
                       autoFocus
                       defaultValue={note}
@@ -185,15 +185,15 @@ export default function stickyNotes(props) {
                             stickyNote: textareaValue,
                           })
                           .then(() => {
-                            setEditModalIsOpen(false)
-                            props.mutate()
-                          })
+                            setEditModalIsOpen(false);
+                            props.mutate();
+                          });
                         toast.promise(updatedNote, {
                           loading: 'Updating sticky note...',
                           error:
                             'Your sticky note could not be updated. Please try again',
                           success: 'Sticky note updated successfully!!',
-                        })
+                        });
                       }}>
                       Save
                     </button>
@@ -201,7 +201,7 @@ export default function stickyNotes(props) {
                       type='button'
                       className='inline-flex justify-center px-4 py-1 mr-3 text-sm font-medium text-gray-900 rounded-sm bg-gray-50 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500'
                       onClick={() => {
-                        setEditModalIsOpen(false)
+                        setEditModalIsOpen(false);
                       }}>
                       Cancel
                     </button>
@@ -217,7 +217,7 @@ export default function stickyNotes(props) {
             as='div'
             className='fixed inset-0 z-10 overflow-y-auto'
             onClose={() => {
-              setViewModalIsOpen(false)
+              setViewModalIsOpen(false);
             }}>
             <div className='min-h-screen px-4 text-center'>
               <Transition.Child
@@ -260,7 +260,7 @@ export default function stickyNotes(props) {
                       type='button'
                       className='inline-flex justify-center px-4 py-1 mr-3 text-sm font-medium text-gray-900 rounded-sm bg-gray-50 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500'
                       onClick={() => {
-                        setViewModalIsOpen(false)
+                        setViewModalIsOpen(false);
                       }}>
                       Close
                     </button>
@@ -268,8 +268,8 @@ export default function stickyNotes(props) {
                       type='button'
                       className='inline-flex justify-center px-4 py-1 mr-3 text-sm font-medium text-gray-900 rounded-sm bg-gray-50 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-500'
                       onClick={() => {
-                        copyToClipBoard()
-                        setViewModalIsOpen(false)
+                        copyToClipBoard();
+                        setViewModalIsOpen(false);
                       }}>
                       Copy & close
                     </button>
@@ -282,18 +282,18 @@ export default function stickyNotes(props) {
                             id: props.stickyNoteId,
                           })
                           .then(() => {
-                            setViewModalIsOpen(false)
-                            props.mutate()
+                            setViewModalIsOpen(false);
+                            props.mutate();
                           })
                           .catch(() => {
-                            setViewModalIsOpen(false)
-                          })
+                            setViewModalIsOpen(false);
+                          });
                         toast.promise(deleteNote, {
                           loading: 'Deleting note...',
                           error:
                             'Your sticky note could not be deleted. Please try again',
                           success: 'Sticky note deleted successfully',
-                        })
+                        });
                       }}>
                       <HiOutlineTrash className='relative inline-block w-4 h-4 mr-0.5 top-0.5' />
                       Delete
@@ -315,5 +315,5 @@ export default function stickyNotes(props) {
         }
 			`}</style>
     </div>
-  )
+  );
 }

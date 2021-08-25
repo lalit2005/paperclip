@@ -1,24 +1,24 @@
-import { HiOutlinePlusCircle } from 'react-icons/hi'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import newNoteSchema from '@/lib/new-note-schema'
-import { newNoteValues } from 'types/types'
-import axios from 'axios'
-import toast from 'react-hot-toast'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { HiOutlinePlusCircle } from 'react-icons/hi';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import newNoteSchema from '@/lib/new-note-schema';
+import { newNoteValues } from 'types/types';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const SearchInput = (props) => {
-  let [isOpen, setIsOpen] = useState(false)
-  const router = useRouter()
+  let [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   const {
@@ -27,7 +27,7 @@ const SearchInput = (props) => {
     handleSubmit,
   } = useForm<newNoteValues>({
     resolver: zodResolver(newNoteSchema),
-  })
+  });
 
   const createNewNote = (data: newNoteValues) => {
     const createNewNote = axios
@@ -35,27 +35,27 @@ const SearchInput = (props) => {
         ...data,
       })
       .then((res) => {
-        router.push('/app/notes/' + res.data.id)
-        closeModal()
-      })
+        router.push('/app/notes/' + res.data.id);
+        closeModal();
+      });
     toast.promise(createNewNote, {
       loading: 'Creating new note...',
       error: 'Error creating new note',
       success: `${data.noteHeading} created`,
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
       if (e.key === '/') {
         const searchInput = document.getElementById(
           'search-input'
-        ) as HTMLInputElement
-        searchInput.value === '' && e.preventDefault()
-        searchInput.focus()
+        ) as HTMLInputElement;
+        searchInput.value === '' && e.preventDefault();
+        searchInput.focus();
       }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div className='flex'>
@@ -174,7 +174,7 @@ const SearchInput = (props) => {
         </Dialog>
       </Transition>
     </div>
-  )
-}
+  );
+};
 
-export default SearchInput
+export default SearchInput;

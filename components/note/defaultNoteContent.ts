@@ -19,4 +19,4 @@ export const defaultNoteContent = `
         <li data-type="taskItem" data-checked="false">sugar</li>
 
 Or just add some <code>inline code</code>
-Finally, you can add <a href="https://lalit.pagely.site">links</a> and <mark>highlight some important texts too</mark>`
+Finally, you can add <a href="https://lalit.pagely.site">links</a> and <mark>highlight some important texts too</mark>`;

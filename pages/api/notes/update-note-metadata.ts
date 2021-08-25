@@ -1,15 +1,15 @@
-import { NextApiRequest, NextApiResponse, PageConfig } from 'next'
-import prisma from '@/utils/prisma'
+import { NextApiRequest, NextApiResponse, PageConfig } from 'next';
+import prisma from '@/utils/prisma';
 import {
   getSession,
   withApiAuthRequired,
   UserProfile,
-} from '@auth0/nextjs-auth0'
-import getTagsFromString from '@/lib/get-tags-from-string'
+} from '@auth0/nextjs-auth0';
+import getTagsFromString from '@/lib/get-tags-from-string';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { body } = req
-  const { noteHeading, noteDescription, tags, id, emoji } = body
+  const { body } = req;
+  const { noteHeading, noteDescription, tags, id, emoji } = body;
   const newNote = await prisma.notes.update({
     where: {
       id,
@@ -20,9 +20,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       tags: getTagsFromString(tags),
       emoji: emoji,
     },
-  })
-  res.json(newNote)
-}
+  });
+  res.json(newNote);
+};
 
 // export const config: PageConfig = {
 //   api: {
@@ -32,4 +32,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 //   },
 // }
 
-export default withApiAuthRequired(handler)
+export default withApiAuthRequired(handler);
