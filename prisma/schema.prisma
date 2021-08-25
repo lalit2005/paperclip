@@ -26,9 +26,9 @@ model stickyNotes {
   stickyNote String?  @db.VarChar
   id         String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   createdAt  DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt  DateTime @default(now()) @updatedAt @db.Timestamptz(6)
   createdBy  String   @db.VarChar
   color      String   @default("blue") @db.VarChar
+  updatedAt  DateTime @default(now()) @updatedAt @db.Timestamptz(6)
 }
 
 model whiteboards {
@@ -57,7 +57,22 @@ model todolists {
   todolistDescription String   @db.VarChar
   createdBy           String   @db.VarChar
   createdAt           DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt           DateTime @default(now()) @updatedAt @db.Timestamptz(6)
   inTrash             Boolean  @default(false)
+  updatedAt           DateTime @default(now()) @updatedAt @db.Timestamptz(6)
   todos               todos[]
+}
+
+model CodePlayground {
+  id             String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  createdBy      String?  @db.VarChar
+  playgroundName String?  @db.VarChar
+  html           String?  @db.VarChar
+  css            String?  @db.VarChar
+  js             String?  @db.VarChar
+  createdAt      DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt      DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  isPublic       Boolean  @default(false)
+  publicId       String   @db.VarChar
+  tags           String[] @db.VarChar
+  inTrash        Boolean  @default(false)
 }
