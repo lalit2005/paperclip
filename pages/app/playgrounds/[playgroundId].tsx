@@ -117,9 +117,9 @@ const index = () => {
             )
           );
           toast.promise(updateReq, {
-            loading: `Saving ${playground?.playgroundName}`,
+            loading: `Saving playground`,
             error: 'Error saving playground',
-            success: `Saved ${playground?.playgroundName}!!`,
+            success: `Saved playground!!`,
           });
         }
       }
