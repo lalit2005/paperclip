@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import Todo from '@/components/todo/Todo';
 import NewTodo from '@/components/todo/NewTodo';
 import DoneTodos from '@/components/todo/DoneTodos';
+import clsx from 'clsx';
 
 const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
         <h1 className='mb-2 text-4xl font-extrabold'>
           {todolist?.todolistName}
         </h1>
-        <div className='flex'>
+        <div className='flex flex-col md:flex-row'>
           <div className='flex-1 my-10'>
             {todolist?.todos?.map(
               (todo) =>
@@ -65,12 +66,29 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
             />
           </div>
           <div className='flex-1'>
-            <div className='relative my-10'>
+            <div className='relative hidden my-10 md:block'>
               <DoneTodos todos={todolist?.todos} />
             </div>
-            <h1 className='z-30 mt-16 text-3xl font-extrabold bg-white'>
+            <div className='relative block my-10 md:hidden'>
+              <h2 className='block my-10 text-3xl font-extrabold md:hidden'>
+                Completed tasks
+              </h2>
+              {todolist?.todos?.map((todo) => (
+                <div
+                  key={todo.id}
+                  className={clsx(
+                    'w-full max-w-sm my-2 px-3 pr-10 py-1 border border-gray-200 relative rounded',
+                    todo?.priority === 1 && 'bg-red-200',
+                    todo?.priority === 2 && 'bg-yellow-100',
+                    todo?.priority === 3 && 'bg-green-100'
+                  )}>
+                  {todo.todo}
+                </div>
+              ))}
+            </div>
+            <h2 className='z-30 text-lg font-extrabold md:text-3xl md:mt-16'>
               Points earned: {points}
-            </h1>
+            </h2>
           </div>
         </div>
       </DashboardLayout>

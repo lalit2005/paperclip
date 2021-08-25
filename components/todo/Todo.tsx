@@ -35,7 +35,7 @@ const Todo: React.FC<{
       {/* <div className='flex items-center'> */}
       <div
         className={
-          'my-2 px-3 rounded py-2 w-96 shadow border flex border-gray-200 transition-all cursor-pointer justify-between hover:bg-gray-50'
+          'my-2 px-3 rounded py-2 max-w-[384px] w-full shadow border flex border-gray-200 transition-all cursor-pointer justify-between hover:bg-gray-50'
         }>
         <div className='inline-flex items-center'>
           <span

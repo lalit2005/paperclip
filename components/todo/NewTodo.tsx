@@ -36,7 +36,7 @@ const Todo: React.FC<{
     <div>
       <button
         onClick={openModal}
-        className='px-3 py-2 my-2 transition-all border border-gray-700 rounded shadow cursor-pointer w-96 hover:text-gray-50 hover:bg-gray-900'>
+        className='px-3 py-2 my-2 transition-all border border-gray-700 rounded shadow cursor-pointer w-full max-w-[384px] hover:text-gray-50 hover:bg-gray-900'>
         <p>+ Add new todo</p>
       </button>
       <Transition appear show={isOpen} as={Fragment}>
