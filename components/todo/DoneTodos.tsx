@@ -18,26 +18,25 @@ const DoneTodos: React.FC<{ todos: todos[] }> = ({ todos }) => {
           alt='Your completed todos'
         />
       </div>
-      <div className='absolute -top-5 left-5'>
+      <div className='absolute flex flex-wrap -top-5 justify-evenly'>
         {todos?.map((todo) => (
-          <div
-            key={todo.id}
-            className={clsx(
-              'w-full max-w-sm px-3 pr-10 py-1 border border-gray-200 relative rounded',
-              todo?.priority === 1 && 'bg-red-200',
-              todo?.priority === 2 && 'bg-yellow-100',
-              todo?.priority === 3 && 'bg-green-100'
-            )}
-            style={{
-              transform: 'rotate(70deg)',
-              left: Math.floor(Math.random() * 300) + 'px',
-            }}>
-            <CustomTooltip text={todo.todo}>
+          <CustomTooltip text={todo.todo} key={todo.id} showArrow={false}>
+            <div
+              className={clsx(
+                'w-full max-w-sm px-3 pr-10 py-1 border border-gray-400 relative rounded',
+                todo?.priority === 1 && 'bg-red-200',
+                todo?.priority === 2 && 'bg-yellow-100',
+                todo?.priority === 3 && 'bg-green-100'
+              )}
+              style={{
+                transform: 'rotate(70deg)',
+                left: Math.floor(Math.random() * 100) + 'px',
+              }}>
               {truncate(todo.todo, {
                 length: 30,
               })}
-            </CustomTooltip>
-          </div>
+            </div>
+          </CustomTooltip>
         ))}
       </div>
     </div>

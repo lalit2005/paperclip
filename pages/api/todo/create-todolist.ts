@@ -8,9 +8,8 @@ import {
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
-    user: { sub },
+    user: { sub, name },
   }: { user: UserProfile } = getSession(req, res);
-  const { body } = req;
   const newTodoList = await prisma.todolists.create({
     data: {
       createdBy: sub,
@@ -18,7 +17,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       todolistDescription: req.body.todolistDescription,
       todos: {
         create: {
-          todo: 'Hello world',
+          todo: `Hey ${name}, you can put me in the "completed" bucket and earn some points 👉`,
+          priority: 3,
         },
       },
     },

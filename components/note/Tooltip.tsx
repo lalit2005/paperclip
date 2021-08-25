@@ -9,7 +9,11 @@ import {
 } from 'react-icons/hi';
 import Link from 'next/link';
 
-const CustomTooltip: React.FC<{ text: string }> = ({ text, ...props }) => {
+const CustomTooltip: React.FC<{ text: string; showArrow?: boolean }> = ({
+  text,
+  showArrow = true,
+  ...props
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div>
@@ -35,7 +39,7 @@ const CustomTooltip: React.FC<{ text: string }> = ({ text, ...props }) => {
             className='px-2 py-1 text-gray-100 bg-gray-900 rounded shadow-lg'
             side='top'
             sideOffset={5}>
-            <Tooltip.Arrow className='shadow-lg' />
+            {showArrow && <Tooltip.Arrow className='shadow-lg' />}
             <p>{text}</p>
           </Tooltip.Content>
         </Transition>

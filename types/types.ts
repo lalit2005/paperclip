@@ -22,6 +22,10 @@ export interface newBoardValues {
   boardDescription: string;
   tags: string;
 }
+export interface newTodolistValues {
+  todolistName: string;
+  todolistDescription: string;
+}
 
 export interface TrashResponse {
   notes: notes[];
