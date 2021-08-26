@@ -16,7 +16,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       id: req.query.todolistId.toString(),
     },
     include: {
-      todos: true,
+      todos: {
+        orderBy: {
+          priority: 'asc',
+        },
+      },
     },
   });
   res.json(todoList);
