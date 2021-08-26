@@ -5,7 +5,7 @@ import NoteTag from '../note/NoteTag';
 import Link from 'next/link';
 import { HiOutlineXCircle } from 'react-icons/hi';
 
-const TagNotesViewer: React.FC<{
+const TagPlaygroundViewer: React.FC<{
   tag: string;
   playgroundsData: CodePlayground[];
 }> = ({ tag, playgroundsData }) => {
@@ -107,4 +107,4 @@ const TagNotesViewer: React.FC<{
   );
 };
 
-export default TagNotesViewer;
+export default TagPlaygroundViewer;

@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import NoteTag from '@/components/note/NoteTag';
-import SearchInput from '@/components/note/SearchInput';
+import SearchInput from '@/components/playground/SearchInput';
 import fetcher from '@/lib/fetcher';
 import { UserProfile, withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { CodePlayground, notes as notesType } from '@prisma/client';
+import { CodePlayground } from '@prisma/client';
 import DashboardLayout from 'layouts/DashboardLayout';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -13,12 +13,11 @@ import Skeleton from 'react-loading-skeleton';
 import Head from 'next/head';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { HiCheck } from 'react-icons/hi';
-import getUniqueTags from '@/lib/get-unique-tags';
-import TagNotesViewer from '@/components/playground/TagNotesViewer';
-import getNotesDataByTags from '@/lib/get-notes-data-by-tags';
+import TagPlaygroundViewer from '@/components/playground/TagPlaygroundViewer';
 import searchTags from '@/lib/search-tags';
 import getUniquePlaygroundTags from '@/lib/get-unique-playground-tags';
 import getPlaygroundsDataByTags from '@/lib/get-playgrounds-data-by-tags';
+import PlaygroundCard from '@/components/playground/PlaygroundCard';
 
 const index: React.FC<{ user: UserProfile }> = ({ user }) => {
   const { data: playgrounds } = useSWR<CodePlayground[]>(
@@ -56,7 +55,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
       </Head>
       <DashboardLayout>
         <h1 className='mb-16 text-4xl font-extrabold text-center'>
-          Your Playgrounds 👨‍💻
+          Your HTML, CSS and JS Playgrounds 👨‍💻
         </h1>
         <SearchInput
           value={inputValue}
@@ -90,28 +89,10 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
         {!isSortedBasedOnTagsChecked ? (
           <div className='flex flex-wrap justify-evenly'>
             {results?.map((playground) => (
-              <Link
+              <PlaygroundCard
+                playground={playground}
                 key={playground.id || playground.item.id}
-                href={`/app/playgrounds/${
-                  playground.id || playground.item.id
-                }`}>
-                <a className='inline-block w-full max-w-xl'>
-                  <div className='p-5 my-4 border border-gray-500 rounded shadow-md hover:bg-gray-50'>
-                    <h3 className='text-lg text-gray-900'>
-                      {playground.playgroundName ||
-                        playground.item.playgroundName}
-                    </h3>
-                    <div className='my-5'>
-                      {playground?.tags?.map((tag) => (
-                        <NoteTag key={tag} tag={tag} />
-                      )) ||
-                        playground?.item?.tags?.map((tag) => (
-                          <NoteTag key={tag} tag={tag} />
-                        ))}
-                    </div>
-                  </div>
-                </a>
-              </Link>
+              />
             )) || (
               <Skeleton
                 height='150px'
@@ -126,7 +107,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
             {/* @ts-ignore */}
             {playgrounds ? (
               searchedPlaygrounds?.map((tag) => (
-                <TagNotesViewer
+                <TagPlaygroundViewer
                   tag={tag}
                   playgroundsData={getPlaygroundsDataByTags(playgrounds, tag)}
                   key={tag}

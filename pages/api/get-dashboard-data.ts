@@ -58,18 +58,32 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     take: 4,
   });
 
-  const [notes, stickyNotes, boards, todolists] = await prisma.$transaction([
-    notesFetcher,
-    stickyNotesFetcher,
-    boardsFetcher,
-    todolistsFetcher,
-  ]);
+  const playgroundsFetcher = prisma.codePlayground.findMany({
+    where: {
+      createdBy: sub,
+      inTrash: false,
+    },
+    orderBy: {
+      updatedAt: 'desc',
+    },
+    take: 4,
+  });
+
+  const [notes, stickyNotes, boards, todolists, playgrounds] =
+    await prisma.$transaction([
+      notesFetcher,
+      stickyNotesFetcher,
+      boardsFetcher,
+      todolistsFetcher,
+      playgroundsFetcher,
+    ]);
 
   res.json({
     notes,
     stickyNotes,
     boards,
     impTodos: todolists,
+    playgrounds,
   });
 };
 

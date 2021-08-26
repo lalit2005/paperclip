@@ -5,14 +5,13 @@ import {
   withApiAuthRequired,
   UserProfile,
 } from '@auth0/nextjs-auth0';
-import { defaultNoteContent } from '@/components/note/defaultNoteContent';
 import getTagsFromString from '@/lib/get-tags-from-string';
 import { customAlphabet } from 'nanoid';
-import generateDefaultContent from '@/lib/generate-default-content';
+import generateDefaultPlaygroundData from '@/lib/generate-default-playground-data';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
-    user: { sub, name, email },
+    user: { sub, name, nickname, picture },
   }: { user: UserProfile } = getSession(req, res);
   const alphabet =
     '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-';
@@ -23,8 +22,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       playgroundName: req.body.playgroundName,
       tags: getTagsFromString(req.body.tags),
       publicId: nanoid(),
-      html: `<h1>Hello ${name} 👋</h1>`,
-      css: `html {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}`,
+      html: generateDefaultPlaygroundData(name, picture, nickname).HTML,
+      css: generateDefaultPlaygroundData(name, picture, nickname).CSS,
+      js: generateDefaultPlaygroundData(name, picture, nickname).JS,
     },
   });
   res.json(newPlayground);

@@ -62,6 +62,7 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
                   <p>
                     Hey {user.name}, you haven&apos;t created any notes yet!!
                   </p>
+                  <p>{'¯\\_(ツ)_/¯'}</p>
                 </div>
               )}
             </div>
@@ -93,6 +94,7 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
                     Hey {user.name}, you haven&apos;t created any sticky notes
                     yet!!
                   </p>
+                  <p>{'¯\\_(ツ)_/¯'}</p>
                 </div>
               )}
             </div>
@@ -118,12 +120,13 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
                   className='w-full px-2 py-1 my-1'
                 />
               )}
-              {data?.notes?.length == 0 && (
+              {data?.boards?.length == 0 && (
                 <div className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
                   <p>
                     Hey {user.name}, you haven&apos;t created any whiteboards
                     yet!!
                   </p>
+                  <p>{'¯\\_(ツ)_/¯'}</p>
                 </div>
               )}
             </div>
@@ -140,16 +143,41 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
                   </a>
                 </Link>
               )) || <Skeleton count={4} className='w-full px-2 py-1 my-1' />}
-              {data?.stickyNotes?.length == 0 && (
+              {data?.impTodos?.length == 0 && (
                 <div className='w-full px-2 py-1 my-3'>
                   <p>
                     Hey {user.name}, you haven&apos;t created any sticky notes
                     yet!!
                   </p>
+                  <p>{'¯\\_(ツ)_/¯'}</p>
                 </div>
               )}
             </div>
-            {/* <div className='max-w-xl px-4 py-2 mx-auto rounded shadow'></div> */}
+          </div>
+          <div className='w-full max-w-sm px-4 py-2 mx-auto'>
+            <h3 className='my-3 text-lg font-medium'>Your Playgrounds</h3>
+            {data?.playgrounds?.map((playground) => (
+              <Link
+                key={playground?.id}
+                href={'/app/playgrounds/' + playground?.id}>
+                <a className='block'>
+                  <div className='w-full px-2 py-1 my-3 rounded bg-gray-50 hover:bg-gray-100'>
+                    <p className='capitalize'>
+                      {truncate(playground?.playgroundName, { length: 50 })}
+                    </p>
+                  </div>
+                </a>
+              </Link>
+            )) || <Skeleton count={4} className='w-full px-2 py-1 my-1' />}
+            {data?.playgrounds?.length == 0 && (
+              <div className='w-full px-2 py-1 my-3'>
+                <p>
+                  Hey {user.name}, you haven&apos;t created any HTML, CSS, JS
+                  Playgrounds yet!!
+                </p>
+                <p>{'¯\\_(ツ)_/¯'}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -175,5 +203,9 @@ const links = [
   {
     path: '/app/sticky-notes',
     title: 'Sticky notes',
+  },
+  {
+    path: '/app/playgrounds',
+    title: 'HTML, CSS, JS Playground',
   },
 ];

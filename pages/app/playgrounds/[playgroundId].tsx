@@ -105,17 +105,6 @@ const index = () => {
               playgroundId: playground?.id,
             }
           );
-          alert(
-            JSON.stringify(
-              {
-                html: event.data.htmlCode,
-                css: event.data.cssCode,
-                js: event.data.jsCode,
-              },
-              null,
-              2
-            )
-          );
           toast.promise(updateReq, {
             loading: `Saving playground`,
             error: 'Error saving playground',
@@ -129,10 +118,13 @@ const index = () => {
 
   return (
     <div className='w-screen h-screen'>
+      <Head>
+        <title>{playground?.playgroundName} | Paperclip</title>
+      </Head>
       {/* {JSON.stringify(note, null, 2)} */}
       {playground && (
         <iframe
-          src='https://paperclip-editor.netlify.app'
+          src='http://localhost:3001'
           frameBorder='0'
           allow='clipboard-read; clipboard-write; allow-popups; allow-downloads; allow-modals;'
           id='paperclip-editor'

@@ -1,7 +1,7 @@
 import {
+  CodePlayground,
   notes,
   stickyNotes,
-  todolists,
   todos,
   whiteboards,
 } from '@prisma/client';
@@ -26,7 +26,10 @@ export interface newTodolistValues {
   todolistName: string;
   todolistDescription: string;
 }
-
+export interface newPlaygroundValues {
+  playgroundName: string;
+  tags: string;
+}
 export interface TrashResponse {
   notes: notes[];
   boards: whiteboards[];
@@ -41,4 +44,5 @@ export interface DashboardData {
   stickyNotes: stickyNotes[];
   boards: whiteboards[];
   impTodos: todos[];
+  playgrounds: CodePlayground[];
 }
