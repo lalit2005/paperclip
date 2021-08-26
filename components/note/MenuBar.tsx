@@ -1,21 +1,28 @@
 import { Editor } from '@tiptap/react';
-import { BiItalic, BiHighlight, BiBold, BiPaint } from 'react-icons/bi';
+import { BiItalic, BiBold, BiPaint } from 'react-icons/bi';
 import { FaRemoveFormat, FaMinus, FaListUl, FaListOl } from 'react-icons/fa';
-import { FiCode, FiLink2 } from 'react-icons/fi';
+import { FiCode, FiLink2, FiYoutube } from 'react-icons/fi';
 import { MdStrikethroughS } from 'react-icons/md';
 import { AiOutlineHighlight, AiOutlineTable } from 'react-icons/ai';
 import { CgQuoteO } from 'react-icons/cg';
 import {
   HiOutlineCode,
+  HiOutlineX,
   HiOutlineDesktopComputer,
   HiOutlinePhotograph,
+  HiOutlineMinusCircle,
+  HiOutlineXCircle,
+  HiOutlinePlus,
+  HiOutlinePlusCircle,
 } from 'react-icons/hi';
+import * as Portal from '@radix-ui/react-portal';
 
 // load all highlight.js languages
 import saveNote from '@/lib/save-note';
 import MenuBarTooltip from './Tooltip';
-import generateEmbedUrl from '@/lib/generateEmbedUrl';
+import generateEmbedUrl from '@/lib/generate-embed-url';
 import { customAlphabet } from 'nanoid';
+import { useState } from 'react';
 
 const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
   editor,
@@ -25,6 +32,18 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
   if (!editor) {
     return <>Loading...</>;
   }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [ytVideo, setYtVideo] = useState<{
+    displayVideo: boolean;
+    url: string;
+  }>({
+    displayVideo: false,
+    url: '',
+  });
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [isVideMinimized, setIsVideMinimized] = useState(false);
 
   return (
     <div>
@@ -276,6 +295,43 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
             <AiOutlineHighlight />
           </button>
         </MenuBarTooltip>
+        <MenuBarTooltip
+          text={
+            ytVideo.displayVideo
+              ? 'Close the currently playing YouTube video'
+              : 'Play YouTube while writing notes'
+          }>
+          <button
+            onClick={() => {
+              if (ytVideo.displayVideo) {
+                setYtVideo({
+                  ...ytVideo,
+                  displayVideo: false,
+                });
+              } else {
+                let videoUrl = window.prompt('URL/link of the YouTube Video');
+                videoUrl = videoUrl.toString().startsWith('http')
+                  ? videoUrl
+                  : 'http://' + videoUrl;
+                if (new URL(videoUrl).hostname === 'www.youtube.com') {
+                  const params = new URL(videoUrl).searchParams;
+                  setYtVideo({
+                    displayVideo: true,
+                    url: `https://www.youtube-nocookie.com/embed/${params.get(
+                      'v'
+                    )}`,
+                  });
+                }
+              }
+            }}
+            className={
+              editor.isActive('blockquote')
+                ? 'is-active'
+                : '' + '  hover:bg-gray-200'
+            }>
+            {ytVideo.displayVideo ? <HiOutlineX /> : <FiYoutube />}
+          </button>
+        </MenuBarTooltip>
         <MenuBarTooltip text='Save note. You can also press Cmd/Ctrl + S to save.'>
           <div
             onClick={() => {
@@ -286,6 +342,63 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
           </div>
         </MenuBarTooltip>
       </div>
+      {ytVideo.displayVideo && (
+        <Portal.Root>
+          <div className='fixed transition-all duration-200 shadow-2xl rounded-br-md'>
+            <div className='flex items-center justify-between w-full px-2 py-1 text-sm text-gray-500 bg-white'>
+              <p className='mr-4'>
+                https://youtube.com/watch?v={ytVideo.url.split('embed/')[1]}
+              </p>
+              <div>
+                <HiOutlineXCircle
+                  onClick={() => {
+                    setYtVideo({
+                      ...ytVideo,
+                      displayVideo: false,
+                    });
+                  }}
+                  title='Close the video'
+                  style={{ zoom: '1.3' }}
+                  className='inline-block w-4 h-4 p-px mx-1 text-red-600 rounded-full cursor-pointer hover:bg-red-100'
+                />
+                {isVideMinimized ? (
+                  <HiOutlinePlusCircle
+                    onClick={() => {
+                      setIsVideMinimized(false);
+                    }}
+                    title='Maximize the video'
+                    style={{ zoom: '1.3' }}
+                    className='inline-block w-4 h-4 p-px mx-1 text-green-600 rounded-full cursor-pointer hover:bg-green-100'
+                  />
+                ) : (
+                  <HiOutlineMinusCircle
+                    onClick={() => {
+                      setIsVideMinimized(true);
+                    }}
+                    title='Minimize the video'
+                    style={{ zoom: '1.3' }}
+                    className='inline-block w-4 h-4 p-px mx-1 text-green-600 rounded-full cursor-pointer hover:bg-green-100'
+                  />
+                )}
+              </div>
+            </div>
+            {!isVideMinimized && (
+              <iframe
+                src={ytVideo.url}
+                frameBorder='0'
+                width={560 * 1.2}
+                height={315 * 1.2}
+                draggable
+                title='YouTube video player'
+                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                allowFullScreen
+                className='rounded-br-md'>
+                Loading...
+              </iframe>
+            )}
+          </div>
+        </Portal.Root>
+      )}
     </div>
   );
 };
