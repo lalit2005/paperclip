@@ -3,7 +3,7 @@ import { notes, whiteboards } from '@prisma/client';
 import { Fragment, useState } from 'react';
 import NoteTag from '../note/NoteTag';
 import Link from 'next/link';
-import { HiOutlineXCircle } from 'react-icons/hi';
+import { HiOutlineFolder, HiOutlineXCircle } from 'react-icons/hi';
 
 const TagNotesViewer: React.FC<{ tag: string; boardsData: whiteboards[] }> = ({
   tag,
@@ -24,7 +24,8 @@ const TagNotesViewer: React.FC<{ tag: string; boardsData: whiteboards[] }> = ({
       <div
         className='p-5 my-4 border border-gray-500 rounded shadow-md cursor-pointer hover:bg-gray-50'
         onClick={openModal}>
-        <h3 className='text-lg text-gray-900 capitalize'>{tag}</h3>
+        <HiOutlineFolder className='relative inline-block w-6 h-6 mr-2 bottom-px' />{' '}
+        <h3 className='inline-block text-lg text-gray-900 capitalize'>{tag}</h3>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
