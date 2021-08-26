@@ -53,6 +53,7 @@ const Page = () => {
       <CommandPalette
         commands={commands}
         open={false}
+        hotKeys={['command+shift+p', 'ctrl+shift+p']}
         trigger='Command Palette'
         closeOnSelect={true}
         maxDisplayItems={500}
