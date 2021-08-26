@@ -12,7 +12,6 @@ import {
   HiOutlinePhotograph,
   HiOutlineMinusCircle,
   HiOutlineXCircle,
-  HiOutlinePlus,
   HiOutlinePlusCircle,
   HiOutlineExternalLink,
 } from 'react-icons/hi';
@@ -23,7 +22,7 @@ import saveNote from '@/lib/save-note';
 import MenuBarTooltip from './Tooltip';
 import generateEmbedUrl from '@/lib/generate-embed-url';
 import { customAlphabet } from 'nanoid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
@@ -46,6 +45,17 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [isVideMinimized, setIsVideMinimized] = useState(false);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    window.onkeydown = (e) => {
+      // if Cmd/Ctrl + M is pressed, toggle the video minimized state
+      if (e.key === 'm' && (e.metaKey || e.ctrlKey)) {
+        setIsVideMinimized((prev) => !prev);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -300,7 +310,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <MenuBarTooltip
           text={
             ytVideo.displayVideo
-              ? 'Close the currently playing YouTube video'
+              ? 'Close the currently playing YouTube video. Press Ctrl/Cmd + M to toggle minimize'
               : 'Play YouTube while writing notes'
           }>
           <button
@@ -353,7 +363,8 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
             )}>
             <div className='flex items-center justify-between w-full px-2 py-1 text-sm text-gray-500 bg-white'>
               <p className='mr-4'>
-                https://youtube.com/watch?v={ytVideo.url.split('embed/')[1]}
+                https://youtube.com/watch?v={ytVideo.url.split('embed/')[1]}{' '}
+                {JSON.stringify(isVideMinimized)}
               </p>
               <div>
                 <HiOutlineXCircle
@@ -368,23 +379,31 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
                   className='inline-block w-4 h-4 p-px mx-1 text-red-600 rounded-full cursor-pointer hover:bg-red-100'
                 />
                 {isVideMinimized ? (
-                  <HiOutlinePlusCircle
+                  <button
+                    className='inline-block'
                     onClick={() => {
                       setIsVideMinimized(false);
                     }}
-                    title='Maximize the video'
-                    style={{ zoom: '1.3' }}
-                    className='inline-block w-4 h-4 p-px mx-1 text-green-600 rounded-full cursor-pointer hover:bg-green-100'
-                  />
+                    id='maximize-icon'>
+                    <HiOutlinePlusCircle
+                      title='Maximize the video'
+                      style={{ zoom: '1.3' }}
+                      className='inline-block w-4 h-4 p-px mx-1 text-green-600 rounded-full cursor-pointer hover:bg-green-100'
+                    />
+                  </button>
                 ) : (
-                  <HiOutlineMinusCircle
+                  <button
+                    className='inline-block'
                     onClick={() => {
                       setIsVideMinimized(true);
                     }}
-                    title='Minimize the video'
-                    style={{ zoom: '1.3' }}
-                    className='inline-block w-4 h-4 p-px mx-1 text-green-600 transition-all duration-500 rounded-full cursor-pointer hover:bg-green-100'
-                  />
+                    id='minimize-icon'>
+                    <HiOutlineMinusCircle
+                      title='Minimize the video'
+                      style={{ zoom: '1.3' }}
+                      className='inline-block w-4 h-4 p-px mx-1 text-green-600 transition-all duration-500 rounded-full cursor-pointer hover:bg-green-100'
+                    />
+                  </button>
                 )}
                 <a
                   href={`https://youtube.com/watch?v=${
@@ -408,6 +427,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
               draggable
               title='YouTube video player'
               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+              id='yt-video-iframe'
               allowFullScreen
               className={clsx(
                 'rounded-br-md w-full h-full',
