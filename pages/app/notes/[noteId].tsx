@@ -80,12 +80,10 @@ const index = () => {
         </div>
       )}
       <DashboardNav />
-      <div className='w-screen max-w-5xl'>
+      <div className='max-w-5xl pt-16 mx-auto px-7'>
         <Link href='/app/notes'>
           <a className='block mb-5 text-gray-500'>{'<-'} Go Back</a>
         </Link>
-      </div>
-      <div className='max-w-5xl pt-16 mx-auto px-7'>
         <div className='items-start justify-start sm:flex group'>
           <MenuBarTooltip text={`Change emoji for ${note?.noteHeading}`}>
             <span
