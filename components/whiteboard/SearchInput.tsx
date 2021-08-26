@@ -65,7 +65,7 @@ const SearchInput = (props) => {
         name='search-input'
         id='search-input'
         autoComplete='off'
-        placeholder='Search your tags, boards and their description. Press / to focus'
+        placeholder='Search your tags and boards. Press / to focus'
         className='inline-block w-full px-2 py-1 mb-5 text-gray-600 border border-gray-400 rounded shadow focus:outline-none focus:ring focus:ring-gray-300 focus:ring-offset-1'
         {...props}
       />
