@@ -14,6 +14,7 @@ import {
   HiOutlineXCircle,
   HiOutlinePlus,
   HiOutlinePlusCircle,
+  HiOutlineExternalLink,
 } from 'react-icons/hi';
 import * as Portal from '@radix-ui/react-portal';
 
@@ -347,7 +348,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <Portal.Root>
           <div
             className={clsx(
-              'fixed w-[672px] transition-all duration-200 shadow-2xl rounded-br-md',
+              'fixed w-[672px] transition-all duration-500 shadow-2xl rounded-br-md',
               isVideMinimized ? 'h-0' : 'h-[378px]'
             )}>
             <div className='flex items-center justify-between w-full px-2 py-1 text-sm text-gray-500 bg-white'>
@@ -382,9 +383,22 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
                     }}
                     title='Minimize the video'
                     style={{ zoom: '1.3' }}
-                    className='inline-block w-4 h-4 p-px mx-1 text-green-600 rounded-full cursor-pointer hover:bg-green-100'
+                    className='inline-block w-4 h-4 p-px mx-1 text-green-600 transition-all duration-500 rounded-full cursor-pointer hover:bg-green-100'
                   />
                 )}
+                <a
+                  href={`https://youtube.com/watch?v=${
+                    ytVideo.url.split('embed/')[1]
+                  }`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-block'>
+                  <HiOutlineExternalLink
+                    title='Open video in new tab'
+                    style={{ zoom: '1.3' }}
+                    className='inline-block w-4 h-4 p-px mx-1 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100'
+                  />
+                </a>
               </div>
             </div>
 
@@ -397,7 +411,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
               allowFullScreen
               className={clsx(
                 'rounded-br-md w-full h-full',
-                isVideMinimized && 'hidden'
+                isVideMinimized && 'opacity-0'
               )}>
               Loading...
             </iframe>
