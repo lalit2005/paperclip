@@ -389,8 +389,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
             )}>
             <div className='flex items-center justify-between w-full px-2 py-1 text-sm text-gray-500 bg-white'>
               <p className='mr-4'>
-                https://youtube.com/watch?v={ytVideo.url.split('embed/')[1]}{' '}
-                {JSON.stringify(isVideMinimized)}
+                https://youtube.com/watch?v={ytVideo.url.split('embed/')[1]}
               </p>
               <div>
                 <HiOutlineXCircle
