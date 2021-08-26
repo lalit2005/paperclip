@@ -1,27 +1,16 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import Note from '@/components/note/Note';
-import NoteTag from '@/components/note/NoteTag';
 import fetcher from '@/lib/fetcher';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { CodePlayground, notes } from '@prisma/client';
+import { CodePlayground } from '@prisma/client';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import DashboardNav from '@/components/dashboard/DashboardNav';
 import { useEffect } from 'react';
 import Head from 'next/head';
-import EditPopover from '@/components/note/EditPopover';
-import { HiOutlineCog, HiOutlineMenuAlt1 } from 'react-icons/hi';
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import { Fab, Action } from 'react-tiny-fab';
+import { useState } from 'react';
 import 'react-tiny-fab/dist/styles.css';
-import Link from 'next/link';
-import MenuBarTooltip from '@/components/note/Tooltip';
-import * as Checkbox from '@radix-ui/react-checkbox';
-import { HiCheck } from 'react-icons/hi';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
-import DashboardLayout from 'layouts/DashboardLayout';
+import CommandPalette from '@/components/dashboard/CommandPalette';
 
 const index = () => {
   const router = useRouter();
@@ -122,6 +111,7 @@ const index = () => {
         <title>{playground?.playgroundName} | Paperclip</title>
       </Head>
       {/* {JSON.stringify(note, null, 2)} */}
+      <CommandPalette />
       {playground && (
         <iframe
           src='https://paperclip-editor.netlify.app'

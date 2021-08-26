@@ -14,6 +14,7 @@ import {
   HiOutlineXCircle,
   HiOutlinePlusCircle,
   HiOutlineExternalLink,
+  HiOutlineInformationCircle,
 } from 'react-icons/hi';
 import * as Portal from '@radix-ui/react-portal';
 
@@ -24,6 +25,7 @@ import generateEmbedUrl from '@/lib/generate-embed-url';
 import { customAlphabet } from 'nanoid';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import CustomTooltip from './Tooltip';
 
 const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
   editor,
@@ -51,9 +53,33 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
     window.onkeydown = (e) => {
       // if Cmd/Ctrl + M is pressed, toggle the video minimized state
       if (e.key === 'm' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
         setIsVideMinimized((prev) => !prev);
       }
+      // if cmd/ctrl + shift + space is pressed, toggle the video minimized state
+      if (e.key === 'd' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        // alert('hi');
+        document
+          .querySelector<HTMLIFrameElement>('#yt-video-iframe')
+          .contentWindow.postMessage(
+            '{"event":"command","func":"pauseVideo","args":""}',
+            '*'
+          );
+      }
+
+      if (e.key === 'e' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        // alert('f');
+        document
+          .querySelector<HTMLIFrameElement>('#yt-video-iframe')
+          .contentWindow.postMessage(
+            '{"event":"command","func":"playVideo","args":""}',
+            '*'
+          );
+      }
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -310,7 +336,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
         <MenuBarTooltip
           text={
             ytVideo.displayVideo
-              ? 'Close the currently playing YouTube video. Press Ctrl/Cmd + M to toggle minimize'
+              ? 'Close the currently playing YouTube video.'
               : 'Play YouTube while writing notes'
           }>
           <button
@@ -405,7 +431,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
                     />
                   </button>
                 )}
-                <a
+                {/* <a
                   href={`https://youtube.com/watch?v=${
                     ytVideo.url.split('embed/')[1]
                   }`}
@@ -417,7 +443,18 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
                     style={{ zoom: '1.3' }}
                     className='inline-block w-4 h-4 p-px mx-1 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100'
                   />
-                </a>
+                </a> */}
+                <span className='inline-block'>
+                  <CustomTooltip
+                    text='Some shortcuts to boost your productivity\n1. Cmd/Ctrl + M to minimize and maximize the video'
+                    showArrow>
+                    <HiOutlineInformationCircle
+                      title='Some shortcuts to boost your productivity'
+                      style={{ zoom: '1.3' }}
+                      className='inline-block w-4 h-4 p-px mx-1 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100'
+                    />
+                  </CustomTooltip>
+                </span>
               </div>
             </div>
 

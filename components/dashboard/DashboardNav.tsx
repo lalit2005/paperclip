@@ -2,6 +2,7 @@ import ProfileDropdown from './ProfileDropdown';
 import Logo from '@/public/logos/logo-transparent.png';
 import Image from 'next/image';
 import Link from 'next/link';
+import CommandPalette from './CommandPalette';
 
 const DashboardNav = (props) => {
   return (
@@ -17,6 +18,7 @@ const DashboardNav = (props) => {
       </div>
       <div>
         <ProfileDropdown />
+        <CommandPalette />
       </div>
     </div>
   );

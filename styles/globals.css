@@ -28,3 +28,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.react-command-palette {
+  display: none !important;
+}

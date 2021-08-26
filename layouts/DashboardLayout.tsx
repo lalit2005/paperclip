@@ -1,3 +1,4 @@
+import CommandPalette from '@/components/dashboard/CommandPalette';
 import DashboardNav from '@/components/dashboard/DashboardNav';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';

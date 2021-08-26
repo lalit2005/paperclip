@@ -49,6 +49,7 @@
     "next": "^11.0.1",
     "next-seo": "^4.26.0",
     "react": "17.0.2",
+    "react-command-palette": "^0.16.2",
     "react-contenteditable": "^3.3.5",
     "react-dom": "17.0.2",
     "react-dropzone": "^11.3.4",
