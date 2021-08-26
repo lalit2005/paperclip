@@ -124,7 +124,7 @@ const index = () => {
       {/* {JSON.stringify(note, null, 2)} */}
       {playground && (
         <iframe
-          src='http://localhost:3001'
+          src='https://paperclip-editor.netlify.app'
           frameBorder='0'
           allow='clipboard-read; clipboard-write; allow-popups; allow-downloads; allow-modals;'
           id='paperclip-editor'
