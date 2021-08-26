@@ -23,6 +23,7 @@ import MenuBarTooltip from './Tooltip';
 import generateEmbedUrl from '@/lib/generate-embed-url';
 import { customAlphabet } from 'nanoid';
 import { useState } from 'react';
+import clsx from 'clsx';
 
 const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
   editor,
@@ -344,7 +345,11 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
       </div>
       {ytVideo.displayVideo && (
         <Portal.Root>
-          <div className='fixed transition-all duration-200 shadow-2xl rounded-br-md'>
+          <div
+            className={clsx(
+              'fixed w-[672px] transition-all duration-200 shadow-2xl rounded-br-md',
+              isVideMinimized ? 'h-0' : 'h-[378px]'
+            )}>
             <div className='flex items-center justify-between w-full px-2 py-1 text-sm text-gray-500 bg-white'>
               <p className='mr-4'>
                 https://youtube.com/watch?v={ytVideo.url.split('embed/')[1]}
@@ -382,20 +387,20 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
                 )}
               </div>
             </div>
-            {!isVideMinimized && (
-              <iframe
-                src={ytVideo.url}
-                frameBorder='0'
-                width={560 * 1.2}
-                height={315 * 1.2}
-                draggable
-                title='YouTube video player'
-                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                allowFullScreen
-                className='rounded-br-md'>
-                Loading...
-              </iframe>
-            )}
+
+            <iframe
+              src={ytVideo.url}
+              frameBorder='0'
+              draggable
+              title='YouTube video player'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+              allowFullScreen
+              className={clsx(
+                'rounded-br-md w-full h-full',
+                isVideMinimized && 'hidden'
+              )}>
+              Loading...
+            </iframe>
           </div>
         </Portal.Root>
       )}
