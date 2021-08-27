@@ -1,10 +1,9 @@
 import CommandPalette from 'react-command-palette';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { stripHtml } from 'string-strip-html';
+import usePrefetch from '@/lib/usePrefetch';
 
 const Page = () => {
-  const router = useRouter();
   const { data } = useSWR<{ name: string; url: string }[]>(
     '/api/get-cmd-palette-data',
     {
@@ -13,6 +12,18 @@ const Page = () => {
     }
   );
   let commandPaletteData = data || [{ name: 'Loading...', url: '#' }];
+
+  const router = usePrefetch([
+    '/app/',
+    '/app/notes',
+    '/app/sticky-notes',
+    '/app/todo',
+    '/app/whiteboard',
+    '/app/playgrounds',
+    '/app/trash',
+    ...commandPaletteData.map(({ url }) => url),
+  ]);
+
   const p = (path) => router.push(path);
   const commands = [
     {
