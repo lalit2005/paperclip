@@ -5,6 +5,7 @@ import {
   withApiAuthRequired,
   UserProfile,
 } from '@auth0/nextjs-auth0';
+import { stripHtml } from 'string-strip-html';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
@@ -33,6 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
     select: {
       note: true,
+      noteHeading: true,
       id: true,
     },
   });
@@ -122,7 +124,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  const [
+  let [
     notes,
     notesContent,
     notesDesc,
@@ -142,6 +144,36 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     playgroundsFetcher,
   ]);
 
+  // break note content into chunks of 70 characters
+  notesContent = notesContent.map((note) => {
+    let content = note.note;
+    let chunks: {
+      id: string;
+      note: string;
+      noteHeading: string;
+    }[] = [];
+    while (content.length > 0) {
+      chunks.push({
+        note:
+          '...' +
+          stripHtml(content.substr(0, 70), {
+            ignoreTags: ['pre'],
+            dumpLinkHrefsNearby: {
+              enabled: true,
+              putOnNewLine: false,
+              wrapHeads: '(',
+              wrapTails: ')',
+            },
+          }).result +
+          '...',
+        id: note.id,
+        noteHeading: note.noteHeading,
+      });
+      content = content.substr(70);
+    }
+    return chunks;
+  })[0];
+  console.log(notesContent);
   const response: {
     name: string;
     url: string;
@@ -150,8 +182,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       name: noteHeading,
       url: `/app/notes/${id}`,
     })),
-    ...notesContent.map(({ note, id }) => ({
-      name: note,
+    ...notesContent.map(({ noteHeading, note, id }) => ({
+      name: noteHeading + ': ' + note,
       url: `/app/notes/${id}`,
     })),
     ...notesDesc.map(({ noteDescription, id }) => ({

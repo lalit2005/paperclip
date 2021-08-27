@@ -11,6 +11,12 @@ const Page = () => {
   const p = (path) => router.push(path);
   const commands = [
     {
+      name: 'Home',
+      command() {
+        p('/app/');
+      },
+    },
+    {
       name: 'Notes',
       command() {
         p('/app/notes');
@@ -49,14 +55,24 @@ const Page = () => {
   ];
 
   return (
-    <div>
+    <div className=''>
       <CommandPalette
         commands={commands}
         open={false}
         hotKeys={['command+shift+p', 'ctrl+shift+p']}
+        placeholder='Search for everything you have on Paperclip 🤯'
         trigger='Command Palette'
         closeOnSelect={true}
         maxDisplayItems={500}
+        theme={{
+          modal:
+            'max-w-3xl bg-white border-2 border-gray-300 mx-auto mt-[25vh] rounded shadow-2xl max-h-[300px] overflow-y-scroll',
+          suggestion:
+            'text-gray-900 text-base px-4 py-2 border-b border-gray-200',
+          input:
+            'w-full m-0 px-4 py-3 focus:outline-none border-b border-gray-400',
+          suggestionHighlighted: 'bg-gray-50',
+        }}
       />
     </div>
   );
