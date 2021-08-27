@@ -145,84 +145,88 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     todolistsFetcher,
     playgroundsFetcher,
   ]);
+  console.log(notesContent);
 
-  // break note content into chunks of 70 characters
-  notesContent = notesContent.map((note) => {
-    let content = note.note;
-    let chunks: {
-      id: string;
-      note: string;
-      noteHeading: string;
-    }[] = [];
-    while (content.length > 0) {
-      chunks.push({
-        note:
-          '...' +
-          stripHtml(content.substr(0, 70), {
-            ignoreTags: ['pre'],
-            dumpLinkHrefsNearby: {
-              enabled: true,
-              putOnNewLine: false,
-              wrapHeads: '(',
-              wrapTails: ')',
-            },
-          }).result +
-          '...',
-        id: note.id,
-        noteHeading: note.noteHeading,
-      });
-      content = content.substr(70);
-    }
-    return chunks;
-  })[0];
+  if (notesContent && notesContent.length > 0) {
+    // break note content into chunks of 70 characters
+    notesContent = notesContent?.map((note) => {
+      let content = note?.note;
+      let chunks: {
+        id: string;
+        note: string;
+        noteHeading: string;
+      }[] = [];
+      while (content.length > 0) {
+        chunks.push({
+          note:
+            '...' +
+            stripHtml(content?.substr(0, 70), {
+              ignoreTags: ['pre'],
+              dumpLinkHrefsNearby: {
+                enabled: true,
+                putOnNewLine: false,
+                wrapHeads: '(',
+                wrapTails: ')',
+              },
+            }).result +
+            '...',
+          id: note?.id,
+          noteHeading: note?.noteHeading,
+        });
+        content = content?.substr(70);
+      }
+      return chunks;
+    })[0];
+  }
+
   console.log(notesContent);
   const response: {
     name: string;
     url: string;
   }[] = [
-    ...notes.map(({ noteHeading, id }) => ({
+    ...notes?.map(({ noteHeading, id }) => ({
       name:
         '<span style="background-color: #DBEAFE; padding: 2px; border-radius: 2px;">Note:</span> ' +
         noteHeading,
       url: `/app/notes/${id}`,
     })),
-    ...notesContent.map(({ noteHeading, note, id }) => ({
+    ...notesContent?.map(({ noteHeading, note, id }) => ({
       name:
         `<span style="background-color: #DBEAFE; padding: 2px; border-radius: 2px;">${noteHeading}:</span> ` +
         note,
       url: `/app/notes/${id}`,
     })),
-    ...notesDesc.map(({ noteDescription, id, noteHeading }) => ({
+    ...notesDesc?.map(({ noteDescription, id, noteHeading }) => ({
       name:
         `<span style="background-color: #DBEAFE; padding: 2px; border-radius: 2px;">${noteHeading}:</span> ` +
         noteDescription,
       url: `/app/notes/${id}`,
     })),
-    ...stickyNotes.map(({ stickyNote, id }) => ({
+    ...stickyNotes?.map(({ stickyNote, id }) => ({
       name:
         '<span style="background-color: #FEE2E2; padding: 2px; border-radius: 2px;">Sticky note:</span> ' +
         stickyNote,
       url: `/app/sticky-notes`,
     })),
-    ...boards.map(({ boardName, id }) => ({
+    ...boards?.map(({ boardName, id }) => ({
       name:
         '<span style="background-color: #FEF3C7; padding: 2px; border-radius: 2px;">Whiteboard:</span> ' +
         boardName,
       url: `/app/whiteboard/${id}`,
     })),
-    ...todos.map(({ todo, todolist }) => ({
+    ...todos?.map(({ todo, todolist }) => ({
       name:
         `<span style="background-color: #D1FAE5; padding: 2px; border-radius: 2px;">${todolist.todolistName}:</span> ` +
         todo,
       url: `/app/todo/${todolist.id}`,
     })),
-    ...todolists.map(({ id, todolistName }) => ({
+    ...todolists?.map(({ id, todolistName }) => ({
       name:
         '<span style="background-color: #D1FAE5; padding: 2px; border-radius: 2px;">Todo list:</span> ' +
         todolistName,
       url: `/app/todo/${id}`,
     })),
-    ...playgrounds.map(({ playgroundName, id }) => ({
+    ...playgrounds?.map(({ playgroundName, id }) => ({
       name:
         '<span style="background-color: #E0E7FF; padding: 2px; border-radius: 2px;">Playground:</span> ' +
         playgroundName,
