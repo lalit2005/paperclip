@@ -89,10 +89,6 @@ const Page = () => {
         getSuggestionValue={(value) => {
           return stripHtml(value.name).result.replace(/\.\.\./g, ' ... ');
         }}
-        filterSearchQuery={(inputValue) => {
-          // alert(inputValue);
-          return inputValue.toLowerCase();
-        }}
         theme={{
           modal:
             'max-w-3xl bg-white border-2 border-gray-300 mx-auto mt-[25vh] rounded shadow-2xl max-h-[300px] overflow-y-scroll',
