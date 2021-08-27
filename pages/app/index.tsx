@@ -22,11 +22,14 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
         <title>{user.name}&apos;s Dashboard | Paperclip</title>
       </Head>
       <div>
-        <div className='flex items-center justify-around w-full px-5 py-3 my-5'>
+        <p className='text-sm text-gray-600'>
+          Press Cmd/Ctrl + Shift + P to open command palette
+        </p>
+        <div className='flex flex-wrap items-center justify-around w-full px-5 py-3 mt-1 mb-5'>
           {links.map((link) => (
             <div
               key={link.path}
-              className='px-3 py-1 text-base border border-gray-300 rounded shadow-inner hover:bg-gray-100 bg-gray-50'>
+              className='px-3 py-1 my-1 text-base border border-gray-300 rounded shadow-inner hover:bg-gray-100 bg-gray-50'>
               <Link href={link.path}>
                 <a>{link.title}</a>
               </Link>
@@ -34,7 +37,7 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
           ))}
         </div>
         <div>
-          <div className='flex justify-around w-full max-w-5xl'>
+          <div className='flex flex-wrap justify-around w-full max-w-5xl'>
             <div className='w-full max-w-md px-4 py-2 mx-auto'>
               <h3 className='my-3 text-lg font-medium'>Your Notes</h3>
               {data?.notes?.map((note) => (
@@ -100,7 +103,7 @@ const indexPage: React.FC<{ user: UserProfile }> = ({ user }) => {
             </div>
             {/* <div className='max-w-xl px-4 py-2 mx-auto rounded shadow'></div> */}
           </div>
-          <div className='flex justify-around w-full max-w-5xl'>
+          <div className='flex flex-wrap justify-around w-full max-w-5xl'>
             <div className='w-full max-w-md px-4 py-2 mx-auto'>
               <h3 className='my-3 text-lg font-medium'>Your Whiteboards</h3>
               {data?.boards?.map((board) => (
