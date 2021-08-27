@@ -1,13 +1,13 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { notes, whiteboards } from '@prisma/client';
+import { whiteboards } from '@prisma/client';
 import { Fragment, useState } from 'react';
 import NoteTag from '../note/NoteTag';
 import Link from 'next/link';
 import { HiOutlineFolder, HiOutlineXCircle } from 'react-icons/hi';
 
-const TagNotesViewer: React.FC<{ tag: string; boardsData: whiteboards[] }> = ({
+const TagBoardsViewer: React.FC<{ tag: string; boardsData: whiteboards[] }> = ({
   tag,
-  boardsData: notesData,
+  boardsData,
 }) => {
   let [isOpen, setIsOpen] = useState(false);
 
@@ -63,23 +63,23 @@ const TagNotesViewer: React.FC<{ tag: string; boardsData: whiteboards[] }> = ({
                   as='h3'
                   className='flex items-center justify-between w-full mb-10 text-lg font-medium leading-6 text-gray-900 capitalize'>
                   <p className='inline-block'>
-                    Notes containg `<span className='underline'>{tag}</span>`
-                    tag
+                    Whiteboards containg `
+                    <span className='underline'>{tag}</span>` tag
                   </p>
                   <button onClick={closeModal} className='inline-block'>
                     <HiOutlineXCircle className='text-gray-600 w-7 h-7' />
                   </button>
                 </Dialog.Title>
                 <div className='mt-3'>
-                  {notesData?.map((note) => (
-                    <Link key={note.id} href={`/app/notes/${note.id}`}>
+                  {boardsData?.map((board) => (
+                    <Link key={board.id} href={`/app/whiteboard/${board.id}`}>
                       <a className='block'>
                         <div className='p-3 my-4 border border-gray-500 rounded shadow-md hover:bg-gray-50'>
                           <h3 className='text-lg text-gray-900'>
-                            {note.boardName}
+                            {board.boardName}
                           </h3>
                           <div className='my-2'>
-                            {note?.tags?.map((tag) => (
+                            {board?.tags?.map((tag) => (
                               <NoteTag key={tag} tag={tag} />
                             ))}
                           </div>
@@ -106,4 +106,4 @@ const TagNotesViewer: React.FC<{ tag: string; boardsData: whiteboards[] }> = ({
   );
 };
 
-export default TagNotesViewer;
+export default TagBoardsViewer;
