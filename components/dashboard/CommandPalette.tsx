@@ -1,6 +1,7 @@
 import CommandPalette from 'react-command-palette';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import { stripHtml } from 'string-strip-html';
 
 const Page = () => {
   const router = useRouter();
@@ -50,6 +51,12 @@ const Page = () => {
         p('/app/playgrounds');
       },
     },
+    {
+      name: 'Trash',
+      command() {
+        p('/app/trash');
+      },
+    },
     ...commandPaletteData?.map((item) => ({
       name: item?.name,
       command() {
@@ -67,14 +74,20 @@ const Page = () => {
         placeholder='Search for everything you have on Paperclip 🤯'
         trigger='Command Palette'
         closeOnSelect={true}
-        maxDisplayItems={500}
+        getSuggestionValue={(value) => {
+          return stripHtml(value.name).result.replace(/\.\.\./g, ' ... ');
+        }}
+        filterSearchQuery={(inputValue) => {
+          // alert(inputValue);
+          return inputValue.toLowerCase();
+        }}
         theme={{
           modal:
             'max-w-3xl bg-white border-2 border-gray-300 mx-auto mt-[25vh] rounded shadow-2xl max-h-[300px] overflow-y-scroll',
           suggestion:
             'text-gray-900 text-base px-4 py-2 border-b border-gray-200',
           input:
-            'w-full m-0 px-4 py-3 focus:outline-none border-b border-gray-400',
+            'w-full m-0 px-4 py-3 focus:outline-none border-b border-gray-400 sticky top-0',
           suggestionHighlighted: 'bg-gray-50',
         }}
       />
