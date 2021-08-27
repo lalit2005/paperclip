@@ -1,5 +1,5 @@
 const tagsToString = (tags: string[]) => {
-  const tagsString = tags.join(',');
+  const tagsString = tags?.join(',');
   return tagsString;
 };
 

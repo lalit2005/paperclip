@@ -35,6 +35,12 @@ export interface TrashResponse {
   boards: whiteboards[];
 }
 
+export interface WhiteboardData {
+  boardName: string;
+  boardDescription: string;
+  tags: string;
+}
+
 export interface DashboardData {
   notes: {
     id: string;

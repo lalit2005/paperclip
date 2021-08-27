@@ -9,15 +9,15 @@ import getTagsFromString from '@/lib/get-tags-from-string';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body } = req;
-  const { noteHeading, noteDescription, tags, id, emoji } = body;
+  const { boardName, noteDescription, tags, id } = body;
   const newNote = await prisma.whiteboards.update({
     where: {
       id,
     },
     data: {
-      boardName: noteHeading,
+      boardName: boardName,
       boardDescription: noteDescription,
-      tags: getTagsFromString(tags),
+      tags: tags,
     },
   });
   res.json(newNote);
