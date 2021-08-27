@@ -5,7 +5,12 @@ import useSWR from 'swr';
 const Page = () => {
   const router = useRouter();
   const { data } = useSWR<{ name: string; url: string }[]>(
-    '/api/get-cmd-palette-data'
+    '/api/get-cmd-palette-data',
+    {
+      revalidateOnFocus: false,
+      revalidateOnMount: false,
+      revalidateOnReconnect: false,
+    }
   );
   let commandPaletteData = data || [{ name: 'Loading...', url: '#' }];
   const p = (path) => router.push(path);
