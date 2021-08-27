@@ -49,6 +49,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
     select: {
       noteDescription: true,
+      noteHeading: true,
       id: true,
     },
   });
@@ -180,35 +181,51 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     url: string;
   }[] = [
     ...notes.map(({ noteHeading, id }) => ({
-      name: noteHeading,
+      name:
+        '<span style="background-color: #DBEAFE; padding: 2px; border-radius: 2px;">Note:</span> ' +
+        noteHeading,
       url: `/app/notes/${id}`,
     })),
     ...notesContent.map(({ noteHeading, note, id }) => ({
-      name: noteHeading + ': ' + note,
+      name:
+        `<span style="background-color: #DBEAFE; padding: 2px; border-radius: 2px;">${noteHeading}:</span> ` +
+        note,
       url: `/app/notes/${id}`,
     })),
-    ...notesDesc.map(({ noteDescription, id }) => ({
-      name: noteDescription,
+    ...notesDesc.map(({ noteDescription, id, noteHeading }) => ({
+      name:
+        `<span style="background-color: #DBEAFE; padding: 2px; border-radius: 2px;">${noteHeading}:</span> ` +
+        noteDescription,
       url: `/app/notes/${id}`,
     })),
     ...stickyNotes.map(({ stickyNote, id }) => ({
-      name: stickyNote,
+      name:
+        '<span style="background-color: #FEE2E2; padding: 2px; border-radius: 2px;">Sticky note:</span> ' +
+        stickyNote,
       url: `/app/sticky-notes`,
     })),
     ...boards.map(({ boardName, id }) => ({
-      name: boardName,
+      name:
+        '<span style="background-color: #FEF3C7; padding: 2px; border-radius: 2px;">Whiteboard:</span> ' +
+        boardName,
       url: `/app/whiteboard/${id}`,
     })),
     ...todos.map(({ todo, todolist }) => ({
-      name: todolist.todolistName + ': ' + todo,
+      name:
+        `<span style="background-color: #D1FAE5; padding: 2px; border-radius: 2px;">${todolist.todolistName}:</span> ` +
+        todo,
       url: `/app/todo/${todolist.id}`,
     })),
     ...todolists.map(({ id, todolistName }) => ({
-      name: todolistName,
+      name:
+        '<span style="background-color: #D1FAE5; padding: 2px; border-radius: 2px;">Todo list:</span> ' +
+        todolistName,
       url: `/app/todo/${id}`,
     })),
     ...playgrounds.map(({ playgroundName, id }) => ({
-      name: playgroundName,
+      name:
+        '<span style="background-color: #E0E7FF; padding: 2px; border-radius: 2px;">Playground:</span> ' +
+        playgroundName,
       url: `/app/playgrounds/${id}`,
     })),
   ];
