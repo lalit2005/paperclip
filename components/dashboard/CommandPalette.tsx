@@ -8,7 +8,6 @@ const Page = () => {
     '/api/get-cmd-palette-data',
     {
       revalidateOnFocus: false,
-      revalidateOnMount: false,
       revalidateOnReconnect: false,
     }
   );
