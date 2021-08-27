@@ -84,7 +84,8 @@ const Page = () => {
         hotKeys={['command+shift+p', 'ctrl+shift+p']}
         placeholder='Search for everything you have on Paperclip 🤯'
         trigger='Command Palette'
-        closeOnSelect={true}
+        closeOnSelect
+        resetInputOnOpen
         getSuggestionValue={(value) => {
           return stripHtml(value.name).result.replace(/\.\.\./g, ' ... ');
         }}
