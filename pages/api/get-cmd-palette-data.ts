@@ -94,6 +94,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       todolist: {
         select: {
           id: true,
+          todolistName: true,
         },
       },
     },
@@ -199,7 +200,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       url: `/app/whiteboard/${id}`,
     })),
     ...todos.map(({ todo, todolist }) => ({
-      name: todo,
+      name: todolist.todolistName + ': ' + todo,
       url: `/app/todo/${todolist.id}`,
     })),
     ...todolists.map(({ id, todolistName }) => ({
