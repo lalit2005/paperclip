@@ -6,11 +6,18 @@ import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Head from 'next/head';
-import { useState } from 'react';
+import { Fab } from 'react-tiny-fab';
+import { useForm } from 'react-hook-form';
 import 'react-tiny-fab/dist/styles.css';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import CommandPalette from '@/components/dashboard/CommandPalette';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { HiOutlineMenuAlt1 } from 'react-icons/hi';
+import { PlaygroundData } from 'types/types';
+import tagsToString from '@/lib/convert-tags-to-string';
+import getTagsFromString from '@/lib/get-tags-from-string';
 
 const index = () => {
   const router = useRouter();
@@ -28,35 +35,18 @@ const index = () => {
     };
   }, []);
 
-  let [isOpen, setIsOpen] = useState(false);
   const [isPlaygroundIdPublic, setIsPlaygroundIdPublic] = useState(
     playground?.isPublic
   );
-
+  let [isOpen, setIsOpen] = useState(false);
+  const [frameLoaded, setFrameLoaded] = useState(false);
   function closeModal() {
     setIsOpen(false);
   }
 
   function openModal() {
-    setIsMenuModalOpen(false);
     setIsOpen(true);
   }
-
-  const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
-  // const [html, setHtml] = useState(playground?.html);
-  // const [css, setCss] = useState(playground?.css);
-  // const [js, setJs] = useState(playground?.js);
-
-  function closeMenuModal() {
-    setIsMenuModalOpen(false);
-  }
-
-  function openMenuModal() {
-    setIsOpen(false);
-    setIsMenuModalOpen(true);
-  }
-
-  const [frameLoaded, setFrameLoaded] = useState(false);
 
   useEffect(() => {
     // @ts-ignore
@@ -79,11 +69,6 @@ const index = () => {
   useEffect(() => {
     window.onmessage = (event) => {
       if (event.data.sentToPaperclip) {
-        // setHtml(event.data.htmlCode);
-        // setCss(event.data.cssCode);
-        // setJs(event.data.jsCode);
-        // alert('Code updated');
-
         if (event.data.saveCode) {
           const updateReq = axios.post(
             `/api/playground/update-playground/?playgroundId=${router.query.playgroundId}`,
@@ -105,6 +90,31 @@ const index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<PlaygroundData>();
+
+  const updatePlaygroundData = (data: PlaygroundData) => {
+    const tags = getTagsFromString(data.tags);
+    const updatePlaygroundReq = axios.post(
+      '/api/playground/update-playground-metadata',
+      {
+        playgroundName: data.playgroundName,
+        tags: tags,
+        id: playground.id,
+      }
+    );
+    mutate({ ...playground, playgroundName: data.playgroundName, tags });
+    toast.promise(updatePlaygroundReq, {
+      loading: `Updating playground...`,
+      error: 'Error updating playground',
+      success: `Updated playground!!`,
+    });
+    closeModal();
+  };
+
   return (
     <div className='w-screen h-screen'>
       <Head>
@@ -112,6 +122,15 @@ const index = () => {
       </Head>
       {/* {JSON.stringify(note, null, 2)} */}
       <CommandPalette />
+      <div style={{ zoom: 0.8 }}>
+        <Fab
+          icon={<HiOutlineMenuAlt1 />}
+          event='click'
+          alwaysShowTitle
+          onClick={openModal}
+          text={playground?.playgroundName + "'s settings"}
+        />
+      </div>
       {playground && (
         <iframe
           src={process.env.NEXT_PUBLIC_PLAYGROUND_URL}
@@ -124,6 +143,90 @@ const index = () => {
         </iframe>
       )}
       <Toaster />
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog
+          as='div'
+          className='fixed inset-0 z-10 overflow-y-auto'
+          onClose={closeModal}>
+          <div className='min-h-screen px-4 text-center'>
+            {playground && (
+              <div>
+                <Transition.Child
+                  as={Fragment}
+                  enter='ease-out duration-300'
+                  enterFrom='opacity-0'
+                  enterTo='opacity-100'
+                  leave='ease-in duration-200'
+                  leaveFrom='opacity-100'
+                  leaveTo='opacity-0'>
+                  <Dialog.Overlay className='fixed inset-0 backdrop-filter backdrop-blur-lg' />
+                </Transition.Child>
+                <span
+                  className='inline-block h-screen align-middle'
+                  aria-hidden='true'>
+                  &#8203;
+                </span>
+                <Transition.Child
+                  as={Fragment}
+                  enter='ease-out duration-300'
+                  enterFrom='opacity-0 scale-95'
+                  enterTo='opacity-100 scale-100'
+                  leave='ease-in duration-200'
+                  leaveFrom='opacity-100 scale-100'
+                  leaveTo='opacity-0 scale-95'>
+                  <div className='inline-block max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl'>
+                    <Dialog.Title
+                      as='h3'
+                      className='text-lg font-medium leading-6 text-gray-900'>
+                      {playground?.playgroundName}&apos;s Settings
+                    </Dialog.Title>
+                    <div className='mt-4'>
+                      <form onSubmit={handleSubmit(updatePlaygroundData)}>
+                        <label className='block my-5'>
+                          <span className='mb-2 text-gray-700'>
+                            Whiteboard title
+                          </span>
+                          <input
+                            type='text'
+                            className='w-full px-2 py-1 mt-1 border border-gray-500 rounded shadow-sm focus:ring focus:ring-gray-300 focus:ring-offset-1 focus:outline-none'
+                            placeholder='My awesome note'
+                            defaultValue={playground?.playgroundName}
+                            {...register('playgroundName')}
+                          />
+                          <p className='text-sm text-red-600'>
+                            {/* @ts-ignore */}
+                            {errors.boardName && errors.boardName.message}
+                          </p>
+                        </label>
+
+                        <label className='block my-5'>
+                          <span className='mb-2 text-gray-700'>
+                            Whiteboard tags
+                          </span>
+                          <input
+                            type='text'
+                            className='w-full px-2 py-1 mt-1 border border-gray-500 rounded shadow-sm focus:ring focus:ring-gray-300 focus:ring-offset-1 focus:outline-none'
+                            placeholder='My awesome note'
+                            defaultValue={tagsToString(playground?.tags)}
+                            {...register('tags')}
+                          />
+                          <p className='text-sm text-red-600'>
+                            {/* @ts-ignore */}
+                            {errors.tags && errors.tags.message}
+                          </p>
+                        </label>
+                        <button className='inline-flex justify-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'>
+                          Save settings
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </Transition.Child>
+              </div>
+            )}
+          </div>
+        </Dialog>
+      </Transition>
     </div>
   );
 };

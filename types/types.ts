@@ -40,6 +40,10 @@ export interface WhiteboardData {
   boardDescription: string;
   tags: string;
 }
+export interface PlaygroundData {
+  playgroundName: string;
+  tags: string;
+}
 
 export interface DashboardData {
   notes: {

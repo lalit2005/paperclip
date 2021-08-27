@@ -2,7 +2,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { whiteboards } from '@prisma/client';
 import DashboardLayout from 'layouts/DashboardLayout';
 import { useRouter } from 'next/router';
-import { Fab, Action } from 'react-tiny-fab';
+import { Fab } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import useSWR, { mutate } from 'swr';
@@ -50,13 +50,7 @@ const Page = () => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<WhiteboardData>({
-    // defaultValues: {
-    //   boardName: data?.boardName || '',
-    //   boardDescription: data?.boardDescription || '',
-    //   tags: tagsToString(data?.tags) || '',
-    // },
-  });
+  } = useForm<WhiteboardData>();
 
   const updateBoard = (formData: WhiteboardData) => {
     const newTags = getTagsFromString(formData.tags);
