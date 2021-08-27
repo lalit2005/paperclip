@@ -114,7 +114,7 @@ const index = () => {
       <CommandPalette />
       {playground && (
         <iframe
-          src='https://paperclip-editor.netlify.app'
+          src={process.env.NEXT_PUBLIC_PLAYGROUND_URL}
           frameBorder='0'
           allow='clipboard-read; clipboard-write; allow-popups; allow-downloads; allow-modals;'
           id='paperclip-editor'
