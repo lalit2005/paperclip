@@ -230,7 +230,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       name:
         '<span style="background-color: #E0E7FF; padding: 2px; border-radius: 2px;">Playground:</span> ' +
         playgroundName,
-      url: `/app/playgrounds/${id}/?reload=yes`,
+      url: `/app/playgrounds/${id}`,
     })),
   ];
 

@@ -79,15 +79,26 @@ const Page = () => {
 
   return (
     <DashboardLayout className='!w-screen !-mt-10'>
-      <div style={{ zoom: 0.8 }}>
-        <Fab
-          icon={<HiOutlineMenuAlt1 />}
-          event='click'
-          alwaysShowTitle
-          onClick={openMenuModal}
-          text={data?.boardName + "'s settings"}
-        />
-      </div>
+      {data && (
+        <div style={{ zoom: 0.8 }}>
+          <Fab
+            icon={<HiOutlineMenuAlt1 />}
+            event='hover'
+            alwaysShowTitle={false}
+            onClick={openMenuModal}
+            text={data?.boardName + "'s settings"}
+            style={{
+              left: '15px',
+              bottom: '50px',
+            }}
+          />
+        </div>
+      )}
+      {(!boardLoaded || !data) && (
+        <div className='flex items-center justify-center h-full w-scree'>
+          Loading...
+        </div>
+      )}
       <iframe
         src={data?.boardUrl}
         id='excalidraw-iframe'
@@ -98,7 +109,6 @@ const Page = () => {
         onLoad={() => setBoardLoaded(true)}
         allow='clipboard-read; clipboard-write; allow-popups; allow-downloads; allow-modals;'
       />
-      {boardLoaded === false && <div className=''>Loading...</div>}
       <Transition appear show={isMenuModalOpen} as={Fragment}>
         <Dialog
           as='div'
