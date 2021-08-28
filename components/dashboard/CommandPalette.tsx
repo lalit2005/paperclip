@@ -22,6 +22,9 @@ const Page = () => {
     '/app/playgrounds',
     '/app/trash',
     // filter out urls that start with /app/playgrounds/
+    ...commandPaletteData
+      .filter((item) => !item.url.startsWith('/app/playgrounds'))
+      .map((item) => item.url),
   ]);
 
   const p = (path) => router.push(path);

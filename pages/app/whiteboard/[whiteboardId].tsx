@@ -95,7 +95,7 @@ const Page = () => {
         </div>
       )}
       {(!boardLoaded || !data) && (
-        <div className='flex items-center justify-center h-full w-scree'>
+        <div className='flex items-center mt-[30vh] justify-center h-full w-scree'>
           Loading...
         </div>
       )}

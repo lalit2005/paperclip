@@ -130,15 +130,26 @@ const index = () => {
       </Head>
       {/* {JSON.stringify(note, null, 2)} */}
       <CommandPalette />
-      <div style={{ zoom: 0.8 }}>
-        <Fab
-          icon={<HiOutlineMenuAlt1 />}
-          event='click'
-          alwaysShowTitle
-          onClick={openModal}
-          text={playground?.playgroundName + "'s settings"}
-        />
-      </div>
+      {!playground && (
+        <div className='flex items-center mt-[30vh] justify-center h-full w-scree'>
+          Loading...
+        </div>
+      )}
+      {playground && (
+        <div style={{ zoom: 0.8 }}>
+          <Fab
+            icon={<HiOutlineMenuAlt1 />}
+            event='hover'
+            alwaysShowTitle={false}
+            onClick={openModal}
+            text={playground?.playgroundName + "'s settings"}
+            style={{
+              left: '15px',
+              bottom: '15px',
+            }}
+          />
+        </div>
+      )}
       {playground && (
         <iframe
           src={process.env.NEXT_PUBLIC_PLAYGROUND_URL}
