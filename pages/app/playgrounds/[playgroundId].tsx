@@ -18,6 +18,8 @@ import { HiOutlineMenuAlt1 } from 'react-icons/hi';
 import { PlaygroundData } from 'types/types';
 import tagsToString from '@/lib/convert-tags-to-string';
 import getTagsFromString from '@/lib/get-tags-from-string';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { HiCheck } from 'react-icons/hi';
 
 const index = () => {
   const router = useRouter();
@@ -35,11 +37,11 @@ const index = () => {
     };
   }, []);
 
-  const [isPlaygroundIdPublic, setIsPlaygroundIdPublic] = useState(
-    playground?.isPublic
-  );
   let [isOpen, setIsOpen] = useState(false);
   const [frameLoaded, setFrameLoaded] = useState(false);
+  const [isPlaygroundPublic, setisPlaygroundPublic] = useState(
+    playground?.isPublic
+  );
   function closeModal() {
     setIsOpen(false);
   }
@@ -90,6 +92,10 @@ const index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (router.query.reload === 'yes') {
+    router.push(`/app/playgrounds/${router.query.playgroundId}`);
+  }
+
   const {
     register,
     formState: { errors },
@@ -104,9 +110,15 @@ const index = () => {
         playgroundName: data.playgroundName,
         tags: tags,
         id: playground.id,
+        isPlaygroundPublic: isPlaygroundPublic,
       }
     );
-    mutate({ ...playground, playgroundName: data.playgroundName, tags });
+    mutate({
+      ...playground,
+      playgroundName: data.playgroundName,
+      tags,
+      isPublic: isPlaygroundPublic,
+    });
     toast.promise(updatePlaygroundReq, {
       loading: `Updating playground...`,
       error: 'Error updating playground',
@@ -215,6 +227,42 @@ const index = () => {
                             {errors.tags && errors.tags.message}
                           </p>
                         </label>
+                        <div className='flex items-center'>
+                          <Checkbox.Root
+                            id='check'
+                            checked={isPlaygroundPublic}
+                            onCheckedChange={(isChecked) => {
+                              // @ts-ignore
+                              setisPlaygroundPublic(isChecked);
+                            }}
+                            className='inline-flex items-center justify-center w-5 h-5 mr-2 text-gray-600 border border-gray-400 rounded shadow focus:ring focus:ring-gray-600 group checked:bg-gray-500 checked:text-gray-50'>
+                            <Checkbox.Indicator>
+                              <HiCheck />
+                            </Checkbox.Indicator>
+                          </Checkbox.Root>
+                          <label htmlFor='check'>
+                            Make {playground?.playgroundName} public?
+                          </label>
+                        </div>
+                        <div className='ml-5 text-base text-gray-600'>
+                          {playground?.isPublic ? (
+                            <div>
+                              Your playground is currently public. View your
+                              playground at{' '}
+                              <a
+                                className='text-blue-500 hover:underline'
+                                rel='noopener noreferrer'
+                                target='_blank'
+                                href={`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/c/${playground?.publicId}`}>{`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/p/${playground?.publicId}`}</a>
+                            </div>
+                          ) : (
+                            <div>
+                              You can convert your playground to a public
+                              playground by selecting the checkbox above and hit
+                              that Save button below.🤯
+                            </div>
+                          )}
+                        </div>
                         <button className='inline-flex justify-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'>
                           Save settings
                         </button>

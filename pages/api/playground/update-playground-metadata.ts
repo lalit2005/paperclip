@@ -5,7 +5,7 @@ import getTagsFromString from '@/lib/get-tags-from-string';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { body } = req;
-  const { playgroundName, tags, id } = body;
+  const { playgroundName, tags, id, isPlaygroundPublic } = body;
   const newNote = await prisma.codePlayground.update({
     where: {
       id,
@@ -13,6 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     data: {
       playgroundName: playgroundName,
       tags: tags,
+      isPublic: isPlaygroundPublic,
     },
   });
   res.json(newNote);
