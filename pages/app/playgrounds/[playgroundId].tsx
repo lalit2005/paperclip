@@ -92,6 +92,10 @@ const index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (router.query.reload === 'yes') {
+    router.push(`/app/playgrounds/${router.query.playgroundId}`);
+  }
+
   const {
     register,
     formState: { errors },
