@@ -92,9 +92,11 @@ const index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (router.query.reload === 'yes') {
-    router.push(`/app/playgrounds/${router.query.playgroundId}`);
-  }
+  useEffect(() => {
+    if (router.query.reload === 'yes') {
+      router.push(`/app/playgrounds/${router.query.playgroundId}`);
+    }
+  }, [router]);
 
   const {
     register,
@@ -264,7 +266,7 @@ const index = () => {
                                 className='text-blue-500 hover:underline'
                                 rel='noopener noreferrer'
                                 target='_blank'
-                                href={`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/c/${playground?.publicId}`}>{`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/p/${playground?.publicId}`}</a>
+                                href={`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/c/${playground?.publicId}`}>{`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/c/${playground?.publicId}`}</a>
                             </div>
                           ) : (
                             <div>
