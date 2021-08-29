@@ -5,9 +5,7 @@ const usePrefetch = (paths: string[]) => {
   const router = useRouter();
   useEffect(() => {
     paths.forEach((path) => {
-      if (!path.includes('app/playground/')) {
-        router.prefetch(path);
-      }
+      router.prefetch(path);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
