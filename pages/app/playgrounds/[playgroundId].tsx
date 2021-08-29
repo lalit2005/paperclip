@@ -104,9 +104,9 @@ const index = () => {
     handleSubmit,
   } = useForm<PlaygroundData>();
 
-  const updatePlaygroundData = (data: PlaygroundData) => {
+  const updatePlaygroundData = async (data: PlaygroundData) => {
     const tags = getTagsFromString(data.tags);
-    const updatePlaygroundReq = axios.post(
+    const updatePlaygroundReq = await axios.post(
       '/api/playground/update-playground-metadata',
       {
         playgroundName: data.playgroundName,
@@ -121,11 +121,7 @@ const index = () => {
       tags,
       isPublic: isPlaygroundPublic,
     });
-    toast.promise(updatePlaygroundReq, {
-      loading: `Updating playground...`,
-      error: 'Error updating playground',
-      success: `Updated playground!!`,
-    });
+    toast.success(`Updated playground!!`);
     closeModal();
   };
 
