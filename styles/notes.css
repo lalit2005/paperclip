@@ -133,10 +133,14 @@
 
 .ProseMirror ul {
   list-style-type: disc;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .ProseMirror ol {
   list-style-type: decimal;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .ProseMirror ul li,
