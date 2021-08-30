@@ -2,7 +2,7 @@ import { Editor } from '@tiptap/react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const saveNote = (noteId: string, editor: Editor) => {
+const saveNote = (noteId: string, editor: Editor, mutate?: any) => {
   const updateNote = axios
     .post('/api/notes/update-note', {
       id: noteId,
@@ -10,6 +10,7 @@ const saveNote = (noteId: string, editor: Editor) => {
     })
     .then(() => {
       console.log('success');
+      mutate();
     })
     .catch((error) => {
       console.log(error);
