@@ -18,6 +18,7 @@ export default function Home() {
 
   return (
     <div>
+      <Nav />
       <iframe
         src='https://paperclip.pagely.site'
         frameBorder='0'

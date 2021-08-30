@@ -74,6 +74,12 @@ const Page = () => {
         p('/app/trash');
       },
     },
+    {
+      name: 'Logout',
+      command() {
+        p('/api/auth/logout');
+      },
+    },
     ...commandPaletteData?.map((item) => ({
       name: item?.name,
       command() {
