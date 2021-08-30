@@ -21,6 +21,7 @@ import * as Checkbox from '@radix-ui/react-checkbox';
 import { HiCheck } from 'react-icons/hi';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import html2md from 'html-to-md';
 
 const index = () => {
   const router = useRouter();
@@ -165,14 +166,14 @@ const index = () => {
               leave='ease-in duration-200'
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'>
-              <div className='inline-block max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl'>
+              <div className='inline-block max-w-2xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white rounded shadow-xl'>
                 <Dialog.Title
                   as='h3'
                   className='text-lg font-medium leading-6 text-gray-900'>
                   {note?.noteHeading}&apos;s Settings
                 </Dialog.Title>
                 <div className='mt-2'>
-                  <div className='flex items-center'>
+                  <div className='flex items-center mb-2'>
                     <Checkbox.Root
                       id='check'
                       checked={isNotePublic}
@@ -208,6 +209,55 @@ const index = () => {
                       </div>
                     )}
                   </div>
+                </div>
+                <div className='my-4'>
+                  <button
+                    className='px-2 py-1 mr-2 bg-gray-100 border-2 border-gray-400 rounded shadow'
+                    onClick={() => {
+                      // export note to md
+                      const md = html2md(note?.note);
+
+                      // download md
+                      const element = document.createElement('a');
+                      element.setAttribute(
+                        'href',
+                        'data:text/plain;charset=utf-8,' +
+                          encodeURIComponent(md)
+                      );
+                      element.setAttribute(
+                        'download',
+                        `${note?.noteHeading}.md`
+                      );
+                      element.style.display = 'none';
+                      document.body.appendChild(element);
+                      element.click();
+                      document.body.removeChild(element);
+                    }}>
+                    Export as Markdown
+                  </button>
+                  <button
+                    className='px-2 py-1 mr-2 bg-gray-100 border-2 border-gray-400 rounded shadow'
+                    onClick={() => {
+                      // export note as html
+                      const html = note?.note;
+                      // download html
+                      const element = document.createElement('a');
+                      element.setAttribute(
+                        'href',
+                        'data:text/plain;charset=utf-8,' +
+                          encodeURIComponent(html)
+                      );
+                      element.setAttribute(
+                        'download',
+                        `${note?.noteHeading}.html`
+                      );
+                      element.style.display = 'none';
+                      document.body.appendChild(element);
+                      element.click();
+                      document.body.removeChild(element);
+                    }}>
+                    Export as HTML (without any CSS)
+                  </button>
                 </div>
                 <div className='mt-4'>
                   <button
