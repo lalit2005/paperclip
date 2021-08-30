@@ -24,7 +24,7 @@ const Page = () => {
     ...commandPaletteData.map(({ url }) => url),
   ]);
 
-  const p = (path) => router.push(path);
+  const p = (path: string) => router.push(path);
   const commands = [
     {
       name: 'Home',
@@ -45,15 +45,21 @@ const Page = () => {
       },
     },
     {
-      name: 'Todolists',
-      command() {
-        p('/app/todo');
-      },
-    },
-    {
       name: 'Whiteboards',
       command() {
         p('/app/whiteboard');
+      },
+    },
+    {
+      name: 'Pomorodo timer',
+      command() {
+        p('/app/pomorodo');
+      },
+    },
+    {
+      name: 'Todolists',
+      command() {
+        p('/app/todo');
       },
     },
     {

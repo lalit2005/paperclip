@@ -51,6 +51,7 @@
     "react": "17.0.2",
     "react-command-palette": "^0.16.2",
     "react-contenteditable": "^3.3.5",
+    "react-countdown-circle-timer": "^2.5.4",
     "react-dom": "17.0.2",
     "react-draggable": "^4.4.4",
     "react-dropzone": "^11.3.4",

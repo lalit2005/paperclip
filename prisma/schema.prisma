@@ -76,3 +76,10 @@ model CodePlayground {
   tags           String[] @db.VarChar
   inTrash        Boolean  @default(false)
 }
+
+model PomorodoTimer {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  userId    String   @unique @db.VarChar
+  points    Int      @db.SmallInt
+}

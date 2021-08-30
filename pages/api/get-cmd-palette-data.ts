@@ -230,6 +230,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       name:
         '<span style="background-color: #E0E7FF; padding: 2px; border-radius: 2px;">Playground:</span> ' +
         playgroundName,
+      // playground proxy to avoid prefetching the playground because editor.contentWindow.postMessage does not work
       url: `/app/playground-proxy/${id}/?reload=yes`,
     })),
   ];
