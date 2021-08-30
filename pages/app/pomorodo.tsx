@@ -48,7 +48,7 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
                 setIsBreakTimerActive(true);
               }}
               rotation='counterclockwise'
-              duration={25}
+              duration={25 * 60}
               size={230}
               colors={[['#50E3C2', 1]]}>
               {({ remainingTime }) => {
@@ -87,7 +87,7 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
                 );
               }}
               rotation='counterclockwise'
-              duration={5}
+              duration={5 * 60}
               size={230}
               colors={[['#3291FF', 1]]}>
               {({ remainingTime }) => {
