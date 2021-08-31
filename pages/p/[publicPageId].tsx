@@ -34,10 +34,9 @@ const Page = ({
           description:
             noteDescription ||
             'Paperclip is more than just a note taking app. It is the only productivity tool you will ever need.',
-          // TODO: Change OG Image URL
           images: [
             {
-              url: 'https://staticshield.vercel.app/ogimage.png',
+              url: 'https://usepaperclip.vercel.app/ogimage.png',
             },
           ],
           site_name: noteHeading || 'Paperclip',
