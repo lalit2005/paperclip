@@ -4,7 +4,7 @@ const generateEmbedUrl = (url: string) => {
     return `https://www.youtube-nocookie.com/embed/${params.get('v')}`;
   }
 
-  if (new URL(url).hostname === 'www.twitter.com') {
+  if (new URL(url).hostname === 'twitter.com' || 'www.twitter.com') {
     return `https://twitframe.com/show?url=${url}`;
   }
 
