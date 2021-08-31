@@ -4,9 +4,14 @@ const generateEmbedUrl = (url: string) => {
     return `https://www.youtube-nocookie.com/embed/${params.get('v')}`;
   }
 
-  if (new URL(url).hostname === 'twitter.com' || 'www.twitter.com') {
+  if (new URL(url).hostname === 'www.twitter.com') {
     return `https://twitframe.com/show?url=${url}`;
   }
+
+  if (new URL(url).hostname === 'www.loom.com') {
+    return `https://www.loom.com/embed/${new URL(url).pathname.split('/')[2]}`;
+  }
+
   return url;
 };
 
