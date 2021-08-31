@@ -211,4 +211,8 @@ const links = [
     path: '/app/playgrounds',
     title: 'HTML, CSS, JS Playground',
   },
+  {
+    path: '/app/pomorodo',
+    title: 'Pomorodo',
+  },
 ];
