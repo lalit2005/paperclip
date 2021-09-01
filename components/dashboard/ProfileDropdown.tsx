@@ -38,7 +38,7 @@ const ProfileDropdown = () => {
                       alt={name}
                     />
                     <Avatar.Fallback className='p-2 uppercase bg-blue-600 rounded-full text-gray-50'>
-                      {name.substr(0, 2)}
+                      {name?.substr(0, 2)}
                     </Avatar.Fallback>
                   </Avatar.Root>
                 </div>
@@ -57,7 +57,7 @@ const ProfileDropdown = () => {
                   side='left'
                   sideOffset={5}>
                   {/* <Tooltip.Arrow className='shadow-lg' /> */}
-                  <p className='capitalize'>{name || email.split('@')[0]}</p>
+                  <p className='capitalize'>{name || email?.split('@')[0]}</p>
                 </Tooltip.Content>
               </Transition>
             </Tooltip.Root>
@@ -75,7 +75,7 @@ const ProfileDropdown = () => {
             <div className='px-1 py-1'>
               <Menu.Item disabled>
                 <div className='p-2 text-base'>
-                  <p>Hello {name || email.split('@')[0]} 👋🏻</p>
+                  <p>Hello {name || email?.split('@')[0]} 👋🏻</p>
                   <p className='text-xs text-gray-500'>{email}</p>
                 </div>
               </Menu.Item>
