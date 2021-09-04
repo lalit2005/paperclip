@@ -371,7 +371,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
             {ytVideo.displayVideo ? <HiOutlineX /> : <FiYoutube />}
           </button>
         </MenuBarTooltip>
-        <MenuBarTooltip text='Save note. You can also press Cmd/Ctrl + S to save.'>
+        {/* <MenuBarTooltip text='Save note. You can also press Cmd/Ctrl + S to save.'>
           <div
             onClick={() => {
               saveNote(noteId, editor);
@@ -379,7 +379,7 @@ const MenuBar: React.FC<{ editor: Editor; noteId: string }> = ({
             className='px-2 py-1 text-white bg-gray-600 rounded shadow hover:text-gray-100 hover:!bg-gray-500'>
             Save
           </div>
-        </MenuBarTooltip>
+        </MenuBarTooltip> */}
       </div>
       {ytVideo.displayVideo && (
         <Portal.Root>
