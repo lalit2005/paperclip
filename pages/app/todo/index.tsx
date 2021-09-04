@@ -132,13 +132,13 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
                     <input
                       type='text'
                       className='w-full px-2 py-1 mt-1 border border-gray-500 rounded shadow-sm focus:ring focus:ring-gray-300 focus:ring-offset-1 focus:outline-none'
-                      placeholder='My awesome todolist'
+                      placeholder='Todolist name'
                       {...register('todolistName')}
                     />
                     <input
                       type='text'
                       className='w-full px-2 py-1 my-5 border border-gray-500 rounded shadow-sm focus:ring focus:ring-gray-300 focus:ring-offset-1 focus:outline-none'
-                      placeholder='My awesome todolist'
+                      placeholder='Todolist description'
                       {...register('todolistDescription')}
                     />
                     <div>
