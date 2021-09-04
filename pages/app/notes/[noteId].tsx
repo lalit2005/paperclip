@@ -13,7 +13,7 @@ import EditPopover from '@/components/note/EditPopover';
 import { HiOutlineCog, HiOutlineMenuAlt1 } from 'react-icons/hi';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import { Fab, Action } from 'react-tiny-fab';
+import { Fab } from 'react-tiny-fab';
 import 'react-tiny-fab/dist/styles.css';
 import Link from 'next/link';
 import MenuBarTooltip from '@/components/note/Tooltip';

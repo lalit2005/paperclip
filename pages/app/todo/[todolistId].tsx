@@ -13,6 +13,7 @@ import DoneTodos from '@/components/todo/DoneTodos';
 import clsx from 'clsx';
 import * as Popover from '@radix-ui/react-popover';
 import { FiInfo } from 'react-icons/fi';
+import EditPopover from '@/components/todo/EditPopover';
 
 const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
   const router = useRouter();
@@ -40,6 +41,7 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
       <Head>
         <title>{user.name || user.nickname}&apos;s Todolists</title>
       </Head>
+      {todolist && <EditPopover mutate={mutate} todolist={todolist} />}
       <DashboardLayout>
         <Link href='/app/todo'>
           <a className='block mb-3 text-gray-500 font-base'>{'<-'} Go Back</a>
