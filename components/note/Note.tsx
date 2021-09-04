@@ -18,6 +18,8 @@ import TableRow from '@tiptap/extension-table-row';
 import TableCell from '@tiptap/extension-table-cell';
 import TableHeader from '@tiptap/extension-table-header';
 
+import debounce from 'debounce';
+
 const Note: React.FC<{
   noteContent: string;
   noteId: string;
@@ -76,6 +78,10 @@ const Note: React.FC<{
     ],
     autofocus: true,
     content: noteContent,
+    onUpdate: debounce(({ editor }) => {
+      // @ts-ignore
+      return saveNote(noteId, editor, mutate);
+    }, 3000),
   });
 
   return (
