@@ -15,11 +15,11 @@ const saveNote = (noteId: string, editor: Editor, mutate?: any) => {
     .catch((error) => {
       console.log(error);
     });
-  toast.promise(updateNote, {
-    error: 'Error updating note',
-    success: 'Note updated',
-    loading: 'Updating note...',
-  });
+  // toast.promise(updateNote, {
+  //   error: 'Error updating note',
+  //   success: 'Note updated',
+  //   loading: 'Updating note...',
+  // });
 };
 
 export default saveNote;
