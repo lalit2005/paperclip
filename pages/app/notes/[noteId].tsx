@@ -22,6 +22,7 @@ import { HiCheck } from 'react-icons/hi';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import html2md from 'html-to-md';
+import Script from 'next/script';
 
 const index = () => {
   const router = useRouter();
@@ -34,7 +35,6 @@ const index = () => {
       return '';
     };
   }, []);
-
   let [isOpen, setIsOpen] = useState(false);
   const [isNotePublic, setIsNotePublic] = useState(note?.isPublic);
 
@@ -70,6 +70,10 @@ const index = () => {
           type='image/x-icon'
         />
       </Head>
+      <Script
+        src='https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js'
+        strategy='lazyOnload'
+      />
       {!isAnyModalOpen && (
         <div style={{ zoom: '0.8' }}>
           <Fab
@@ -212,7 +216,7 @@ const index = () => {
                 </div>
                 <div className='my-4'>
                   <button
-                    className='px-2 py-1 mr-2 bg-gray-100 border-2 border-gray-400 rounded shadow'
+                    className='px-2 py-1 mr-2 border border-gray-300 rounded shadow'
                     onClick={() => {
                       // export note to md
                       const md = html2md(note?.note);
@@ -236,7 +240,7 @@ const index = () => {
                     Export as Markdown
                   </button>
                   <button
-                    className='px-2 py-1 mr-2 bg-gray-100 border-2 border-gray-400 rounded shadow'
+                    className='px-2 py-1 mr-2 border border-gray-300 rounded shadow'
                     onClick={() => {
                       // export note as html
                       const html = note?.note;
@@ -257,6 +261,18 @@ const index = () => {
                       document.body.removeChild(element);
                     }}>
                     Export as HTML (without any CSS)
+                  </button>
+                  <button
+                    className='px-2 py-1 mr-2 border border-gray-300 rounded shadow'
+                    onClick={() => {
+                      window
+                        // @ts-ignore
+                        ?.html2pdf(document?.querySelector('.ProseMirror'), {
+                          margin: [20, 10],
+                          filename: `${note?.noteHeading}.pdf`,
+                        });
+                    }}>
+                    Export as PDF
                   </button>
                 </div>
                 <div className='mt-4'>
