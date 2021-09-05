@@ -16,8 +16,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['Inter', 'monospace'],
-      mono: ['Menlo', 'sans-serif'],
+      sans: ['Inter', 'sans-serif'],
+      mono: ['Menlo', 'monospace'],
     },
   },
   variants: {
