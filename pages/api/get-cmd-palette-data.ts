@@ -6,6 +6,7 @@ import {
   UserProfile,
 } from '@auth0/nextjs-auth0';
 import { stripHtml } from 'string-strip-html';
+import truncate from 'lodash.truncate';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
@@ -205,7 +206,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ...stickyNotes?.map(({ stickyNote, id }) => ({
       name:
         '<span style="background-color: #FEE2E2; padding: 2px; border-radius: 2px;">Sticky note:</span> ' +
-        stickyNote,
+        truncate(stickyNote, { length: 200 }),
       url: `/app/sticky-notes`,
     })),
     ...boards?.map(({ boardName, id }) => ({
