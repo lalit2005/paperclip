@@ -91,7 +91,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
             {results?.map((playground) => (
               <PlaygroundCard
                 playground={playground}
-                key={playground.id || playground.item.id}
+                key={playground?.id || playground?.item?.id}
               />
             )) || (
               <Skeleton
