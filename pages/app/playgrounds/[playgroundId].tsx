@@ -212,11 +212,18 @@ const index = () => {
                             className='w-full px-2 py-1 mt-1 border border-gray-500 rounded shadow-sm focus:ring focus:ring-gray-300 focus:ring-offset-1 focus:outline-none'
                             placeholder='My awesome note'
                             defaultValue={playground?.playgroundName}
-                            {...register('playgroundName')}
+                            {...register('playgroundName', {
+                              required: {
+                                value: true,
+                                message:
+                                  'Please enter a title for your playground',
+                              },
+                              minLength: 1,
+                            })}
                           />
                           <p className='text-sm text-red-600'>
-                            {/* @ts-ignore */}
-                            {errors.boardName && errors.boardName.message}
+                            {errors.playgroundName &&
+                              errors.playgroundName.message}
                           </p>
                         </label>
 
@@ -268,11 +275,12 @@ const index = () => {
                             <div>
                               You can convert your playground to a public
                               playground by selecting the checkbox above and hit
-                              that Save button below.🤯
+                              that Save button below. You can embed it anywhere
+                              too!
                             </div>
                           )}
                         </div>
-                        <button className='inline-flex justify-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'>
+                        <button className='inline-flex justify-center px-4 py-2 mt-5 mb-2 mr-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'>
                           Save settings
                         </button>
                       </form>
