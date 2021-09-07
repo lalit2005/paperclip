@@ -51,7 +51,7 @@ const index: React.FC<{ user: UserProfile }> = ({ user }) => {
   return (
     <div>
       <Head>
-        <title>{user.name || user.nickname}&apos;s Notes</title>
+        <title>{user.name || user.nickname}&apos;s Code playgrounds</title>
       </Head>
       <DashboardLayout>
         <h1 className='mb-16 text-4xl font-extrabold text-center'>
