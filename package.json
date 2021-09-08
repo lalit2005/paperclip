@@ -64,7 +64,7 @@
     "react-loading-skeleton": "^2.2.0",
     "react-tiny-fab": "^4.0.3",
     "string-strip-html": "^8.3.0",
-    "swr": "^0.5.6",
+    "swr": "^1.0.0",
     "zod": "^3.7.1"
   },
   "devDependencies": {
