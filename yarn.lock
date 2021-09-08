@@ -1005,10 +1005,10 @@
   resolved "https://registry.yarnpkg.com/@types/lowlight/-/lowlight-0.0.3.tgz#433b03dd63894dde17860063f4c90a688431194b"
   integrity sha512-R83q/yPX2nIlo9D3WtSjyUDd57t8s+GVLaL8YIv3k7zMMWpYpOXqjJgrWp80qXUJB/a1t76nTyBpxrv0JNYaEg==
 
-"@types/node@*", "@types/node@^16.4.10":
-  version "16.4.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.4.10.tgz#e57e2a54fc6da58da94b3571b1cb456d39f88597"
-  integrity sha512-TmVHsm43br64js9BqHWqiDZA+xMtbUpI1MBIA0EyiBmoV9pcEYFOSdj5fr6enZNfh4fChh+AGOLIzGwJnkshyQ==
+"@types/node@*", "@types/node@^16.7.13":
+  version "16.7.13"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.13.tgz#86fae356b03b5a12f2506c6cf6cd9287b205973f"
+  integrity sha512-pLUPDn+YG3FYEt/pHI74HmnJOWzeR+tOIQzUx93pi9M7D8OE7PSLr97HboXwk5F+JS+TLtWuzCOW97AHjmOXXA==
 
 "@types/orderedmap@*":
   version "1.0.0"
