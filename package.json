@@ -14,7 +14,7 @@
     "@excalidraw/excalidraw": "^0.9.0",
     "@headlessui/react": "^1.4.0",
     "@hookform/resolvers": "^2.7.1",
-    "@prisma/client": "2.28.0",
+    "@prisma/client": "3.0.1",
     "@radix-ui/react-avatar": "^0.0.15",
     "@radix-ui/react-checkbox": "^0.0.17",
     "@radix-ui/react-popover": "^0.0.20",
