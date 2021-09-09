@@ -30,7 +30,7 @@ const SearchInput = (props) => {
   });
 
   const createNewBoard = (data: newBoardValues) => {
-    alert(JSON.stringify(data, null, 2));
+    // alert(JSON.stringify(data, null, 2));
     const createNewBoard = axios
       .post('/api/whiteboard/create-board', {
         ...data,
