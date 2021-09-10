@@ -880,10 +880,10 @@
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
-"@tiptap/extension-paragraph@^2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@tiptap/extension-paragraph/-/extension-paragraph-2.0.0-beta.16.tgz#2112f548e4d2c1a104f8e1daa60e45e7c324894e"
-  integrity sha512-Sj8TXrt9W3ZjK6TQYle9VDgV/bUVnQsXEA7+iQ/gtWST0F1UMFXIhi4hgd9n4gLUtsY/PsmYOEMMbTTAwlERgw==
+"@tiptap/extension-paragraph@^2.0.0-beta.16", "@tiptap/extension-paragraph@^2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-paragraph/-/extension-paragraph-2.0.0-beta.17.tgz#f8f0263359b95dec9c10078699697908568d9be9"
+  integrity sha512-qCQVCf9c2hgaeIdfy22PaoZyW5Vare/1aGkOEAaZma5RjrUbV9hrRKwoW9LsDjnh1EN1fIeKdg02yEhnHWtG8A==
 
 "@tiptap/extension-placeholder@2.0.0-beta.26":
   version "2.0.0-beta.26"
