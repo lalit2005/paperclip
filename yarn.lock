@@ -1005,10 +1005,10 @@
     prosemirror-tables "^1.1.1"
     prosemirror-view "^1.20.0"
 
-"@tiptap/extension-task-item@^2.0.0-beta.17":
-  version "2.0.0-beta.17"
-  resolved "https://registry.yarnpkg.com/@tiptap/extension-task-item/-/extension-task-item-2.0.0-beta.17.tgz#e4e010c321b8f9aa5f49847c48e4e3a0695a47a9"
-  integrity sha512-uV5f9rWo9NAZ+oyt/mkhFEZfcngr92pVL2sn291RiT0qw9NRvdIQ6PLH24il9zu+jjeWmh1cJnBuQos+MQqjyg==
+"@tiptap/extension-task-item@^2.0.0-beta.18":
+  version "2.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-task-item/-/extension-task-item-2.0.0-beta.18.tgz#f109c15c997038d8099b64dba4cfc4e219b426e4"
+  integrity sha512-SmXWdfpDFIBGxWH4Xhb9d6jRSK7jJqsw0GqC5KAtIQ9gNvAQS1j5FqAtWfxlb8FkunIfV6MNnxDP2ZgbKvaEug==
   dependencies:
     prosemirror-inputrules "^1.1.3"
 
