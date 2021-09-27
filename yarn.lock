@@ -832,13 +832,13 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-bold/-/extension-bold-2.0.0-beta.15.tgz#cf9ddb3fc316be9707753ad4e497bfb8a3ebb0c2"
   integrity sha512-jKyV6iiwhxwa0+7uuKD74jNDVNLNOS1GmU14MgaA95pY5e1fyaRBPPX8Gtt89niz2CLOY711AV17RPZTe/e60w==
 
-"@tiptap/extension-bubble-menu@^2.0.0-beta.25":
-  version "2.0.0-beta.25"
-  resolved "https://registry.yarnpkg.com/@tiptap/extension-bubble-menu/-/extension-bubble-menu-2.0.0-beta.25.tgz#6be1496fe7477901d0b3e62ba9e3b6dfda8b547c"
-  integrity sha512-OZnhJ/n7DUKmXrj791CUC/LRQRerCxuZJY5pT0Vy4QV0q0QH66yTrlCokkjrFPrXyTtWD6Mc04teRKctwxi6DA==
+"@tiptap/extension-bubble-menu@^2.0.0-beta.35":
+  version "2.0.0-beta.35"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-bubble-menu/-/extension-bubble-menu-2.0.0-beta.35.tgz#11ea379b9e9044c96ddbcdc457155b6fd4ee81e7"
+  integrity sha512-9Cu7X2HvTCLMDOZNZLM0gL/fXHsQOUiWtVoDTfYGizo2sztFcgg7IV+FYvquerAzwfZvUX3EDdYBnRbhVXRobg==
   dependencies:
     prosemirror-state "^1.3.4"
-    prosemirror-view "^1.18.11"
+    prosemirror-view "^1.20.1"
     tippy.js "^6.3.1"
 
 "@tiptap/extension-bullet-list@^2.0.0-beta.15":
@@ -885,13 +885,13 @@
     "@types/prosemirror-dropcursor" "^1.0.2"
     prosemirror-dropcursor "^1.3.5"
 
-"@tiptap/extension-floating-menu@^2.0.0-beta.19":
-  version "2.0.0-beta.19"
-  resolved "https://registry.yarnpkg.com/@tiptap/extension-floating-menu/-/extension-floating-menu-2.0.0-beta.19.tgz#57d229a0bd7cd9a61469be361c527c87123355cb"
-  integrity sha512-SwUFE8Gwsb9B7uP24n/cZUY6fSez5umvaHgsz8TIupgfYsCePMqcwYaMGxJE5iGTE/Zi6vf50b3Xfq87oibO3g==
+"@tiptap/extension-floating-menu@^2.0.0-beta.29":
+  version "2.0.0-beta.29"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-floating-menu/-/extension-floating-menu-2.0.0-beta.29.tgz#a3d27a859be0f21334a37f9213bcd49e2f80241c"
+  integrity sha512-PwXdDqGwbm4sUlm+FTs69xwPl99r1HQ8iye9XLuQMkjMJv7W4fByyStqzSMiocYcdGF3rWA+txQRen5/qo9O7Q==
   dependencies:
     prosemirror-state "^1.3.4"
-    prosemirror-view "^1.18.11"
+    prosemirror-view "^1.20.1"
     tippy.js "^6.3.1"
 
 "@tiptap/extension-gapcursor@^2.0.0-beta.19":
@@ -1022,14 +1022,14 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text/-/extension-text-2.0.0-beta.13.tgz#da0af8d9a3f149d20076e15d88c6af21fb6d940f"
   integrity sha512-0EtAwuRldCAoFaL/iXgkRepEeOd55rPg5N4FQUN1xTwZT7PDofukP0DG/2jff/Uj17x4uTaJAa9qlFWuNnDvjw==
 
-"@tiptap/react@2.0.0-beta.55":
-  version "2.0.0-beta.55"
-  resolved "https://registry.yarnpkg.com/@tiptap/react/-/react-2.0.0-beta.55.tgz#01a57b75d6ddb37e0bebb7845ad6b647a7fff6f5"
-  integrity sha512-lYP6O7DvlMcv9zfyOo6uxsBCBD4sIC3YwfEwX83K1jLs3lC8TNkwy/3+JWcM5ssVXaxRmyJ+U2b+WM0md6SlLw==
+"@tiptap/react@2.0.0-beta.72":
+  version "2.0.0-beta.72"
+  resolved "https://registry.yarnpkg.com/@tiptap/react/-/react-2.0.0-beta.72.tgz#859a1c57acf0c12560c47132e67194a78f4b46ba"
+  integrity sha512-klWkWV0zDcRcIxNmqQsWUK6giP0TvTNFKq09IKjHQ3qP92wIlZBuewaTYJCrDK8xNmetUF5sPkyB3Jm7VWwaAg==
   dependencies:
-    "@tiptap/extension-bubble-menu" "^2.0.0-beta.25"
-    "@tiptap/extension-floating-menu" "^2.0.0-beta.19"
-    prosemirror-view "^1.18.11"
+    "@tiptap/extension-bubble-menu" "^2.0.0-beta.35"
+    "@tiptap/extension-floating-menu" "^2.0.0-beta.29"
+    prosemirror-view "^1.20.1"
 
 "@tiptap/starter-kit@2.0.0-beta.89":
   version "2.0.0-beta.89"
@@ -4247,7 +4247,7 @@ prosemirror-transform@^1.0.0, prosemirror-transform@^1.1.0, prosemirror-transfor
   dependencies:
     prosemirror-model "^1.0.0"
 
-prosemirror-view@1.16.5, prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.13.3, prosemirror-view@^1.18.11, prosemirror-view@^1.20.0:
+prosemirror-view@1.16.5, prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.13.3, prosemirror-view@^1.18.11, prosemirror-view@^1.20.0, prosemirror-view@^1.20.1:
   version "1.16.5"
   resolved "https://registry.yarnpkg.com/prosemirror-view/-/prosemirror-view-1.16.5.tgz#1a4646832e16c1cf116b54b9becf4b0663821125"
   integrity sha512-cFEjzhqQZIRDALEgQt8CNn+Qb+BUOvNxxaljaWoCbAYlsWGMiNNQG06I1MwbRNDcwnZKeFmOGpLEB4eorYYGig==
