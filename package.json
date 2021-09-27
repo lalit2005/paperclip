@@ -65,7 +65,7 @@
     "react-tiny-fab": "^4.0.3",
     "string-strip-html": "^8.3.0",
     "swr": "^0.5.6",
-    "zod": "^3.7.1"
+    "zod": "^3.9.1"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.0",
