@@ -22,7 +22,7 @@
     "@radix-ui/react-radio-group": "^0.0.19",
     "@radix-ui/react-tooltip": "^0.1.0",
     "@tailwindcss/typography": "^0.4.1",
-    "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.33",
+    "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.39",
     "@tiptap/extension-document": "^2.0.0-beta.13",
     "@tiptap/extension-highlight": "2.0.0-beta.18",
     "@tiptap/extension-image": "2.0.0-beta.15",
