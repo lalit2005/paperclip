@@ -989,10 +989,10 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-table-cell/-/extension-table-cell-2.0.0-beta.14.tgz#a164a82ba6e15ba95673a9a9d9cbd68fdaf0362b"
   integrity sha512-VoZ8SF8urU1/I3XnjDez2pbDO0h4cow+o8Xi6mhkMTXbxr212T674W7lu5DVMJ4Y1NF1eLe9eJ9kGJE43cA0+Q==
 
-"@tiptap/extension-table-header@^2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@tiptap/extension-table-header/-/extension-table-header-2.0.0-beta.16.tgz#7c200d8c64111b6d84f23888752b421b89c2428e"
-  integrity sha512-L/r+ez4G7ZlninS4MwK4tYoVuA6bMMCz7OLvHGBmp24vZm7OA3qyUP4+GGtOXtdhv3aydeBis03gSrrB50aRWw==
+"@tiptap/extension-table-header@^2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-table-header/-/extension-table-header-2.0.0-beta.17.tgz#1bd008825146e6f5fc607a1d8682b5d47ba08f25"
+  integrity sha512-HctO608QQEPe29QBtxXcDfBKfv+m9u2jBJ5AYpo7HjYGfUYRxv5uQpGXX3RW/c50+AhyTF0skF6Td1jiZcEPPw==
 
 "@tiptap/extension-table-row@^2.0.0-beta.14":
   version "2.0.0-beta.14"
