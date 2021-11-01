@@ -4457,10 +4457,10 @@ react-dropzone@^11.3.4:
     file-selector "^0.2.2"
     prop-types "^15.7.2"
 
-react-expanding-textarea@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/react-expanding-textarea/-/react-expanding-textarea-2.3.1.tgz#1aa99509be216efc86e74ec2d9eb5c65bd8470d1"
-  integrity sha512-nomhZjSPuia2hM8E9LKr4XsphXPDz968gHCWXaHNYjPLUQr12rATP0ghxqF7Vt+rcsUJPkFj+oOfc6BQIMAaWA==
+react-expanding-textarea@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/react-expanding-textarea/-/react-expanding-textarea-2.3.3.tgz#3ae5051f4275e2a5a04510c2c338e2581680c502"
+  integrity sha512-nLg4sbCej8wRHFry4yciju4EOSV/80S5onr+alNK0XVGR1X3z2OxjSYfSG9KvH/4hGXfq7OS3735kDe9fLUy9g==
   dependencies:
     react-with-forwarded-ref "^0.3.3"
     tslib "^2.0.3"
