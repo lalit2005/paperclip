@@ -101,7 +101,7 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
                   <FiInfo className='w-6 h-6 p-1 text-gray-500 rounded hover:bg-gray-100' />
                 </Popover.Trigger>
                 <Popover.Anchor />
-                <Popover.Content className='flex items-center justify-center py-2 -mb-3 bg-gray-900 rounded shadow-lg px-7 text-gray-50'>
+                <Popover.Content className='flex items-center justify-center py-3 -mb-3 bg-gray-900 rounded shadow-lg px-7 text-gray-50'>
                   <ul className='block list-disc'>
                     <li>5 points - a very important task</li>
                     <li>3 points - an important task</li>
