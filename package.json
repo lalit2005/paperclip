@@ -44,7 +44,7 @@
     "debounce": "^1.2.1",
     "emoji-set": "^1.0.3",
     "fuse.js": "^6.4.6",
-    "html-to-md": "^0.4.4",
+    "html-to-md": "^0.5.8",
     "lodash.truncate": "^4.4.2",
     "nanoid": "^3.1.25",
     "next": "^11.0.1",
