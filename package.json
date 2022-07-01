@@ -37,7 +37,7 @@
     "@tiptap/extension-task-list": "^2.0.0-beta.17",
     "@tiptap/extension-text": "^2.0.0-beta.13",
     "@tiptap/react": "2.0.0-beta.73",
-    "@tiptap/starter-kit": "2.0.0-beta.89",
+    "@tiptap/starter-kit": "2.0.0-beta.190",
     "add": "^2.0.6",
     "axios": "^0.21.4",
     "clsx": "^1.1.1",
