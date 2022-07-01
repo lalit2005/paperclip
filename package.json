@@ -24,7 +24,7 @@
     "@tailwindcss/typography": "^0.4.1",
     "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.39",
     "@tiptap/extension-document": "^2.0.0-beta.13",
-    "@tiptap/extension-highlight": "2.0.0-beta.18",
+    "@tiptap/extension-highlight": "2.0.0-beta.35",
     "@tiptap/extension-image": "2.0.0-beta.15",
     "@tiptap/extension-link": "2.0.0-beta.20",
     "@tiptap/extension-paragraph": "^2.0.0-beta.17",
