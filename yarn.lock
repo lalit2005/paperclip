@@ -4334,12 +4334,10 @@ react-contenteditable@^3.3.5:
     fast-deep-equal "^2.0.1"
     prop-types "^15.7.1"
 
-react-countdown-circle-timer@^2.5.4:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/react-countdown-circle-timer/-/react-countdown-circle-timer-2.5.4.tgz#95cb58e5e734deffd9087a13279d8924463cc239"
-  integrity sha512-nKGlpS6UzfWI+k66ZVYAjcZZbZeCJuB1Xkcdci+6De1KghHfs5IwjMCdAAcZP1n1m3+tyuhLF+GVB8FRmh27RQ==
-  dependencies:
-    use-elapsed-time "2.1.8"
+react-countdown-circle-timer@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-countdown-circle-timer/-/react-countdown-circle-timer-3.2.1.tgz#5d3a3560e1b5b501356e733e76d269506611a0ab"
+  integrity sha512-yBAy/9ILXOiFbLBM+3jS72TW5LeRcH8wkRC9NNqMpUkCXkGjSnaeRbJMsR9lsYF0oVXjSDbJaRbCuVMT+9HnKA==
 
 react-dom@17.0.2:
   version "17.0.2"
@@ -5254,11 +5252,6 @@ use-callback-ref@^1.2.3:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/use-callback-ref/-/use-callback-ref-1.2.5.tgz#6115ed242cfbaed5915499c0a9842ca2912f38a5"
   integrity sha512-gN3vgMISAgacF7sqsLPByqoePooY3n2emTH59Ur5d/M8eg4WTWu1xp8i8DHjohftIyEx0S08RiYxbffr4j8Peg==
-
-use-elapsed-time@2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-2.1.8.tgz#3c830ae730e2bc204f2294b66be15580f0016ea5"
-  integrity sha512-lNLTDffKHdHWweQNvnch9tFI2eRP3tXccSLrwE7U6xrfyWFNEgNQZWWsGhQvtwKa0kJ6L+7E5wKbi3jg86opjg==
 
 use-sidecar@^1.0.1:
   version "1.0.5"
