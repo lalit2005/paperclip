@@ -29,7 +29,9 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
     2: 3,
     3: 1,
   };
+
   let points = 0;
+
   todolist?.todos?.forEach((todo) => {
     if (todo?.isDone) {
       points += pointsTable[todo.priority];
@@ -99,22 +101,22 @@ const Page: React.FC<{ user: UserProfile }> = ({ user }) => {
                   <FiInfo className='w-6 h-6 p-1 text-gray-500 rounded hover:bg-gray-100' />
                 </Popover.Trigger>
                 <Popover.Anchor />
-                <Popover.Content>
-                  <div className='bg-gray-900 rounded shadow-lg text-gray-50'>
-                    <ul className='px-5 py-2 list-disc'>
-                      <li>5 points for completing a very important task</li>
-                      <li>3 points for completing an important task</li>
-                      <li>
-                        1 point for completing a &quot;not so important&quot;
-                        task
-                      </li>
-                    </ul>
-                    <Popover.Close />
-                    <Popover.Arrow />
-                  </div>
+                <Popover.Content className='flex items-center justify-center py-3 -mb-3 bg-gray-900 rounded shadow-lg px-7 text-gray-50'>
+                  <ul className='block list-disc'>
+                    <li>5 points - a very important task</li>
+                    <li>3 points - an important task</li>
+                    <li>1 point - a &quot;not so important&quot; task</li>
+                  </ul>
+                  <Popover.Close />
+                  <Popover.Arrow />
                 </Popover.Content>
               </Popover.Root>
             </div>
+            <p>
+              {todolist?.todos?.filter((todo) => todo?.isDone === false)
+                .length || 0}{' '}
+              Tasks remaining
+            </p>
           </div>
         </div>
       </DashboardLayout>
