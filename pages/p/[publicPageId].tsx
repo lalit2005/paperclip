@@ -14,7 +14,7 @@ const Page = ({
   publicId,
 }) => {
   return (
-    <div className='min-h-screen px-10 bg-gray-50'>
+    <div className='min-h-screen px-2 bg-gray-50'>
       <Head>
         <title>
           {noteHeading || 'Note'} {'| ' + noteDescription}
