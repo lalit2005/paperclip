@@ -1,16 +1,11 @@
 import CommandPalette from 'react-command-palette';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { stripHtml } from 'string-strip-html';
 import usePrefetch from '@/lib/usePrefetch';
+import fetcher from '@/lib/fetcher';
 
 const Page = () => {
-  const { data } = useSWR<{ name: string; url: string }[]>(
-    '/api/get-cmd-palette-data',
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
+  const { data } = useSWRImmutable('/api/get-cmd-palette-data', fetcher);
   let commandPaletteData = data || [{ name: 'Loading...', url: '#' }];
 
   const router = usePrefetch([
