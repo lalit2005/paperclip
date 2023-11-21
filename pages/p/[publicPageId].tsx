@@ -68,7 +68,7 @@ const Page = ({
         </div>
         <div className='-mt-5 note-container'>
           <Note noteContent={content} />
-          <footer className='py-4 text-sm px-2 border-t border-gray-500'>
+          <footer className='py-4 text-sm border-t border-gray-300'>
             <p>
               Built with{' '}
               <NextLink href='/app/notes'>
