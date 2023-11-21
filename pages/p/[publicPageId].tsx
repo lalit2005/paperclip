@@ -49,9 +49,9 @@ const Page = ({
       />
       <div className='max-w-5xl mx-auto pt-10 sm:pt-16'>
         <div className='items-start justify-start sm:flex group'>
-          <span className='inline-block sm:mr-5 text-4xl font-bold'>
+          {/* <span className='inline-block sm:mr-5 text-4xl font-bold'>
             {emoji}
-          </span>
+          </span> */}
           <div className='inline-block'>
             <h1 className='text-4xl mt-3 sm:mt-auto font-bold'>
               {noteHeading}
