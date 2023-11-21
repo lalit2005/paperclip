@@ -85,7 +85,7 @@ const index = () => {
         </div>
       )}
       <DashboardNav />
-      <div className='max-w-5xl pt-16 mx-auto px-7'>
+      <div className='max-w-5xl pt-16 mx-auto'>
         <Link href='/app/notes'>
           <a className='block mb-5 text-gray-500'>{'<-'} Go Back</a>
         </Link>

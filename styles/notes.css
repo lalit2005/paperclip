@@ -9,7 +9,7 @@
 }
 
 .ProseMirror {
-  @apply text-lg;
+  @apply text-base md:text-lg;
 }
 
 .ProseMirror p code {
