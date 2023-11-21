@@ -61,7 +61,7 @@ const Page = ({
             </div>
           </div>
         </div>
-        <div className='mt-12 bg-white note-container'>
+        <div className='mt-12 bg-white note-container px-2'>
           <Note noteContent={content} />
         </div>
       </div>
