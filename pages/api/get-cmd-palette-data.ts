@@ -146,7 +146,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     todolistsFetcher,
     playgroundsFetcher,
   ]);
-  console.log(notesContent);
 
   if (notesContent && notesContent.length > 0) {
     // break note content into chunks of 70 characters
@@ -180,7 +179,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     })[0];
   }
 
-  console.log(notesContent);
   const response: {
     name: string;
     url: string;

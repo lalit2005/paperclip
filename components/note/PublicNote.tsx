@@ -77,7 +77,7 @@ const Note: React.FC<{
     <div className='bg-gray-50'>
       <div
         id='paperclip-editor'
-        className='px-6 pb-12 font-sans bg-transparent rounded-lg py-7 focus:outline-none active:outline-none'>
+        className='pb-12 font-sans bg-transparent rounded-lg py-7 focus:outline-none active:outline-none'>
         <EditorContent editor={editor} />
       </div>
     </div>

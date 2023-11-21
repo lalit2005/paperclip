@@ -91,7 +91,7 @@ const Note: React.FC<{
       </div>
       <div
         id='paperclip-editor'
-        className='px-6 pb-12 font-sans bg-transparent rounded-lg py-7 focus:outline-none active:outline-none'
+        className='pb-12 font-sans bg-transparent rounded-lg py-7 focus:outline-none active:outline-none'
         onKeyDown={(e) => {
           if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
             e.preventDefault();

@@ -46,7 +46,7 @@ const Page = ({
           cardType: 'summary_large_image',
         }}
       />
-      <div className='max-w-5xl mx-auto pt-28 px-7'>
+      <div className='max-w-5xl mx-auto pt-28'>
         <div className='items-start justify-start sm:flex group'>
           <span className='inline-block mr-5 text-4xl font-bold'>{emoji}</span>
           <div className='inline-block'>
