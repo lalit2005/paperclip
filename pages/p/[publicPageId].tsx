@@ -4,6 +4,7 @@ import Note from '@/components/note/PublicNote';
 import NoteTag from '@/components/note/NoteTag';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
+import NextLink from 'next/link';
 
 const Page = ({
   content,
@@ -67,6 +68,23 @@ const Page = ({
         </div>
         <div className='-mt-5 note-container'>
           <Note noteContent={content} />
+          <footer className='py-4 text-sm px-2'>
+            <p>
+              Built with{' '}
+              <NextLink href='/app/notes'>
+                <a className='text-blue-500 hover:underline'>Paperclip</a>
+              </NextLink>
+            </p>
+            <p>
+              An app by{' '}
+              <a
+                className='text-blue-500 hover:underline'
+                target='__blanlk'
+                href='https://lalit.sh'>
+                Lalit
+              </a>
+            </p>
+          </footer>
         </div>
       </div>
     </div>
