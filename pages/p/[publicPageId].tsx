@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         tags: pageData.tags,
         publicId: pageData.publicId,
       },
-      revalidate: 10 * 60,
+      revalidate: 90,
     };
   } catch (error) {
     console.log(error);
