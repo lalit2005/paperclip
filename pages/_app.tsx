@@ -34,6 +34,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           cardType: 'summary_large_image',
         }}
       />
+      <link rel='preconnect' href='https://rsms.me/' />
+      <link rel='stylesheet' href='https://rsms.me/inter/inter.css' />
+
       <Component {...pageProps} />
     </UserProvider>
   );

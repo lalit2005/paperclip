@@ -14,7 +14,7 @@ const Page = ({
   publicId,
 }) => {
   return (
-    <div className='min-h-screen text-sm md:text-base bg-gray-50'>
+    <div className='min-h-screen text-sm md:text-base bg-gray-50 px-3'>
       <Head>
         <title>
           {noteHeading || 'Note'} {'| ' + noteDescription}
@@ -46,13 +46,17 @@ const Page = ({
           cardType: 'summary_large_image',
         }}
       />
-      <div className='max-w-5xl mx-auto pt-28'>
+      <div className='max-w-5xl mx-auto pt-10 sm:pt-16'>
         <div className='items-start justify-start sm:flex group'>
-          <span className='inline-block mr-5 text-4xl font-bold'>{emoji}</span>
+          <span className='inline-block sm:mr-5 text-4xl font-bold'>
+            {emoji}
+          </span>
           <div className='inline-block'>
-            <h1 className='text-4xl font-bold'>{noteHeading}</h1>
-            <div className='mt-4 text-lg text-gray-500'>
-              <h2>{noteDescription} </h2>
+            <h1 className='text-4xl mt-3 sm:mt-auto font-bold'>
+              {noteHeading}
+            </h1>
+            <div className='sm:mt-4 mt-2 text-lg text-gray-500'>
+              <h2>{noteDescription}</h2>
             </div>
             <div className='mt-3 tags'>
               {tags.map((tag) => (
@@ -61,7 +65,7 @@ const Page = ({
             </div>
           </div>
         </div>
-        <div className='mt-12 bg-white note-container px-2'>
+        <div className='-mt-5 note-container'>
           <Note noteContent={content} />
         </div>
       </div>

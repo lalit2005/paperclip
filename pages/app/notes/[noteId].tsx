@@ -59,7 +59,7 @@ const index = () => {
   }
   const isAnyModalOpen = isOpen || isMenuModalOpen;
   return (
-    <div className='min-h-screen text-sm md:text-base bg-gray-50'>
+    <div className='min-h-screen text-sm md:text-base bg-gray-50 px-3'>
       <Head>
         <title>
           {note?.noteHeading || 'Note'} {'| ' + note?.noteDescription}
@@ -130,7 +130,7 @@ const index = () => {
             </div>
           </div>
         </div>
-        <div className='mt-12 bg-white note-container'>
+        <div className='mt-5 note-container'>
           {note?.note && (
             <Note
               noteId={router.query.noteId.toString()}
